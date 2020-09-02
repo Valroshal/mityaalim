@@ -4,6 +4,7 @@
     "slug": "MityaalimApp",
     "version": "1.0.0",
     "orientation": "portrait",
+    "facebookScheme":"fb918095505346162",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
@@ -17,10 +18,21 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mityaalim"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "sdkVersion": "38.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "android": {
+      "package": "com.mityaalim"
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
   }
 }

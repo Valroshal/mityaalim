@@ -1,21 +1,35 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text,TouchableOpacity, View } from 'react-native';
+import HomeComponent from './src/screens/Home'
+import LoginComponent from './src/screens/Login'
+import Expo from 'expo';
+const id = "918095505346162";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+export default class App extends React.Component {
+
+  
+  render(){
+    return (
+      <View style={styles.container}>
+        <LoginComponent/>
+        <StatusBar style="auto" />
+      </View>
+    );
+  }
 }
 
+//need camelCase in style sheet
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    flexDirection: 'row',
+    backgroundColor: '#ceffee',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  text:{
+    color:'#fff',
+    fontSize: 26
+  }
 });
