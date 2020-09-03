@@ -41,10 +41,12 @@ const styles = StyleSheet.create({
     color:'#FFF',
     marginBottom: 10,
     paddingHorizontal:10,
+    borderRadius: 5,
   },
   buttonContainer:{
     backgroundColor:'#034643',
     paddingVertical: 15,
+    borderRadius: 5,
   },
   buttonText:{
     textAlign: 'center',

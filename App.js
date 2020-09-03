@@ -1,21 +1,30 @@
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text,TouchableOpacity, View } from 'react-native';
-import HomeComponent from './src/screens/Home'
-import LoginComponent from './src/screens/Login'
+import HomeComponent from './src/screens/Home';
+import LoginScreen from './src/screens/Login';
+import RegistrationScreen from './src/screens/Registration';
 import Expo from 'expo';
-const id = "918095505346162";
+import  MyStack from './src/navigation/navigator'
+
 
 export default class App extends React.Component {
 
   
+  
   render(){
+    
     return (
       <View style={styles.container}>
-        <LoginComponent/>
+        <MyStack/>
         <StatusBar style="auto" />
       </View>
     );
+
   }
 }
 

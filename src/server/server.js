@@ -1,8 +1,6 @@
 const express = require('express');
 const app = express();
 const mysql = require('mysql');
-// const router = express.Router();
-// const conn = require('../server/routes/router');
 const bodyParser = require('body-parser');
 
 app.use(bodyParser.json({type:'application/json'}));
@@ -10,18 +8,18 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 const con = mysql.createPool({
     //host: 'ns1.bluehost.com',
-    // host: '162.159.25.175',
-    // port: '3306',
-    // user:'mityaali_valerie',
-    // password: 'val0527475185',
-    // database: 'mityaali_hello',
-    // connectionLimit: 100,
-    // multipleStatements: true
-    host: 'localhost',
+    //host: '162.159.25.175',
+    host: '70.40.218.93',
     //port: '3306',
-    user:'valerie',
-    password: 'val0527475185',
-    database: 'mityaalim_test',
+    user:'mityaalim.org',
+    password: '!TowerJazz2019',
+    database: 'mityaali_hello',
+    //connectionLimit: 100,
+    multipleStatements: true,
+    // host: 'localhost',
+    // user:'valerie',
+    // password: 'val0527475185',
+    // database: 'mityaalim_test',
     connectionLimit : 1000,
     connectTimeout  : 60 * 60 * 1000,
     acquireTimeout  : 60 * 60 * 1000,
@@ -49,5 +47,5 @@ app.get('/check',function(req,res){
     })
 })
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3306;
 app.listen(port, () => console.log(`Server is running on ${port}`));
