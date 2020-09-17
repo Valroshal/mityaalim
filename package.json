@@ -10,7 +10,7 @@
     "@react-navigation/native": "^5.7.3",
     "@react-navigation/stack": "^5.9.0",
     "body-parser": "^1.19.0",
-    "expo": "~38.0.8",
+    "expo": "^38.0.10",
     "expo-facebook": "~8.2.1",
     "expo-splash-screen": "^0.5.0",
     "expo-status-bar": "^1.0.2",
@@ -28,13 +28,14 @@
     "react-native-screens": "~2.9.0",
     "react-native-unimodules": "~0.10.1",
     "react-native-web": "~0.11.7",
-    "react-native-webview": "^10.7.0"
+    "react-native-webview": "^10.8.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.6",
+    "@babel/core": "^7.11.6",
     "babel-jest": "~25.2.6",
     "babel-preset-expo": "~8.1.0",
     "jest": "~25.2.6",
+    "nodemon": "^2.0.4",
     "react-test-renderer": "~16.11.0"
   },
   "private": true,
