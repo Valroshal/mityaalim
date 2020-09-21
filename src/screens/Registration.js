@@ -1,10 +1,39 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, TextInput, TouchableOpacity, Text, KeyboardAvoidingView, StatusBar, Dimensions } from 'react-native';
 import Register from '../components/RegistrationForm';
-
+import { ifValidState } from '../components/RegistrationForm';
+//import * as fromRegForm from '../components/RegistrationForm';
 const ScreenHeight = Dimensions.get("window").height;
 
 class Registration extends React.Component {
+
+    state={
+ 
+        // Default Value for ButtonStateHolder State. Now the button is Enabled.
+        ButtonStateHolder : true ,
+   
+        // Default Text for Button Title.
+        //ButtonTitle : 'Button Disabled'
+   
+      }
+    
+     
+    clickRegister=() =>{
+        
+        if(Register.status == true)
+            {
+                this.setState({
+          
+                    // On State True it will Disable the button.
+                    ButtonStateHolder : false ,
+             
+                    //ButtonTitle : 'Button Enabled'
+                  
+                })
+            }
+
+    }
+
 render() {
     //const { navigate } = this.props.navigation
     return (
@@ -12,9 +41,11 @@ render() {
             <Register/>
             <TouchableOpacity 
                 style={styles.buttonContainer}
-                //onPress={() => navigate("HomeScreen")}> 
+                disabled={this.state.ButtonStateHolder}
+                onMouseEnter={this.clickRegister}
+                //onPress={() => navigate("HomeScreen")}
                 >
-                <Text style={styles.buttonText}>REGISTER</Text>
+                <Text style={styles.buttonText, { backgroundColor: this.state.ButtonStateHolder ? '#607D8B' : '#009688' }}>REGISTER</Text>
             </TouchableOpacity> 
         </View>
     );
