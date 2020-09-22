@@ -15,47 +15,47 @@ import  RootStack from './src/navigation/navigator';
 import Error from './src/components/Error';
 
 
-class App extends React.Component{
-      render(){
-        return(
-            <View style={styles.container}>
-              <RegistrationScreen/>
-              <StatusBar style="auto" />
-            </View>
-        );
-      }
-  }
+// class App extends React.Component{
+//       render(){
+//         return(
+//             <View style={styles.container}>
+//               <RegistrationScreen/>
+//               <StatusBar style="auto" />
+//             </View>
+//         );
+//       }
+//   }
 
-  // const Stack = createStackNavigator();
-  // class App extends React.Component{
-  //   render(){
-  //   return (
+  const Stack = createStackNavigator();
+  class App extends React.Component{
+    render(){
+    return (
 
-  //       <NavigationContainer>
-  //         <Stack.Navigator
-  //             screenOptions={{  headerShown: false } }  
-  //           >
-  //             <Stack.Screen
-  //               name="Login"
-  //               component={LoginScreen}
-  //             />
-  //             <Stack.Screen
-  //               name="RegistrationScreen"
-  //               component={RegistrationScreen}
-  //             />
-  //             <Stack.Screen
-  //               name="HomeScreen"
-  //               component={HomeScreen}
-  //             />
-  //             <Stack.Screen
-  //               name="Error"
-  //               component={Error}
-  //             />
-  //           </Stack.Navigator>
-  //       </NavigationContainer>
+        <NavigationContainer>
+          <Stack.Navigator
+              screenOptions={{  headerShown: false } }  
+            >
+              <Stack.Screen
+                name="Login"
+                component={LoginScreen}
+              />
+              <Stack.Screen
+                name="RegistrationScreen"
+                component={RegistrationScreen}
+              />
+              <Stack.Screen
+                name="HomeScreen"
+                component={HomeScreen}
+              />
+              <Stack.Screen
+                name="Error"
+                component={Error}
+              />
+            </Stack.Navigator>
+        </NavigationContainer>
 
-  //   );
-  // } }
+    );
+  } }
       
 
 //need camelCase in style sheet

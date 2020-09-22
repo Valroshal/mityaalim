@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, TextInput, TouchableOpacity, Text, KeyboardAvoidingView, StatusBar } from 'react-native';
+import {StyleSheet, View, TextInput, TouchableOpacity, Text, KeyboardAvoidingView, StatusBar, Button } from 'react-native';
 //import { Form, TextValidator } from 'react-native-validator-form';
-import {validate} from '../components/validation'
+import validate from '../components/validation'
 //import {validation} from 'validation'
 //import validate from 'validation_wrapper'
-//import TextField from 'textfield'
-import TextField from '@material-ui/core/TextField';
+import {
+  TextField,
+  FilledTextField,
+  OutlinedTextField,
+} from 'react-native-material-textfield';
 
 class RegistrationForm extends React.Component{
 
-    
+    constructor(){
+      super();
+      global.status = false;
+    }
     
         state = {
           email: '',
@@ -17,7 +23,6 @@ class RegistrationForm extends React.Component{
           password: '',
           passwordError: ''
         }
-      
 
       register() {
         const emailError = validate('email', this.state.email)
@@ -35,42 +40,70 @@ class RegistrationForm extends React.Component{
 
         handleEmail = (email) =>{
             this.setState({email});
+            this.setState({
+              emailError: validate('email', this.state.email)
+            })
+            //console.log(this.state.emailError)
         }
 
         handlePass = (password) =>{
-            this.setState({password});
+          this.setState({password});
+          this.setState({
+            passwordError: validate('password', this.state.password)
+          })
+          //console.log(this.state.passwordError)
+            if(this.state.emailError == null && this.state.passwordError == null)
+            {
+              global.status = true;
+            }
+          console.log(global.status)
         }
 
+        // handleEmailErr = () =>{
+        //     this.setState({
+        //     emailError: validate('email', this.state.email)
+        //   })
+        //   console.log(this.state.emailError)
+        //   if(this.state.emailError == null)
+        //   {
+        //     global.status = true;
+        //   }
+        //   console.log(global.status)
+        // }
+
+        // handlePass = (password) =>{
+        //     this.setState({password});
+        // }
+
+      
         render() {
-            const { email } = this.state;
-            const { password } = this.state;
+            //const { email } = this.state;
+            //const { password } = this.state;
             return (
               <View>
                 <TextField
-                  value={email}
+                  
                   onChangeText={this.handleEmail}
-                  onBlur={() => {
-                    this.setState({
-                      emailError: validate('email', this.state.email)
-                    })
-                  }}
+                  // onBlur={() => {
+                  //   this.setState({
+                  //     emailError: validate('email', this.state.email)
+                  //   })
+                    
+                  // }}
+                  onBlur={this.handleEmail}
                   error={this.state.emailError}/>
         
                 <TextField
-                  //onChangeText={value => this.setState({password: value.trim()})}
                   onChangeText={this.handlePass}
-                  onBlur={() => {
-                    this.setState({
-                      passwordError: validate('password', this.state.password)
-                    })
-                  }}
+                  // onBlur={() => {
+                    
+                  //   this.setState({
+                  //     passwordError: validate('password', this.state.password)
+                  //   })
+                  // }}
+                  onBlur={this.handlePass}
                   error={this.state.passwordError}
                   secureTextEntry={true}/>
-        
-                <Button
-                  title='Register'
-                  onPress={this.validateRegister}/>
-        
               </View>
             )
           }

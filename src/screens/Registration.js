@@ -1,51 +1,65 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, TextInput, TouchableOpacity, Text, KeyboardAvoidingView, StatusBar, Dimensions } from 'react-native';
 import Register from '../components/RegistrationForm';
-
+// import CheckBox from '@react-native-community/checkbox';
+//import {CheckBox} from "native-base";
+import CheckBox from 'react-native-check-box'
 
 const ScreenHeight = Dimensions.get("window").height;
 
 class Registration extends React.Component {
 
     state={
- 
-        // Default Value for ButtonStateHolder State. Now the button is Enabled.
-        ButtonStateHolder : true ,
-   
-        // Default Text for Button Title.
-        //ButtonTitle : 'Button Disabled'
-   
+        buttonStateHolder : true ,
+        checked : false,
       }
     
      
     clickRegister=() =>{
-        
-        if(Register.status == true)
+        console.log('entering the button')
+        if(global.status == 'true')
             {
-                this.setState({
-          
+                this.setState({     
                     // On State True it will Disable the button.
-                    ButtonStateHolder : false ,
-             
-                    //ButtonTitle : 'Button Enabled'
-                  
+                    buttonStateHolder : false
                 })
+                console.log('inside the loop');
+                console.log('button state',this.state.buttonStateHolder);
             }
-
+        console.log('status',global.status);
+        console.log('button state',this.state.buttonStateHolder);
     }
 
 render() {
-    //const { navigate } = this.props.navigation
+    const { navigate } = this.props.navigation
     return (
         <View style={styles.container}>
+            
             <Register/>
+            
+            <View style={{ flexDirection: 'column'}}>
+                <CheckBox />
+               
+                <View style={{flex:0.1, flexDirection: 'row'}}>
+                    <CheckBox
+                    style={styles.checkBox }
+                    //style={{height: 20, width:20, backgroundColor: this.state.checked ? 'ffff00' : '#00ffaa'}}
+                    value={this.state.checked}
+                    onValueChange={() => this.setState({ checked: !this.state.checked })}
+                    
+                    /> 
+                    <Text>Privacy Policy, Terms and conditions</Text>   
+                </View>
+            </View>
+
             <TouchableOpacity 
                 style={styles.buttonContainer}
-                disabled={this.state.ButtonStateHolder}
+                disabled={this.state.buttonStateHolder}
                 onMouseEnter={this.clickRegister}
                 //onPress={() => navigate("HomeScreen")}
+                onPress={()=>{navigate("HomeScreen")}}
                 >
-                <Text style={styles.buttonText, { backgroundColor: this.state.ButtonStateHolder ? '#607D8B' : '#009688' }}>REGISTER</Text>
+                <Text style={styles.buttonText}>REGISTER</Text>
             </TouchableOpacity> 
         </View>
     );
@@ -69,7 +83,18 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color:'#FFF',
         fontWeight: '500',
+      },
+      checkBox:{
+        height: 20,
+        width:20,
+        borderColor: '#034643',
+        backgroundColor: '#00ffaa', 
+        
+        marginRight:10,
+        marginBottom: 20 
       }
   });
 
 export default Registration;
+
+// , { backgroundColor: this.state.ButtonStateHolder ? '#607D8B' : '#009688' }
