@@ -6,46 +6,38 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json({type:'application/json'}));
 app.use(bodyParser.urlencoded({extended:true}));
 
-//const con = mysql.createPool({  //for remote db
-    //host: '70.40.218.93',
+const con = mysql.createPool({
+    //host: 'ns1.bluehost.com',
+    //host: '162.159.25.175',
+    host: '70.40.218.93',
     //port: '3306',
-    //user:'mityaalim.org',
-    //password: '!TowerJazz2019',
-    //database: 'mityaali_hello',
+    user:'mityaalim.org',
+    password: '!TowerJazz2019',
+    database: 'mityaali_hello',
     //connectionLimit: 100,
-    //multipleStatements: true,
-    // connectionLimit : 1000,
-    // connectTimeout  : 60 * 60 * 1000,
-    // acquireTimeout  : 60 * 60 * 1000,
-    // timeout         : 60 * 60 * 1000
-//});
-
-const con = mysql.createPool({ //for local db
-    host: 'localhost',
-    user:'valerie',
-    password: 'val0527475185',
-    database: 'mityaalim_test',
+    multipleStatements: true,
+    // host: 'localhost',
+    // user:'valerie',
+    // password: 'val0527475185',
+    // database: 'mityaalim_test',
     connectionLimit : 1000,
     connectTimeout  : 60 * 60 * 1000,
     acquireTimeout  : 60 * 60 * 1000,
     timeout         : 60 * 60 * 1000
 });
 
-con.getConnection((err)=>{
-    if(err){
-        console.log(err);
-    } else {
-        console.log('connected');
-    }
+con.getConnection(function(err){
+    if(err) console.log(err);
+    else console.log('connected');
 });
 
 
-app.get('/', (req,res,next) =>{
+app.get('/', function(req,res,next){
     // res.render('index', {title: 'Express'});
     //next(err);
 });
 
-app.get('/check', (req,res) =>{
+app.get('/check',function(req,res){
     con.query('select * from wp_fhvw_actionscheduler_actions', function(err, result){
         if(err) {
             res.send(err)

@@ -21,7 +21,7 @@ export default class LoginForm extends Component {
                   returnKeyType='go'
                   style={styles.input}
                   ref={(input) => this.passwordInput = input}/> 
-        <TouchableOpacity style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.buttonContainer} >
           <Text style={styles.buttonText}>LOGIN</Text>
         </TouchableOpacity>  
       

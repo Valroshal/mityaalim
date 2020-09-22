@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, TextInput, TouchableOpacity, Text, KeyboardAvoidingView, StatusBar, Dimensions } from 'react-native';
 import Register from '../components/RegistrationForm';
-import { ifValidState } from '../components/RegistrationForm';
-//import * as fromRegForm from '../components/RegistrationForm';
+
+
 const ScreenHeight = Dimensions.get("window").height;
 
 class Registration extends React.Component {

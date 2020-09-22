@@ -1,21 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
-
 import React from 'react';
-import { StyleSheet, Text,TouchableOpacity,TouchableHighlight, View, Image, KeyboardAvoidingView, Dimensions } from 'react-native';
+import { StyleSheet, Text,TouchableOpacity, View, Image, KeyboardAvoidingView } from 'react-native';
 import Expo from 'expo';
 import LoginForm from '../components/LoginForm';
 import FacebookLogin from '../components/FacebookLogin';
-import Error from '../components/Error';
-const id = "918095505346162"; //for face
-const mityalimLogo = require ('../images/mityalimLogo.png');
-const ScreenHeight = Dimensions.get("window").height;
 
-class Login extends React.Component {
+const id = "918095505346162";
+const mityalimLogo = require ('../images/mityalimLogo.png');
+
+export default class Login extends React.Component {
 
   
 
   render(){
-    const { navigate } = this.props.navigation
     return (
       <KeyboardAvoidingView>  
         <View style={styles.container}>
@@ -29,14 +26,6 @@ class Login extends React.Component {
           </View>
           <View style={styles.formContainer}>
               <LoginForm />
-              
-              <TouchableHighlight
-                onPress={() => navigate("RegistrationScreen")}
-                style={styles.button}>
-                <Text
-                  style={styles.buttonText}>Not a Registered User? Register Now!</Text>
-              </TouchableHighlight>
-              
               <FacebookLogin />
           </View>
 
@@ -49,8 +38,7 @@ class Login extends React.Component {
 
 const styles = StyleSheet.create({
     container:{
-      backgroundColor: '#ceffee',
-      height: ScreenHeight,
+      
     },
     text:{
         
@@ -68,11 +56,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 30,
-    },
-    formContainer:{
-      justifyContent: 'center',
-      alignItems: 'center'
     }
   });
 
-  export default Login;
+

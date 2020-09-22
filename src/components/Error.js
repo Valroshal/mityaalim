@@ -41,8 +41,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 30,
-        
+
     },
 })
 
-export default Error;
+export default Error; 

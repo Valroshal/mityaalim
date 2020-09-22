@@ -1,36 +1,39 @@
-import 'react-native-gesture-handler';
+// import 'react-native-gesture-handler';
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+// import LoginScreen from '../screens/Login';
+// import RegistrationScreen from '../screens/Registration';
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createStackNavigator } from '@react-navigation/stack';
 
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text,TouchableOpacity, View } from 'react-native';
-import HomeComponent from '../screens/Home';
-import LoginScreen from '../screens/Login';
-import RegistrationScreen from '../screens/Registration';
-import Expo from 'expo';
-  
-  const Stack = createStackNavigator();
-  function RootStack() {
-    return (
-    <NavigationContainer>
-      <Stack.Navigator
-          screenOptions={{  headerShown: false }}
-          
-        >
-          <Stack.Screen
-            name="Login"
-            component={LoginScreen}
-          />
-          <Stack.Screen
-            name="RegistrationScreen"
-            component={RegistrationScreen}
-          />
-        </Stack.Navigator>
-    </NavigationContainer>
-    );
+// const Stack = createStackNavigator();
 
-  } 
 
-export default RootStack;
+//     const MyStack = () => {
+//       return (
+//         <NavigationContainer>
+//           <Stack.Navigator>
+//             <Stack.Screen
+//               name="Login"
+//               component={LoginScreen}
+//               //options={{ title: 'Welcome' }}
+//             />
+//             <Stack.Screen 
+//             name="Register" component={RegistrationScreen} />
+//           </Stack.Navigator>
+//         </NavigationContainer>
+//       );
+//     };
+
+
+// export default createStackNavigator(MyStack);
+
+// // const AppNavigator = createBottomTabNavigator({
+// //     Login:{
+// //         screen: LoginScreen,
+// //     },
+// //     Register:{
+// //         screen: RegistrationScreen,
+// //     }
+// // })
+
+// // export default createAppContainer(AppNavigator);
