@@ -10,8 +10,8 @@ const ScreenHeight = Dimensions.get("window").height;
 class Registration extends React.Component {
 
     state={
-        buttonStateHolder : true ,
-        buttonColor: '#00ffaa',
+        //buttonStateHolder : true ,
+        //buttonColor: '#00ffaa',
         checked : false,
         
       }
@@ -22,18 +22,19 @@ class Registration extends React.Component {
         console.log('checked', this.state.checked)
         if(global.status == 'true' && this.state.checked == true)
             {
-                this.setState({     
-                    // On State True it will Disable the button.
-                    buttonStateHolder : false
-                })
-                this.setState({
-                    buttonColor : '#034643'
-                })
-                console.log('inside the loop');
-                console.log('button state',this.state.buttonStateHolder);
+                // this.setState({     
+                //     // On State True it will Disable the button.
+                //     buttonStateHolder : false
+                // })
+                // this.setState({
+                //     buttonColor : '#034643'
+                // })
+                // console.log('inside the loop');
+                // console.log('button state',this.state.buttonStateHolder);
+                this.props.navigation.navigate("HomeScreen");
             }
-        console.log('status',global.status);
-        console.log('button state',this.state.buttonStateHolder);
+        // console.log('status',global.status);
+        // console.log('button state',this.state.buttonStateHolder);
     }
 
 render() {
@@ -41,7 +42,9 @@ render() {
     return (
         <View style={styles.container}>
             
-            <Register/>
+            <Register
+            onChange={this.clickRegister} //need something that will change the button before click
+            />
             <View style={{flexDirection: 'row', justifyContent:'flex-start', marginRight:15}}>
                 <CheckBox 
                     style={styles.checkBox}
@@ -53,28 +56,13 @@ render() {
                 >Privacy Policy, Terms and Conditions</Text>
             </View>
 
-            {/* <View style={{ flexDirection: 'column'}}>
-                <CheckBox />
-               
-                <View style={{flex:0.1, flexDirection: 'row'}}>
-                    <CheckBox
-                    style={styles.checkBox }
-                    //style={{height: 20, width:20, backgroundColor: this.state.checked ? 'ffff00' : '#00ffaa'}}
-                    value={this.state.checked}
-                    onValueChange={() => this.setState({ checked: !this.state.checked })}
-                    
-                    /> 
-                    {/* do link to term and conditions page  */}
-                    {/* <Text>Privacy Policy, Terms and conditions</Text>   
-                </View>
-            </View> */} 
-
             <TouchableOpacity 
-                style={{backgroundColor: this.state.buttonColor, paddingVertical: 15, borderRadius: 5, width:260}}
+                style={styles.buttonContainer}
                 disabled={this.state.buttonStateHolder}
-                onMouseEnter={this.clickRegister}
-                //onPress={() => navigate("HomeScreen")}
-                onPress={()=>{navigate("HomeScreen")}}
+////////////////////////////////////////////////////need changes
+                //onMouseOver={this.clickRegister}
+                //onPress={()=>{navigate("HomeScreen")}}
+                onPress={this.clickRegister}
                 >
                 <Text style={styles.buttonText}>REGISTER</Text>
             </TouchableOpacity> 
@@ -90,12 +78,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    // buttonContainer:{
-    //     //backgroundColor:'#034643',
-    //     paddingVertical: 15,
-    //     borderRadius: 5,
-    //     width:260, 
-    //   },
+    buttonContainer:{
+        backgroundColor:'#034643',
+        paddingVertical: 15,
+        borderRadius: 5,
+        width:260, 
+      },
       buttonText:{
         textAlign: 'center',
         color:'#FFF',
@@ -114,4 +102,3 @@ const styles = StyleSheet.create({
 
 export default Registration;
 
-// , { backgroundColor: this.state.ButtonStateHolder ? '#607D8B' : '#009688' }

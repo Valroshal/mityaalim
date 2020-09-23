@@ -11,7 +11,12 @@ const ScreenHeight = Dimensions.get("window").height;
 
 export default class Login extends React.Component {
 
-  
+  pressLogin = () =>{
+    if(global.flag == true)
+    {
+      this.props.navigation.navigate("HomeScreen");
+    }
+  }
 
   render(){
     const { navigate } = this.props.navigation
@@ -28,6 +33,12 @@ export default class Login extends React.Component {
           </View>
           <View style={styles.formContainer}>
               <LoginForm />
+
+              <TouchableOpacity
+                onPress={this.pressLogin}
+                style={styles.loginButtonContainer} >
+                <Text style={styles.loginButtonText}>LOGIN</Text>
+              </TouchableOpacity> 
 
               <TouchableHighlight
                 onPress={() => navigate("RegistrationScreen")}
@@ -48,7 +59,7 @@ export default class Login extends React.Component {
 
 const styles = StyleSheet.create({
     container:{
-      
+      padding: 20,
     },
     text:{
         
@@ -66,7 +77,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 30,
-    }
+    },
+    loginButtonText:{
+      textAlign: 'center',
+      color:'#FFF',
+      fontWeight: '500',
+    },
+    loginButtonContainer:{
+      backgroundColor:'#034643',
+      paddingVertical: 15,
+      borderRadius: 5,
+    },
   });
 
 

@@ -17,20 +17,29 @@ class RegistrationForm extends React.Component{
       global.status = false;
     }
     
-        state = {
-          email: '',
-          emailError: '',
-          password: '',
-          passwordError: ''
-        }
+      state = {
+        name:'',
+        nameError: '',
+        email: '',
+        emailError: '',
+        password: '',
+        passwordError: '',
+        repeatPassword: '',
+        repeatPasswordError: '',
+      }
 
       register() {
+        const nameError = validate('name', this.state.name)
         const emailError = validate('email', this.state.email)
         const passwordError = validate('password', this.state.password)
-    
+        const repeatPasswordError = validate('repeatPassword', this.state.repeatPassword)
+
         this.setState({
+            nameError: nameError,
             emailError: emailError,
-            passwordError: passwordError
+            passwordError: passwordError,
+            repeatPasswordError: repeatPasswordError,
+
           })
       
           if (!emailError && !passwordError) {
@@ -38,26 +47,64 @@ class RegistrationForm extends React.Component{
           }
         }
 
+        handleName = (name) =>{
+          this.setState({name});
+          console.log('name: ', this.state.name);
+          this.setState({
+            nameError: validate('name', this.state.name)
+          })
+      }
+
         handleEmail = (email) =>{
             this.setState({email});
+            console.log('email: ', this.state.email);
             this.setState({
               emailError: validate('email', this.state.email)
             })
-            //console.log(this.state.emailError)
         }
 
         handlePass = (password) =>{
           this.setState({password});
+          console.log('pass: ', this.state.password);
           this.setState({
             passwordError: validate('password', this.state.password)
           })
-          //console.log(this.state.passwordError)
-            if(this.state.emailError == null && this.state.passwordError == null)
-            {
+          console.log('errors: ', this.state.nameError, this.state.emailError, this.state.passwordError)
+          if(this.state.nameError == null && this.state.emailError == null && this.state.passwordError == null)
+          {
               global.status = true;
             }
           console.log(global.status)
         }
+
+        // handleRepPass = (repeatPassword) =>{
+        //   this.setState({repeatPassword});
+        //   console.log('pass: ', this.state.password);
+        //   //console.log('confirm pass: ', this.state.repeatPassword);
+        //   this.setState({
+        //     repeatPasswordError: validate('repeatPassword', this.state.repeatPassword)
+        //   })
+        //     console.log('errors: ', this.state.nameError, this.state.emailError, this.state.passwordError)
+        //     if(this.state.nameError == null && this.state.emailError == null && this.state.passwordError == null)
+        //     {
+        //       global.status = true;
+        //     }
+        //   console.log(global.status)
+        // }
+
+        // here is the same problem as in validate function password is null
+        // handleConfirmPass = (repeatPassword) =>{
+        //   this.setState({repeatPassword});
+        //   if(this.state.password != this.state.repeatPassword)
+        //     {
+        //       this.setState({
+        //         repeatPasswordError: 'not matched'
+        //       })
+        //     }
+        //   console.log('pass: ', this.state.password);
+        //   console.log('confirm pass: ', this.state.repeatPassword);
+        //   console.log('pass err: ', this.state.repeatPasswordError);
+        // }
 
         // handleEmailErr = () =>{
         //     this.setState({
@@ -82,18 +129,53 @@ class RegistrationForm extends React.Component{
             return (
               <View>
                 <TextField
-                  
-                  onChangeText={this.handleEmail}
+                  //name='name'
+                  placeholder='name'
+                  placeholderTextColor="rgba(255,255,255,0.7)"
+                  //type="text"
+                  autoCapitalize='none'
+                  autoCorrect={false}
+                  style={styles.input}
+                  returnKeyType='next'
+                  onChangeText={this.handleName}
                   // onBlur={() => {
                   //   this.setState({
                   //     emailError: validate('email', this.state.email)
                   //   })
                     
                   // }}
+                  onBlur={this.handleName}
+                  error={this.state.nameError}/> 
+
+                <TextField
+                  //name='email'
+                  placeholder='email'
+                  placeholderTextColor="rgba(255,255,255,0.7)"
+                  
+                  //type="email"
+                  keyboardType="email-address"
+                  autoCapitalize='none'
+                  autoCorrect={false}
+                  style={styles.input}
+                  returnKeyType='next'
+                  onChangeText={this.handleEmail}
+                  // onBlur={() => {
+                  //   this.setState({
+                  //     emailError: validate('email', this.state.email)
+                  //   })
+                  // }}
                   onBlur={this.handleEmail}
                   error={this.state.emailError}/>
         
                 <TextField
+                  //name='password'
+                  placeholder='password'
+                  placeholderTextColor="rgba(255,255,255,0.7)"
+                  //type="password"
+                  autoCapitalize='none'
+                  autoCorrect={false}
+                  style={styles.input}
+                  returnKeyType='next'
                   onChangeText={this.handlePass}
                   // onBlur={() => {
                     
@@ -104,12 +186,40 @@ class RegistrationForm extends React.Component{
                   onBlur={this.handlePass}
                   error={this.state.passwordError}
                   secureTextEntry={true}/>
+
+                {/* <TextField
+                  
+                  placeholder='repeat password'
+                  placeholderTextColor="rgba(255,255,255,0.7)"
+                  autoCapitalize='none'
+                  autoCorrect={false}
+                  style={styles.input}
+                  returnKeyType='next'
+                  onChangeText={this.handleConfirmPass}
+                  
+                  onBlur={this.handleConfirmPass}
+                  error={this.state.repeatPasswordError}
+                  secureTextEntry={true}/> */}
               </View>
             )
           }
         }
-    
-      
+    const styles = StyleSheet.create({
+      container:{
+        padding: 20,
+      },
+      input:{
+        height: 40,
+        width:260,
+        backgroundColor: '#07beb8',
+        color:'#FFF',
+        marginBottom: 10,
+        paddingHorizontal:10,
+        borderRadius: 5,
+      },
+
+    });
+        
 export default RegistrationForm;
 
 
@@ -299,18 +409,3 @@ export default RegistrationForm;
 //   }  
 // }
 
-// const styles = StyleSheet.create({
-//   container:{
-//     padding: 20,
-//   },
-//   input:{
-//     height: 40,
-//     width:260,
-//     backgroundColor: '#07beb8',
-//     color:'#FFF',
-//     marginBottom: 10,
-//     paddingHorizontal:10,
-//     borderRadius: 5,
-//   },
-
-// });
