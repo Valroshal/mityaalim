@@ -8,24 +8,25 @@ import HomeComponent from './src/screens/Home';
 import HomeScreen from './src/screens/Home';
 import LoginScreen from './src/screens/Login';
 import RegistrationScreen from './src/screens/Registration';
-import Expo from 'expo';
-import  MyStack from './src/navigation/navigator'
 
+import Expo from 'expo';
+import  MyStack from './src/navigation/navigator';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import  RootStack from './src/navigation/navigator';
 import Error from './src/components/Error';
-
+import BudgetComponent from './src/components/Budget'
 
 // class App extends React.Component{
 //       render(){
 //         return(
 //             <View style={styles.container}>
-//               <RegistrationScreen/>
+//               <HomeScreen/>
 //               <StatusBar style="auto" />
 //             </View>
 //         );
 //       }
 //   }
-
+  const Tab = createBottomTabNavigator();
   const Stack = createStackNavigator();
   class App extends React.Component{
     render(){
@@ -50,6 +51,10 @@ import Error from './src/components/Error';
               <Stack.Screen
                 name="Error"
                 component={Error}
+              />
+              <Stack.Screen
+                name="BudgetComponent"
+                component={BudgetComponent}
               />
             </Stack.Navigator>
         </NavigationContainer>

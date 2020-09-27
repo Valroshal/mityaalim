@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, TextInput, TouchableOpacity, Text, KeyboardAvoidingView, StatusBar, Button } from 'react-native';
-//import { Form, TextValidator } from 'react-native-validator-form';
 import validate from '../components/validation'
-//import {validation} from 'validation'
-//import validate from 'validation_wrapper'
 import {
   TextField,
   FilledTextField,
@@ -15,6 +12,9 @@ class RegistrationForm extends React.Component{
     constructor(){
       super();
       global.status = false;
+      global.regName = '';
+      global.regEmail = '';
+      global.regPass = '';
     }
     
       state = {
@@ -49,7 +49,9 @@ class RegistrationForm extends React.Component{
 
         handleName = (name) =>{
           this.setState({name});
+          global.regName = this.state.name;
           console.log('name: ', this.state.name);
+          console.log('global name: ', global.regName);
           this.setState({
             nameError: validate('name', this.state.name)
           })
@@ -57,6 +59,7 @@ class RegistrationForm extends React.Component{
 
         handleEmail = (email) =>{
             this.setState({email});
+            global.regEmail = this.state.email;
             console.log('email: ', this.state.email);
             this.setState({
               emailError: validate('email', this.state.email)
@@ -65,6 +68,7 @@ class RegistrationForm extends React.Component{
 
         handlePass = (password) =>{
           this.setState({password});
+          global.regPass = this.state.password;
           console.log('pass: ', this.state.password);
           this.setState({
             passwordError: validate('password', this.state.password)

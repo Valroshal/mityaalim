@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, TextInput, TouchableOpacity, Text, KeyboardAvoidingView, StatusBar, Dimensions } from 'react-native';
 import Register from '../components/RegistrationForm';
+import axios from 'axios';
 
 //import CheckBox from 'react-native-check-box';
 import { CheckBox } from 'react-native-elements';
@@ -15,7 +16,55 @@ class Registration extends React.Component {
         checked : false,
         
       }
+
+    instance = axios.create({
+        baseURL: 'http://localhost:5000',
+        timeout: 1000,
+        headers: {
+            'Content-Type':'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:19006',
+            'Access-Control-Expose-Headers':'Access-Control-*',
+            'Access-Control-Allow-Headers':'Access-Control-*',
+            'Access-Control-Allow-Methods':'GET, POST, PUT, DELETE, OPTIONS, HEAD',
+            'Allow':'GET, POST, PUT, DELETE, OPTIONS, HEAD'
+        }
+        });
+
+        getUser = () => this.instance({
+            'method':'GET',
+            'url':'/getuser',
+            // 'params': {
+            //     'search':'parameter',
+            // }
+        })
+
+        postUser = () =>this.instance({
+            'method': 'POST',
+            'url':'/adduser',
+            'data': {
+                'name': global.regName,
+                'email': global.regEmail,
+                'password': global.regPass
+            }
+        })
+    //url = 'http://localhost:5000/adduser';
+    //baseURL = 'http://localhost:5000'
+    // postUser = () =>{
+    // axios.post('/adduser', {
+    //     name: global.regName,
+    //     email: global.regEmail,
+    //     password: global.regPass
+    // }, this.baseURL)
+    // .then(function (response) {
+    //     console.log(response);
+    // })
+    // .catch(function (error) {
+    //     console.log(error);
+    // });
+    // }
+
     
+
      
     clickRegister=() =>{
         console.log('entering the button')
@@ -31,7 +80,9 @@ class Registration extends React.Component {
                 // })
                 // console.log('inside the loop');
                 // console.log('button state',this.state.buttonStateHolder);
+                this.postUser();
                 this.props.navigation.navigate("HomeScreen");
+
             }
         // console.log('status',global.status);
         // console.log('button state',this.state.buttonStateHolder);

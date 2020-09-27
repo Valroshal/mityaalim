@@ -2,24 +2,22 @@ const express = require('express');
 const app = express();
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
+const users = require('./routes/usersAPI')
 
 app.use(bodyParser.json({type:'application/json'}));
 app.use(bodyParser.urlencoded({extended:true}));
 
 const con = mysql.createPool({
-    //host: 'ns1.bluehost.com',
-    //host: '162.159.25.175',
-    host: '70.40.218.93',
-    //port: '3306',
-    user:'mityaalim.org',
-    password: '!TowerJazz2019',
-    database: 'mityaali_hello',
+    // host: '70.40.218.93',
+    // user:'mityaalim.org',
+    // password: '!TowerJazz2019',
+    // database: 'mityaali_hello',
     //connectionLimit: 100,
     multipleStatements: true,
-    // host: 'localhost',
-    // user:'valerie',
-    // password: 'val0527475185',
-    // database: 'mityaalim_test',
+    host: 'localhost',
+    user:'valerie',
+    password: 'val0527475185',
+    database: 'userdb',
     connectionLimit : 1000,
     connectTimeout  : 60 * 60 * 1000,
     acquireTimeout  : 60 * 60 * 1000,
@@ -37,15 +35,77 @@ app.get('/', function(req,res,next){
     //next(err);
 });
 
-app.get('/check',function(req,res){
-    con.query('select * from wp_fhvw_actionscheduler_actions', function(err, result){
+app.get('/check',(req,res) =>{
+    con.query('select * from users', function(err, result){
+    //con.query('select * from wp_fhvw_actionscheduler_actions', function(err, result){
         if(err) {
             res.send(err)
         }else{
-            res.send('RESULT IS: ', result)
+            res.status.send('RESULT IS: ', result)
         }
     })
 })
 
-const port = process.env.PORT || 3306;
+//create db
+app.get('/createdb',(req,res) =>{
+    let sql = 'CREATE DATABASE userdb';
+    con.query(sql, (err, result) =>{
+        if(err) throw err;
+        console.log(result);
+        res.send('DBcreated');
+    });
+});
+
+//create table
+app.get('/createuserstable', (req,res) =>{
+    let sql = 'CREATE TABLE users(id int AUTO_INCREMENT, name VARCHAR(50), email VARCHAR(100), password VARCHAR(50), PRIMARY KEY (id) )';
+    con.query(sql, (err, result) =>{
+        if(err) throw err;
+        console.log(result);
+        res.send('users table created');
+    });
+});
+
+//Insert user
+app.get('/adduser', (req,res) =>{
+    let user = {
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+    };
+    let sql = 'INSERT INTO users SET ?';
+    con.query(sql, user, (err, result) =>{
+        if(err) throw err;
+        console.log(result);
+        res.send('user added');
+    });
+
+//select users
+app.get('/getuser', (req,res) =>{
+    let sql = 'SELECT * FROM users';
+    con.query(sql, (err, result) =>{
+        if(err) throw err;
+        console.log(result);
+        res.send('users fetched');
+    });
+
+    // User.findOne({ email: req.body.email }).then(user => {
+	// 	//there is a user with that email
+	// 	if (user) {
+	// 		errors.email = 'Email already exists';
+	// 		return res.status(400).json(errors);
+	// 	} //if there isn't then we need to create a user
+	// 	else {
+	// 		//req.body.-will come from the form
+	// 		const user = {
+	// 			name: req.body.name,
+	// 			email: req.body.email,
+	// 			password: req.body.password,
+    //         };
+    //     }
+});
+//Use Routes - Initilaze routes
+//app.use('/api/users', users);
+
+const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server is running on ${port}`));

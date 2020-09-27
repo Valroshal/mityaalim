@@ -23,9 +23,6 @@ export default class Login extends React.Component {
     return (
       <KeyboardAvoidingView>  
         <View style={styles.container}>
-          {/* <Text style={styles.text}>
-            Welcome to our app!
-          </Text> */}
           <View style={styles.logoContainer}>
               <Image style={styles.logo}
               source={mityalimLogo}
@@ -43,13 +40,14 @@ export default class Login extends React.Component {
               <TouchableHighlight
                 onPress={() => navigate("RegistrationScreen")}
                 style={styles.button}>
-                <Text
-                  style={styles.buttonText}>Not a Registered User? Register Now!</Text>
+                  <View style={styles.registerContainer}>
+                    <Text style={styles.buttonText}>Not a Registered User? Register Now!</Text>
+                  </View>
               </TouchableHighlight>
 
+              {/* facebook login doesn't work need to do */}
               <FacebookLogin />
           </View>
-
         </View>
       </KeyboardAvoidingView>  
     );
@@ -87,6 +85,11 @@ const styles = StyleSheet.create({
       backgroundColor:'#034643',
       paddingVertical: 15,
       borderRadius: 5,
+    },
+    registerContainer:{
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingTop: 10,
     },
   });
 
