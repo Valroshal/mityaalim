@@ -4,17 +4,19 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text,TouchableOpacity, View } from 'react-native';
-import HomeComponent from './src/screens/Home';
+
 import HomeScreen from './src/screens/Home';
 import LoginScreen from './src/screens/Login';
 import RegistrationScreen from './src/screens/Registration';
 
 import Expo from 'expo';
-import  MyStack from './src/navigation/navigator';
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import  RootStack from './src/navigation/navigator';
 import Error from './src/components/Error';
-import BudgetComponent from './src/components/Budget'
+import BudgetComponent from './src/components/Budget';
+import VideoComponent from './src/components/Video';
+import EventsComponent from './src/components/Events';
 
 // class App extends React.Component{
 //       render(){
@@ -51,6 +53,14 @@ import BudgetComponent from './src/components/Budget'
               <Stack.Screen
                 name="Error"
                 component={Error}
+              />
+              <Stack.Screen
+                name="VideoComponent"
+                component={VideoComponent}
+              />
+              <Stack.Screen
+                name="EventsComponent"
+                component={EventsComponent}
               />
               <Stack.Screen
                 name="BudgetComponent"

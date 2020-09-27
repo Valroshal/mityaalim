@@ -82,7 +82,7 @@ class HomeComponent extends React.Component{
            <View
               style={styles.button}>
               <TouchableHighlight
-                onPress={() => navigate("BudgetComponent")}
+                onPress={() => navigate("EventsComponent")}
                 // style={styles.button}
                 >
                     <Text style={styles.buttonText}>events</Text>
@@ -91,7 +91,7 @@ class HomeComponent extends React.Component{
            <View
               style={styles.button}>
               <TouchableHighlight
-                onPress={() => navigate("BudgetComponent")}
+                onPress={() => navigate("VideoComponent")}
                 // style={styles.button}
                 >
                     <Text style={styles.buttonText}>video</Text>

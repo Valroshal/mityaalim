@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react'; 
 import { StyleSheet, Text,TouchableOpacity, View, Image, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
 
-class BudgetComponent extends React.Component{
+class VideoComponent extends React.Component{
   
   render(){
   const { navigate } = this.props.navigation
@@ -52,7 +52,7 @@ class BudgetComponent extends React.Component{
            </View>
          </View>
 
-        <Text style={styles.text}>Hello Budget Component!</Text>
+        <Text style={styles.text}>Hello Video Component!</Text>
         <StatusBar style="auto" />
       </View>
     );
@@ -100,4 +100,4 @@ const styles = StyleSheet.create({
 
 
 
-export default BudgetComponent;
+export default VideoComponent;
