@@ -5,7 +5,19 @@ import React from 'react';
 import { StyleSheet, Text,TouchableOpacity, View, Image, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
 
 class EventsComponent extends React.Component{
-  
+    
+    state = {
+        color: 'white'
+    }
+
+    setEventsButton = () =>{
+      this.setState({
+        color: 'red'
+      })
+      console.log('events', this.state.color);
+      this.props.navigation.navigate("EventsComponent");
+    }
+
   render(){
   const { navigate } = this.props.navigation
   return (
@@ -24,9 +36,14 @@ class EventsComponent extends React.Component{
               </TouchableHighlight>
            </View>
            <View
-              style={styles.button}>
+              style={{
+                alignItems: 'center',
+                marginTop: 10,
+                backgroundColor: this.state.color
+              }}>
               <TouchableHighlight
-                onPress={() => navigate("EventsComponent")}
+                onPress={this.setEventsButton}
+                //onPress={() => navigate("EventsComponent")}
                 // style={styles.button}
                 >
                     <Text style={styles.buttonText}>events</Text>

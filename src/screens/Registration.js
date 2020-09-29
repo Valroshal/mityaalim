@@ -3,7 +3,6 @@ import {StyleSheet, View, TextInput, TouchableOpacity, Text, KeyboardAvoidingVie
 import Register from '../components/RegistrationForm';
 import axios from 'axios';
 
-//import CheckBox from 'react-native-check-box';
 import { CheckBox } from 'react-native-elements';
 
 const ScreenHeight = Dimensions.get("window").height;

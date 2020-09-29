@@ -3,7 +3,7 @@ import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react'; 
 import { StyleSheet, Text,TouchableOpacity, View, Image, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
-
+import HomeMenuBar from '../components/HomeMenuBar'
 
 //import TopBarNav from 'top-bar-nav';
 
@@ -11,57 +11,18 @@ import { StyleSheet, Text,TouchableOpacity, View, Image, KeyboardAvoidingView, D
 
 class HomeComponent extends React.Component{
   
-//   state = {
-//         showBudget: false,
-//         showVideo: false,
-//         showEvent: false,
-//         showHome: true
-//     }
+  state = {
+        color: 'white'
+    }
+
+    setHomeButton = () =>{
+      this.setState({
+        color: 'red'
+      })
+      console.log('home', this.state.color);
+      this.props.navigation.navigate("HomeScreen");
+    }
   
-  
-//   toggleBudget = () =>{
-//     console.log('budget pressed')
-//     this.setState({
-//         showBudget: true,
-//         showVideo: false,
-//         showEvent: false,
-//         showHome: false
-//     });
-//     if(this.state.showBudget)
-//       {
-//         return(
-//       <View>
-//         <Text style={styles.text2}>Hello Budget Component!</Text>
-//         <StatusBar style="auto" />
-//       </View>
-//       )
-//     }else{
-//       return null;
-//     }
-// }
-
-// toggleHome = () =>{
-//   console.log('budget pressed')
-//   this.setState({
-//         showBudget: false,
-//         showVideo: false,
-//         showEvent: false,
-//         showHome: true
-//   });
-//   if(this.state.showHome)
-//     {
-//       return(
-//     <View>
-//       <Text style={styles.text2}>Hello Home Component!</Text>
-//       <StatusBar style="auto" />
-//     </View>
-//     )
-//   }else{
-//     return null;
-//   }
-// }
-
-
   render(){
   const { navigate } = this.props.navigation
   return (
@@ -72,11 +33,8 @@ class HomeComponent extends React.Component{
            <View
               style={styles.button}>
               <TouchableHighlight
-                onPress={() => navigate("BudgetComponent")}
-                // style={styles.button}
-                //onPress={this.toggleBudget}
-                >
-                    <Text style={styles.buttonText}>budget</Text>
+                  onPress={() => navigate("BudgetComponent")}>
+                  <Text style={styles.buttonText}>budget</Text>
               </TouchableHighlight>
            </View>
            <View
@@ -98,16 +56,24 @@ class HomeComponent extends React.Component{
               </TouchableHighlight>
            </View>
            <View
-              style={styles.button}>
+              // style={styles.buttonHome}>
+              style={{
+                alignItems: 'center',
+                marginTop: 10,
+                backgroundColor: this.state.color
+              }}>
               <TouchableHighlight
-                onPress={() => navigate("HomeScreen")}
-                // style={styles.button}
+                  onPress = {this.setHomeButton}
                 >
                     <Text style={styles.buttonText}>home</Text>
               </TouchableHighlight>
-           </View>
+           </View> 
          </View>
 
+
+
+        {/* <HomeMenuBar/>  */}
+        {/*  // navigation from another component doesn't work, why ????*/}
         <Text style={styles.text}>Hello Home Component!</Text>
         <StatusBar style="auto" />
       </View>

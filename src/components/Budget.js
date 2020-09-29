@@ -5,7 +5,19 @@ import React from 'react';
 import { StyleSheet, Text,TouchableOpacity, View, Image, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
 
 class BudgetComponent extends React.Component{
-  
+    
+    state = {
+        color: 'white'
+    }
+
+    setBudgetButton = () =>{
+      this.setState({
+        color: 'red'
+      })
+      console.log('budget', this.state.color);
+      this.props.navigation.navigate("BudgetComponent");
+    }
+
   render(){
   const { navigate } = this.props.navigation
   return (
@@ -14,9 +26,14 @@ class BudgetComponent extends React.Component{
          <View 
          style={styles.menu}>
            <View
-              style={styles.button}>
+              style={{
+                alignItems: 'center',
+                marginTop: 10,
+                backgroundColor: this.state.color
+              }}>
               <TouchableHighlight
-                onPress={() => navigate("BudgetComponent")}
+                onPress={this.setBudgetButton}
+                //onPress={() => navigate("BudgetComponent")}
                 // style={styles.button}
                 //onPress={this.toggleBudget}
                 >

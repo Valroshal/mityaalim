@@ -4,33 +4,28 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react'; 
 import { StyleSheet, Text,TouchableOpacity, View, Image, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
 
-class VideoComponent extends React.Component{
-    
-    state = {
-        color: 'white'
-    }
+class HomeMenuBar extends React.Component{
 
-    setVideoButton = () =>{
-      this.setState({
-        color: 'red'
-      })
-      console.log('video', this.state.color);
-      this.props.navigation.navigate("VideoComponent");
+//    function HomeMenuBar(){
+
+    navigateTo = () =>{
+        this.props.navigation.navigate("BudgetComponent");
     }
-  
-  render(){
-  const { navigate } = this.props.navigation
-  return (
-      <View
-         style={styles.container2}>
+   
+    render(){
+    
+  //const { navigate } = this.props.navigation
+        return (
+    //   <View
+    //      style={styles.container2}>
          <View 
          style={styles.menu}>
            <View
               style={styles.button}>
               <TouchableHighlight
-                onPress={() => navigate("BudgetComponent")}
+                //onPress={() => navigate("BudgetComponent")}
                 // style={styles.button}
-                //onPress={this.toggleBudget}
+                onPress={this.navigateTo}
                 >
                     <Text style={styles.buttonText}>budget</Text>
               </TouchableHighlight>
@@ -45,14 +40,9 @@ class VideoComponent extends React.Component{
               </TouchableHighlight>
            </View>
            <View
-              style={{
-                alignItems: 'center',
-                marginTop: 10,
-                backgroundColor: this.state.color
-              }}>
+              style={styles.button}>
               <TouchableHighlight
-                onPress={this.setVideoButton}
-                //onPress={() => navigate("VideoComponent")}
+                onPress={() => navigate("VideoComponent")}
                 // style={styles.button}
                 >
                     <Text style={styles.buttonText}>video</Text>
@@ -67,9 +57,7 @@ class VideoComponent extends React.Component{
                     <Text style={styles.buttonText}>home</Text>
               </TouchableHighlight>
            </View>
-         </View>
-
-        <Text style={styles.text}>Hello Video Component!</Text>
+         {/* </View> */}
         <StatusBar style="auto" />
       </View>
     );
@@ -117,4 +105,4 @@ const styles = StyleSheet.create({
 
 
 
-export default VideoComponent;
+export default HomeMenuBar;
