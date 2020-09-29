@@ -62,7 +62,7 @@ class HomeComponent extends React.Component{
          style={styles.container2}>
            
          <View 
-         style={styles.menu}>
+         style={styles.topMenu}>
            <View
               style={styles.button}>
               <TouchableHighlight
@@ -110,6 +110,16 @@ class HomeComponent extends React.Component{
         <Text style={styles.text}>Hello Home Component!</Text>
         <StatusBar style="auto" />
         
+        <View 
+         style={styles.bottomMenu}>
+           <View
+              style={styles.button}>
+              <TouchableHighlight>
+                  {/* //onPress={() => navigate("BudgetComponent")}> */}
+                  <Text style={styles.buttonText}>sign out</Text>
+              </TouchableHighlight>
+           </View>
+        </View>   
       </View>
       // {/* </GestureRecognizer> */}
 
@@ -137,7 +147,7 @@ const styles = StyleSheet.create({
   text2:{
     fontSize: 46,
   },
-  menu:{
+  topMenu:{
     backgroundColor: '#fff',
     height: 50,
     width: 375,
@@ -148,6 +158,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+
+  bottomMenu:{
+    backgroundColor: '#fff',
+    height: 50,
+    width: 375,
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
+
   button:{
     alignItems: 'center',
     marginTop: 10,
