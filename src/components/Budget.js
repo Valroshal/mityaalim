@@ -6,9 +6,24 @@ import { StyleSheet, Text,TouchableOpacity, View, Image, KeyboardAvoidingView, D
 
 class BudgetComponent extends React.Component{
     
-    state = {
-        color: 'white'
+    componentDidMount(){
+        this.checkColor()
+        this.props.navigation.addListener('willFocus', this.load)
     }
+    
+      state = {
+            color: 'white'
+        }
+    
+        checkColor = () =>{
+          console.log('on load home', this.state.color);
+          if(this.state.color == 'white')
+          {
+            this.setState({
+              color: 'red'
+            })
+          }
+        }
 
     setBudgetButton = () =>{
       this.setState({
@@ -34,8 +49,7 @@ class BudgetComponent extends React.Component{
               <TouchableHighlight
                 onPress={this.setBudgetButton}
                 //onPress={() => navigate("BudgetComponent")}
-                // style={styles.button}
-                //onPress={this.toggleBudget}
+                
                 >
                     <Text style={styles.buttonText}>budget</Text>
               </TouchableHighlight>

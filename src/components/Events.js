@@ -6,9 +6,24 @@ import { StyleSheet, Text,TouchableOpacity, View, Image, KeyboardAvoidingView, D
 
 class EventsComponent extends React.Component{
     
-    state = {
-        color: 'white'
+    componentDidMount(){
+        this.checkColor()
+        this.props.navigation.addListener('willFocus', this.load)
     }
+    
+      state = {
+            color: 'white'
+        }
+    
+        checkColor = () =>{
+          console.log('on load home', this.state.color);
+          if(this.state.color == 'white')
+          {
+            this.setState({
+              color: 'red'
+            })
+          }
+        }
 
     setEventsButton = () =>{
       this.setState({

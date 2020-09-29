@@ -10,9 +10,23 @@ import HomeMenuBar from '../components/HomeMenuBar'
 
 
 class HomeComponent extends React.Component{
-  
+  componentDidMount(){
+    this.checkColor()
+    this.props.navigation.addListener('willFocus', this.load)
+}
+
   state = {
         color: 'white'
+    }
+
+    checkColor = () =>{
+      console.log('on load home', this.state.color);
+      if(this.state.color == 'white')
+      {
+        this.setState({
+          color: 'red'
+        })
+      }
     }
 
     setHomeButton = () =>{
@@ -63,6 +77,7 @@ class HomeComponent extends React.Component{
                 backgroundColor: this.state.color
               }}>
               <TouchableHighlight
+                  o
                   onPress = {this.setHomeButton}
                 >
                     <Text style={styles.buttonText}>home</Text>
