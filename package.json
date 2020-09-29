@@ -6,7 +6,6 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/bottom-tabs": "5.9.0",
     "@react-navigation/native": "5.7.4",
@@ -35,6 +34,7 @@
     "react-native-reanimated": "1.13.0",
     "react-native-safe-area-context": "3.1.4",
     "react-native-screens": "2.10.1",
+    "react-native-swipe-gestures": "^1.0.5",
     "react-native-unimodules": "0.10.1",
     "react-native-web": "0.11.7",
     "react-native-webview": "10.9.0",
@@ -49,7 +49,6 @@
     "jest": "25.2.6",
     "prettier": "2.1.2",
     "react-test-renderer": "16.11.0"
-    
   },
   "private": true,
   "name": "MityaalimApp",

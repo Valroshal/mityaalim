@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react'; 
 import { StyleSheet, Text,TouchableOpacity, View, Image, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
 import HomeMenuBar from '../components/HomeMenuBar'
-
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 //import TopBarNav from 'top-bar-nav';
 
 
@@ -19,29 +19,48 @@ class HomeComponent extends React.Component{
         color: 'white'
     }
 
-    checkColor = () =>{
-      console.log('on load home', this.state.color);
-      if(this.state.color == 'white')
-      {
-        this.setState({
-          color: 'red'
-        })
-      }
-    }
+  onSwipeLeft = () =>{
+    this.props.navigation.navigate('VideoComponent')
+  }
 
-    setHomeButton = () =>{
+  onSwipeRight = () =>{
+    this.props.navigation.goBack()
+  }
+
+  checkColor = () =>{
+    console.log('on load home', this.state.color);
+    if(this.state.color == 'white')
+    {
       this.setState({
         color: 'red'
       })
-      console.log('home', this.state.color);
-      this.props.navigation.navigate("HomeScreen");
     }
+  }
+
+  setHomeButton = () =>{
+    this.setState({
+      color: 'red'
+    })
+    console.log('home', this.state.color);
+    this.props.navigation.navigate("HomeScreen");
+  }
   
   render(){
   const { navigate } = this.props.navigation
+  const config = {
+    velocityThreshold: 0.3,
+    directionalOffsetThreshold: 80
+  };
   return (
+    
+      // {/* guesture recognizer doesn't work! why?????? */}
+      // <GestureRecognizer
+      //   onSwipeLeft={this.onSwipeLeft}
+      //   onSwipeRight={this.onSwipeRight}
+      //   config={config}>  
       <View
          style={styles.container2}>
+           
          <View 
          style={styles.menu}>
            <View
@@ -84,18 +103,22 @@ class HomeComponent extends React.Component{
               </TouchableHighlight>
            </View> 
          </View>
-
-
+         
 
         {/* <HomeMenuBar/>  */}
         {/*  // navigation from another component doesn't work, why ????*/}
         <Text style={styles.text}>Hello Home Component!</Text>
         <StatusBar style="auto" />
+        
       </View>
+      // {/* </GestureRecognizer> */}
+
     );
   }
 }
 
+
+        
 //need camelCase in style sheet
 const styles = StyleSheet.create({
   container2:{
