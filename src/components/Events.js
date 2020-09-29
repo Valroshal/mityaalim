@@ -12,7 +12,8 @@ class EventsComponent extends React.Component{
     }
     
       state = {
-            color: 'white'
+            color: 'white',
+            font: 'normal'
         }
     
         checkColor = () =>{
@@ -20,14 +21,16 @@ class EventsComponent extends React.Component{
           if(this.state.color == 'white')
           {
             this.setState({
-              color: 'red'
+              color: '#50C878',
+              font: 'bold'
             })
           }
         }
 
     setEventsButton = () =>{
       this.setState({
-        color: 'red'
+        color: '#50C878',
+        font: 'bold'
       })
       console.log('events', this.state.color);
       this.props.navigation.navigate("EventsComponent");
@@ -54,14 +57,16 @@ class EventsComponent extends React.Component{
               style={{
                 alignItems: 'center',
                 marginTop: 10,
-                backgroundColor: this.state.color
+                width: 75,
+                borderBottomColor: this.state.color,
+                borderBottomWidth: 2,
               }}>
               <TouchableHighlight
                 onPress={this.setEventsButton}
                 //onPress={() => navigate("EventsComponent")}
                 // style={styles.button}
                 >
-                    <Text style={styles.buttonText}>events</Text>
+                    <Text style={[styles.buttonText, {fontWeight: this.state.font}]}>events</Text>
               </TouchableHighlight>
            </View>
            <View
@@ -86,6 +91,23 @@ class EventsComponent extends React.Component{
 
         <Text style={styles.text}>Hello Events Component!</Text>
         <StatusBar style="auto" />
+        <View 
+         style={styles.bottomMenu}>
+           <View
+              style={styles.button}>
+              <TouchableHighlight>
+                  {/* //onPress={() => navigate("BudgetComponent")}> */}
+                  <Text style={styles.buttonText}>sign out</Text>
+              </TouchableHighlight>
+           </View>
+           <View
+              style={styles.button}>
+              <TouchableHighlight>
+                  {/* //onPress={() => navigate("BudgetComponent")}> */}
+                  <Text style={styles.buttonText}>settings</Text>
+              </TouchableHighlight>
+           </View>
+        </View>   
       </View>
     );
   }
@@ -109,8 +131,8 @@ const styles = StyleSheet.create({
   text2:{
     fontSize: 46,
   },
-  menu:{
-    backgroundColor: '#fff',
+  topMenu:{
+    backgroundColor: '#ececec',
     height: 50,
     width: 375,
     position: 'absolute',
@@ -118,7 +140,19 @@ const styles = StyleSheet.create({
     top: 0,
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
+    
+  },
+
+  bottomMenu:{
+    backgroundColor: '#ececec',
+    height: 50,
+    width: 375,
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
   button:{
     alignItems: 'center',

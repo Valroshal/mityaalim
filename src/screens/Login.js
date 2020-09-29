@@ -80,11 +80,16 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       color:'#FFF',
       fontWeight: '500',
+      
     },
     loginButtonContainer:{
       backgroundColor:'#034643',
       paddingVertical: 15,
       borderRadius: 5,
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '90%',
+      marginLeft: 17
     },
     registerContainer:{
       justifyContent: 'center',

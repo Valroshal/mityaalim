@@ -16,7 +16,8 @@ class HomeComponent extends React.Component{
 }
 
   state = {
-        color: 'white'
+        color: 'white',
+        font: 'normal'
     }
 
   onSwipeLeft = () =>{
@@ -32,14 +33,16 @@ class HomeComponent extends React.Component{
     if(this.state.color == 'white')
     {
       this.setState({
-        color: 'red'
+        color: '#50C878',
+        font: 'bold'
       })
     }
   }
 
   setHomeButton = () =>{
     this.setState({
-      color: 'red'
+      color: '#50C878',
+      font: 'bold'
     })
     console.log('home', this.state.color);
     this.props.navigation.navigate("HomeScreen");
@@ -93,13 +96,20 @@ class HomeComponent extends React.Component{
               style={{
                 alignItems: 'center',
                 marginTop: 10,
-                backgroundColor: this.state.color
+                width: 75,
+                borderBottomColor: this.state.color,
+                borderBottomWidth: 2,
+                // shadowColor: 'rgba(0, 0, 0, 0.1)',
+                // shadowOpacity: 1,
+                // // elevation: 6,
+                // shadowRadius: 10 ,
+                // shadowOffset : { width: 1, height: 13},
               }}>
               <TouchableHighlight
-                  o
+                  
                   onPress = {this.setHomeButton}
                 >
-                    <Text style={styles.buttonText}>home</Text>
+                    <Text style={[styles.buttonText, {fontWeight: this.state.font}]}>home</Text>
               </TouchableHighlight>
            </View> 
          </View>
@@ -117,6 +127,13 @@ class HomeComponent extends React.Component{
               <TouchableHighlight>
                   {/* //onPress={() => navigate("BudgetComponent")}> */}
                   <Text style={styles.buttonText}>sign out</Text>
+              </TouchableHighlight>
+           </View>
+           <View
+              style={styles.button}>
+              <TouchableHighlight>
+                  {/* //onPress={() => navigate("BudgetComponent")}> */}
+                  <Text style={styles.buttonText}>settings</Text>
               </TouchableHighlight>
            </View>
         </View>   
@@ -148,7 +165,7 @@ const styles = StyleSheet.create({
     fontSize: 46,
   },
   topMenu:{
-    backgroundColor: '#fff',
+    backgroundColor: '#ececec',
     height: 50,
     width: 375,
     position: 'absolute',
@@ -156,18 +173,19 @@ const styles = StyleSheet.create({
     top: 0,
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
+    
   },
 
   bottomMenu:{
-    backgroundColor: '#fff',
+    backgroundColor: '#ececec',
     height: 50,
     width: 375,
     position: 'absolute',
     right: 0,
     bottom: 0,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
   },
 
 
