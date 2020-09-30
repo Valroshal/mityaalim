@@ -42,7 +42,7 @@ class EventsComponent extends React.Component{
       <View
          style={styles.container2}>
          <View 
-         style={styles.menu}>
+         style={styles.topMenu}>
            <View
               style={styles.button}>
               <TouchableHighlight
@@ -95,8 +95,8 @@ class EventsComponent extends React.Component{
          style={styles.bottomMenu}>
            <View
               style={styles.button}>
-              <TouchableHighlight>
-                  {/* //onPress={() => navigate("BudgetComponent")}> */}
+              <TouchableHighlight
+                  onPress={() => navigate("LoginScreen")}>
                   <Text style={styles.buttonText}>sign out</Text>
               </TouchableHighlight>
            </View>
@@ -154,6 +154,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
+
   button:{
     alignItems: 'center',
     marginTop: 10,

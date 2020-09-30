@@ -70,6 +70,7 @@ export default class LoginForm extends Component {
     return (
       <View style={styles.container}>
         <StatusBar barStyle='Light-content'/>
+        {/* <TextField */}
         <TextField
                   placeholder='email'
                   placeholderTextColor="rgba(255,255,255,0.7)"
@@ -82,7 +83,7 @@ export default class LoginForm extends Component {
                   onBlur={this.checkLogin}
                   error={this.state.emailError}/>
         
-                <TextField
+        <TextField
                   placeholder='password'
                   placeholderTextColor="rgba(255,255,255,0.7)"
                   autoCapitalize='none'
@@ -125,7 +126,7 @@ const styles = StyleSheet.create({
   },
   input:{
     height: 40,
-    width:260,
+    //width:260,
     backgroundColor: '#07beb8',
     color:'#FFF',
     marginBottom: 10,

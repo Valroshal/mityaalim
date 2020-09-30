@@ -124,15 +124,15 @@ class HomeComponent extends React.Component{
          style={styles.bottomMenu}>
            <View
               style={styles.button}>
-              <TouchableHighlight>
-                  {/* //onPress={() => navigate("BudgetComponent")}> */}
+              <TouchableHighlight
+                  onPress={() => navigate("LoginScreen")}>
                   <Text style={styles.buttonText}>sign out</Text>
               </TouchableHighlight>
            </View>
            <View
               style={styles.button}>
-              <TouchableHighlight>
-                  {/* //onPress={() => navigate("BudgetComponent")}> */}
+              <TouchableHighlight
+                  onPress={() => navigate("SettingsScreen")}>
                   <Text style={styles.buttonText}>settings</Text>
               </TouchableHighlight>
            </View>

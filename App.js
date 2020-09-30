@@ -8,7 +8,7 @@ import { StyleSheet, Text,TouchableOpacity, View } from 'react-native';
 import HomeScreen from './src/screens/Home';
 import LoginScreen from './src/screens/Login';
 import RegistrationScreen from './src/screens/Registration';
-
+import SettingsScreen from './src/screens/Settings';
 import Expo from 'expo';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -38,7 +38,7 @@ import EventsComponent from './src/components/Events';
           <Stack.Navigator
               screenOptions={{  headerShown: false } }  
             >
-              <Stack.Screen
+              {/* <Stack.Screen
                 name="Login"
                 component={LoginScreen}
               />
@@ -46,9 +46,14 @@ import EventsComponent from './src/components/Events';
                 name="RegistrationScreen"
                 component={RegistrationScreen}
               />
+              
               <Stack.Screen
                 name="HomeScreen"
                 component={HomeScreen}
+              /> */}
+              <Stack.Screen
+                name="SettingsScreen"
+                component={SettingsScreen}
               />
               <Stack.Screen
                 name="Error"
