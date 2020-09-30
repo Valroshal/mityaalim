@@ -46,22 +46,22 @@ export default class FacebookLogin extends Component {
     }
 
     const styles = StyleSheet.create({
-        container:{
-            padding: 20,
-          },
+        
           text:{
               
               fontSize: 26,
               textAlign: 'center',
             },
           buttonface:{
-              width: '100%',
+              width: '88%',
               height: '30%',
               justifyContent: 'center',
               alignItems: 'center',
               borderRadius: 4,
               padding: 24,
-              backgroundColor: '#3b5998'
+              backgroundColor: '#3b5998',
+              marginTop:10,
+              marginLeft:20
           },
 
     });

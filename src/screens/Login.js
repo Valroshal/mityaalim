@@ -38,13 +38,22 @@ export default class Login extends React.Component {
               </TouchableOpacity> 
 
               <TouchableHighlight
-                onPress={() => navigate("RegistrationScreen")}
+                // onPress={() => navigate("RegistrationScreen")}
                 style={styles.button}>
                   <View style={styles.registerContainer}>
-                    <Text style={styles.buttonText}>Not a Registered User? Register Now!</Text>
+                    <Text style={styles.buttonText}>Not a Registered User?</Text>
                   </View>
               </TouchableHighlight>
 
+              <TouchableOpacity
+                onPress={() => navigate("RegistrationScreen")}
+                style={styles.CreateAccountButtonContainer} >
+                <Text style={styles.loginButtonText}>Create an Account</Text>
+              </TouchableOpacity> 
+
+              <View style={styles.registerContainer}>
+                    <Text style={styles.buttonText}>or</Text>
+              </View>
               {/* facebook login doesn't work need to do */}
               <FacebookLogin />
           </View>
@@ -88,8 +97,18 @@ const styles = StyleSheet.create({
       borderRadius: 5,
       justifyContent: 'center',
       alignItems: 'center',
-      width: '90%',
-      marginLeft: 17
+      width: '88%',
+      marginLeft: 20
+    },
+    CreateAccountButtonContainer:{
+      backgroundColor:'#034643',
+      paddingVertical: 15,
+      borderRadius: 5,
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '88%',
+      marginLeft: 20,
+      marginTop: 5
     },
     registerContainer:{
       justifyContent: 'center',
