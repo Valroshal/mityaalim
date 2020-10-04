@@ -47,38 +47,100 @@ class RegistrationForm extends React.Component{
           }
         }
 
-        handleName = (name) =>{
-          this.setState({name});
+        handleName = async (name) =>{
+          await this.setState({name});
           global.regName = this.state.name;
-          console.log('name: ', this.state.name);
+          await console.log('name: ', this.state.name);
           console.log('global name: ', global.regName);
-          this.setState({
+          await this.setState({
             nameError: validate('name', this.state.name)
           })
-      }
-
-        handleEmail = (email) =>{
-            this.setState({email});
-            global.regEmail = this.state.email;
-            console.log('email: ', this.state.email);
-            this.setState({
-              emailError: validate('email', this.state.email)
-            })
+          // if(this.state.nameError == null && this.state.emailError == null && this.state.passwordError == null)
+          // {
+          //     global.status = true;
+          // }
+          this.setGlobalStatus();
+          console.log(global.status)
         }
 
-        handlePass = (password) =>{
-          this.setState({password});
+        handleEmail = async (email) =>{
+          await this.setState({email});
+          global.regEmail = this.state.email;
+          await console.log('email: ', this.state.email);
+          this.setState({
+            emailError: validate('email', this.state.email)
+          })
+          // if(this.state.nameError == null && this.state.emailError == null && this.state.passwordError == null)
+          // {
+          //     global.status = true;
+          // }
+          this.setGlobalStatus();
+          console.log(global.status)
+        }
+
+        handlePass = async (password) =>{
+          await this.setState({password});
           global.regPass = this.state.password;
-          console.log('pass: ', this.state.password);
+          await console.log('pass: ', this.state.password);
           this.setState({
             passwordError: validate('password', this.state.password)
           })
           console.log('errors: ', this.state.nameError, this.state.emailError, this.state.passwordError)
-          if(this.state.nameError == null && this.state.emailError == null && this.state.passwordError == null)
+          // if(this.state.nameError == null && this.state.emailError == null && this.state.passwordError == null)
+          // {
+          //     global.status = true;
+          // }
+          this.setGlobalStatus();
+          console.log(global.status)
+        }
+
+        
+        // here is the same problem as in validate function password is null
+        handleConfirmPass = async (repeatPassword) =>{
+          
+          await this.setState({repeatPassword});
+
+          if(this.state.password.property != this.state.repeatPassword.property)
+            {
+              this.setState({
+                repeatPasswordError: 'not matched'
+              })
+            }
+          // console.log('pass: ', this.state.password);
+          // console.log('confirm pass: ', this.state.repeatPassword);
+          // console.log('pass err: ', this.state.repeatPasswordError);
+          this.setGlobalStatus();
+          console.log(global.status)
+        }
+
+        //need to repair last else - every time has an error, but button works - no error need to be 
+        setGlobalStatus = () =>{
+          const err = 'Field cannot be empy';
+          if(this.state.nameError == null && this.state.emailError == null && this.state.passwordError == null
+            && this.state.name!= null && this.state.email!= null && this.state.password!= null && this.state.repeatPassword!= null)
           {
               global.status = true;
+          }
+          else if(this.state.name== ''){
+              this.setState({
+                nameError: err
+              })
             }
-          console.log(global.status)
+          else if(this.state.email== ''){
+              this.setState({
+                emailError: err
+              })
+            }
+          else if(this.state.password==''){
+              this.setState({
+                passwordError: err
+              })
+            }
+          else {
+              this.setState({
+                repeatPasswordError: err
+              })
+            }
         }
 
         // handleRepPass = (repeatPassword) =>{
@@ -96,102 +158,51 @@ class RegistrationForm extends React.Component{
         //   console.log(global.status)
         // }
 
-        // here is the same problem as in validate function password is null
-        // handleConfirmPass = (repeatPassword) =>{
-        //   this.setState({repeatPassword});
-        //   if(this.state.password != this.state.repeatPassword)
-        //     {
-        //       this.setState({
-        //         repeatPasswordError: 'not matched'
-        //       })
-        //     }
-        //   console.log('pass: ', this.state.password);
-        //   console.log('confirm pass: ', this.state.repeatPassword);
-        //   console.log('pass err: ', this.state.repeatPasswordError);
-        // }
-
-        // handleEmailErr = () =>{
-        //     this.setState({
-        //     emailError: validate('email', this.state.email)
-        //   })
-        //   console.log(this.state.emailError)
-        //   if(this.state.emailError == null)
-        //   {
-        //     global.status = true;
-        //   }
-        //   console.log(global.status)
-        // }
-
-        // handlePass = (password) =>{
-        //     this.setState({password});
-        // }
+      
 
       
         render() {
-            //const { email } = this.state;
-            //const { password } = this.state;
             return (
               <View>
                 <TextField
-                  //name='name'
+                  name='name'
                   placeholder='name'
                   placeholderTextColor="rgba(255,255,255,0.7)"
-                  //type="text"
                   autoCapitalize='none'
                   autoCorrect={false}
                   style={styles.input}
                   returnKeyType='next'
                   onChangeText={this.handleName}
-                  // onBlur={() => {
-                  //   this.setState({
-                  //     emailError: validate('email', this.state.email)
-                  //   })
-                    
-                  // }}
-                  onBlur={this.handleName}
+                  
                   error={this.state.nameError}/> 
 
                 <TextField
-                  //name='email'
+                  name='email'
                   placeholder='email'
                   placeholderTextColor="rgba(255,255,255,0.7)"
-                  
-                  //type="email"
                   keyboardType="email-address"
                   autoCapitalize='none'
                   autoCorrect={false}
                   style={styles.input}
                   returnKeyType='next'
                   onChangeText={this.handleEmail}
-                  // onBlur={() => {
-                  //   this.setState({
-                  //     emailError: validate('email', this.state.email)
-                  //   })
-                  // }}
-                  onBlur={this.handleEmail}
+                  
                   error={this.state.emailError}/>
         
                 <TextField
-                  //name='password'
+                  name='password'
                   placeholder='password'
                   placeholderTextColor="rgba(255,255,255,0.7)"
-                  //type="password"
                   autoCapitalize='none'
                   autoCorrect={false}
                   style={styles.input}
                   returnKeyType='next'
                   onChangeText={this.handlePass}
-                  // onBlur={() => {
-                    
-                  //   this.setState({
-                  //     passwordError: validate('password', this.state.password)
-                  //   })
-                  // }}
-                  onBlur={this.handlePass}
+                  
                   error={this.state.passwordError}
                   secureTextEntry={true}/>
 
-                {/* <TextField
+                <TextField
                   
                   placeholder='repeat password'
                   placeholderTextColor="rgba(255,255,255,0.7)"
@@ -201,9 +212,9 @@ class RegistrationForm extends React.Component{
                   returnKeyType='next'
                   onChangeText={this.handleConfirmPass}
                   
-                  onBlur={this.handleConfirmPass}
+                  //onBlur={this.handleConfirmPass}
                   error={this.state.repeatPasswordError}
-                  secureTextEntry={true}/> */}
+                  secureTextEntry={true}/>
               </View>
             )
           }

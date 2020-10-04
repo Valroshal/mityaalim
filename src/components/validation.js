@@ -5,15 +5,15 @@ import validation from 'validate.js';
       email: {
           presence: true,
           format: {
-              pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-              message: 'Invalid email id',
+              pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ ,
+              message: 'is invalid',
           }
       },
       password: {
           presence: true,
           length: {
               minimum: 6,
-              message: 'Invalid Password',
+              message: 'is invalid',
           }
       },
       repeatPassword: {
@@ -26,13 +26,13 @@ import validation from 'validate.js';
           },
           
       },
-      phoneNo: {
-          presence: true,
-          format: {
-              pattern: "^[0-9]{10}$",
-              message: 'Invalid phone number',
-          },
-      },
+    //   phoneNo: {
+    //       presence: true,
+    //       format: {
+    //           pattern: "^[0-9]{10}$",
+    //           message: 'Invalid phone number',
+    //       },
+    //   },
       name: {
           presence: true,
           length: {
@@ -40,7 +40,7 @@ import validation from 'validate.js';
               maximum: 20,
           },
           format:{
-              pattern: "[a-z]+",
+              pattern: /^[A-Za-z]+$/,
               // We don't care if the username is uppercase or lowercase
               flags: "i",
               message: 'can only contain letters',
@@ -51,13 +51,14 @@ import validation from 'validate.js';
 
     var formValues = {}
     formValues[fieldName] = value
+    
 
     var formFields = {}
     formFields[fieldName] = constraints[fieldName]
-
+    
 
     const result = validation(formValues, formFields)
-
+    console.log('result', result)
     if (result) 
     {
 	    return result[fieldName][0]
@@ -66,16 +67,3 @@ import validation from 'validate.js';
 }
 
 
-// export const constraints = {
-//     emailAddress: {
-//       presence: {
-//         allowEmpty: false,
-//         message: "^Please enter an email address"
-//       },
-//       email: {
-//         message: "^Please enter a valid email address"
-//       }
-//     },
-//   };
-
-//   export default constraints;

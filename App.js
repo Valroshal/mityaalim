@@ -38,7 +38,7 @@ import EventsComponent from './src/components/Events';
           <Stack.Navigator
               screenOptions={{  headerShown: false } }  
             >
-              {/* <Stack.Screen
+              <Stack.Screen
                 name="Login"
                 component={LoginScreen}
               />
@@ -50,7 +50,7 @@ import EventsComponent from './src/components/Events';
               <Stack.Screen
                 name="HomeScreen"
                 component={HomeScreen}
-              /> */}
+              /> 
               <Stack.Screen
                 name="SettingsScreen"
                 component={SettingsScreen}

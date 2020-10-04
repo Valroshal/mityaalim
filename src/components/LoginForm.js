@@ -70,7 +70,7 @@ export default class LoginForm extends Component {
     return (
       <View style={styles.container}>
         <StatusBar barStyle='Light-content'/>
-        {/* <TextField */}
+        
         <TextField
                   placeholder='email'
                   placeholderTextColor="rgba(255,255,255,0.7)"

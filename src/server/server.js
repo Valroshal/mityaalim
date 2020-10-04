@@ -74,11 +74,14 @@ app.get('/adduser', (req,res) =>{
         password: req.body.password,
     };
     let sql = 'INSERT INTO users SET ?';
+
     con.query(sql, user, (err, result) =>{
         if(err) throw err;
         console.log(result);
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.send('user added');
     });
+})
 
 //select users
 app.get('/getuser', (req,res) =>{

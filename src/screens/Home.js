@@ -5,7 +5,7 @@ import React from 'react';
 import { StyleSheet, Text,TouchableOpacity, View, Image, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
 import HomeMenuBar from '../components/HomeMenuBar'
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
-//import TopBarNav from 'top-bar-nav';
+import { Icon } from 'react-native-elements';
 
 
 
@@ -14,7 +14,7 @@ class HomeComponent extends React.Component{
     this.checkColor()
     this.props.navigation.addListener('willFocus', this.load)
 }
-
+  
   state = {
         color: 'white',
         font: 'normal'
@@ -68,6 +68,7 @@ class HomeComponent extends React.Component{
          style={styles.topMenu}>
            <View
               style={styles.button}>
+              <Icon name='credit-card' type='font-awesome' />
               <TouchableHighlight
                   onPress={() => navigate("BudgetComponent")}>
                   <Text style={styles.buttonText}>budget</Text>
@@ -75,42 +76,35 @@ class HomeComponent extends React.Component{
            </View>
            <View
               style={styles.button}>
+                
+              <Icon name='calendar' type='font-awesome' />
               <TouchableHighlight
-                onPress={() => navigate("EventsComponent")}
-                // style={styles.button}
-                >
+                onPress={() => navigate("EventsComponent")}>
                     <Text style={styles.buttonText}>events</Text>
               </TouchableHighlight>
            </View>
            <View
               style={styles.button}>
+              <Icon name='film' type='font-awesome' />
               <TouchableHighlight
-                onPress={() => navigate("VideoComponent")}
-                // style={styles.button}
-                >
+                onPress={() => navigate("VideoComponent")}>
                     <Text style={styles.buttonText}>video</Text>
               </TouchableHighlight>
            </View>
            <View
-              // style={styles.buttonHome}>
               style={{
                 alignItems: 'center',
                 marginTop: 10,
                 width: 75,
                 borderBottomColor: this.state.color,
                 borderBottomWidth: 2,
-                // shadowColor: 'rgba(0, 0, 0, 0.1)',
-                // shadowOpacity: 1,
-                // // elevation: 6,
-                // shadowRadius: 10 ,
-                // shadowOffset : { width: 1, height: 13},
               }}>
-              <TouchableHighlight
-                  
-                  onPress = {this.setHomeButton}
-                >
-                    <Text style={[styles.buttonText, {fontWeight: this.state.font}]}>home</Text>
-              </TouchableHighlight>
+                <Icon name='home' type='font-awesome' style={{}} />
+                <TouchableHighlight onPress = {this.setHomeButton}>
+                      <Text style={[styles.buttonText, {fontWeight: this.state.font}]}>home</Text>
+                </TouchableHighlight>
+                
+              {/* </View> */}
            </View> 
          </View>
          
@@ -124,17 +118,23 @@ class HomeComponent extends React.Component{
          style={styles.bottomMenu}>
            <View
               style={styles.button}>
-              <TouchableHighlight
-                  onPress={() => navigate("LoginScreen")}>
-                  <Text style={styles.buttonText}>sign out</Text>
-              </TouchableHighlight>
+              <View style={{flexDirection: 'row'}}>
+                <TouchableHighlight
+                    onPress={() => navigate("LoginScreen")}>
+                    <Text style={styles.buttonText}>sign out</Text>
+                </TouchableHighlight>
+                <Icon name='sign-out' type='font-awesome' style={{paddingLeft:3}} />
+              </View> 
            </View>
            <View
               style={styles.button}>
-              <TouchableHighlight
-                  onPress={() => navigate("SettingsScreen")}>
-                  <Text style={styles.buttonText}>settings</Text>
-              </TouchableHighlight>
+              <View style={{flexDirection: 'row'}}>
+                <TouchableHighlight
+                    onPress={() => navigate("SettingsScreen")}>
+                    <Text style={styles.buttonText}>settings</Text>
+                </TouchableHighlight>
+                <Icon name='settings' style={{paddingLeft:3}} />   
+              </View> 
            </View>
         </View>   
       </View>
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
   },
   topMenu:{
     backgroundColor: '#ececec',
-    height: 50,
+    height: 60,
     width: 375,
     position: 'absolute',
     left: 0,

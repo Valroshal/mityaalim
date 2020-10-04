@@ -3,6 +3,7 @@ import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react'; 
 import { StyleSheet, Text,TouchableOpacity, View, Image, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
+import { Icon } from 'react-native-elements';
 
 class EventsComponent extends React.Component{
     
@@ -45,13 +46,11 @@ class EventsComponent extends React.Component{
          style={styles.topMenu}>
            <View
               style={styles.button}>
-              <TouchableHighlight
-                onPress={() => navigate("BudgetComponent")}
-                // style={styles.button}
-                //onPress={this.toggleBudget}
-                >
-                    <Text style={styles.buttonText}>budget</Text>
-              </TouchableHighlight>
+                <Icon name='credit-card' type='font-awesome' />
+                <TouchableHighlight
+                    onPress={() => navigate("BudgetComponent")}>
+                        <Text style={styles.buttonText}>budget</Text>
+                </TouchableHighlight>
            </View>
            <View
               style={{
@@ -61,31 +60,31 @@ class EventsComponent extends React.Component{
                 borderBottomColor: this.state.color,
                 borderBottomWidth: 2,
               }}>
-              <TouchableHighlight
-                onPress={this.setEventsButton}
-                //onPress={() => navigate("EventsComponent")}
-                // style={styles.button}
-                >
-                    <Text style={[styles.buttonText, {fontWeight: this.state.font}]}>events</Text>
-              </TouchableHighlight>
+                <Icon name='calendar' type='font-awesome' />
+                <TouchableHighlight
+                    onPress={this.setEventsButton}>
+                        <Text style={[styles.buttonText, {fontWeight: this.state.font}]}>events</Text>
+                </TouchableHighlight>
            </View>
            <View
               style={styles.button}>
-              <TouchableHighlight
-                onPress={() => navigate("VideoComponent")}
-                // style={styles.button}
-                >
-                    <Text style={styles.buttonText}>video</Text>
-              </TouchableHighlight>
+                <Icon name='film' type='font-awesome' />
+                <TouchableHighlight
+                    onPress={() => navigate("VideoComponent")}
+                    // style={styles.button}
+                    >
+                        <Text style={styles.buttonText}>video</Text>
+                </TouchableHighlight>
            </View>
            <View
               style={styles.button}>
-              <TouchableHighlight
-                onPress={() => navigate("HomeScreen")}
-                // style={styles.button}
-                >
-                    <Text style={styles.buttonText}>home</Text>
-              </TouchableHighlight>
+                <Icon name='home' type='font-awesome' style={{fontSize:'5px'}} />
+                <TouchableHighlight
+                    onPress={() => navigate("HomeScreen")}
+                    // style={styles.button}
+                    >
+                        <Text style={styles.buttonText}>home</Text>
+                </TouchableHighlight>
            </View>
          </View>
 
@@ -95,17 +94,23 @@ class EventsComponent extends React.Component{
          style={styles.bottomMenu}>
            <View
               style={styles.button}>
-              <TouchableHighlight
-                  onPress={() => navigate("LoginScreen")}>
-                  <Text style={styles.buttonText}>sign out</Text>
-              </TouchableHighlight>
+                <View style={{flexDirection: 'row'}}>
+                    <TouchableHighlight
+                        onPress={() => navigate("LoginScreen")}>
+                        <Text style={styles.buttonText}>sign out</Text>
+                    </TouchableHighlight>
+                    <Icon name='sign-out' type='font-awesome' style={{paddingLeft:3}} />
+                </View>
            </View>
            <View
               style={styles.button}>
-              <TouchableHighlight>
-                  {/* //onPress={() => navigate("BudgetComponent")}> */}
-                  <Text style={styles.buttonText}>settings</Text>
-              </TouchableHighlight>
+                <View style={{flexDirection: 'row'}}>
+                    <TouchableHighlight>
+                        {/* //onPress={() => navigate("BudgetComponent")}> */}
+                        <Text style={styles.buttonText}>settings</Text>
+                    </TouchableHighlight>
+                    <Icon name='settings' style={{paddingLeft:3}} />
+                </View>
            </View>
         </View>   
       </View>
@@ -133,7 +138,7 @@ const styles = StyleSheet.create({
   },
   topMenu:{
     backgroundColor: '#ececec',
-    height: 50,
+    height: 60,
     width: 375,
     position: 'absolute',
     left: 0,
