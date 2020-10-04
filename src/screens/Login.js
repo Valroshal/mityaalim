@@ -11,6 +11,7 @@ const ScreenHeight = Dimensions.get("window").height;
 
 export default class Login extends React.Component {
 
+  //global.flag set only after the first clicking, need to change it. set flag before the clicking
   pressLogin = () =>{
     if(global.flag == true)
     {
@@ -38,7 +39,6 @@ export default class Login extends React.Component {
               </TouchableOpacity> 
 
               <TouchableHighlight
-                // onPress={() => navigate("RegistrationScreen")}
                 style={styles.button}>
                   <View style={styles.registerContainer}>
                     <Text style={styles.buttonText}>Not a Registered User?</Text>

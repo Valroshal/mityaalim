@@ -44,29 +44,28 @@ export default class LoginForm extends Component {
         console.log('flag: ', global.flag);
       }
 
-    handleEmail = (email) =>{
-      this.setState({email});
+    handleEmail = async (email) =>{
+      await this.setState({email});
       console.log('email: ', this.state.email);
       this.setState({
         emailError: validate('email', this.state.email)
-      })
-      
+      });
+      this.checkLogin();
     }
 
-    handlePass = (password) =>{
-      this.setState({password});
+    handlePass = async (password) =>{
+      await this.setState({password});
       console.log('pass: ', this.state.password);
       this.setState({
         passwordError: validate('password', this.state.password)
-      })
-      
+      }); 
+      this.checkLogin();
     }
 
     
     
 
   render() {
-    //const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
         <StatusBar barStyle='Light-content'/>
@@ -80,7 +79,6 @@ export default class LoginForm extends Component {
                   style={styles.input}
                   returnKeyType='next'
                   onChangeText={this.handleEmail}
-                  onBlur={this.checkLogin}
                   error={this.state.emailError}/>
         
         <TextField
@@ -91,30 +89,8 @@ export default class LoginForm extends Component {
                   style={styles.input}
                   returnKeyType='next'
                   onChangeText={this.handlePass}
-                  onBlur={this.checkLogin}
                   error={this.state.passwordError}
                   secureTextEntry={true}/>
-        {/* <TextInput placeholder='email' 
-                  placeholderTextColor="rgba(255,255,255,0.7)" 
-                  returnKeyType='next'
-                  onSubmitEditing={() => this.passwordInput.focus()}
-                  keyboardType='email-address'
-                  autoCapitalize='none'
-                  autoCorrect={false}
-                  style={styles.input}/> 
-        <TextInput placeholder='password' 
-                  placeholderTextColor="rgba(255,255,255,0.7)"
-                  secureTextEntry 
-                  returnKeyType='go'
-                  style={styles.input}
-                  ref={(input) => this.passwordInput = input}/>  */}
-        {/* <TouchableOpacity
-          //onPress={this.pressLogin}
-          onPress={()=>{this.props.navigation.navigate("HomeScreen")}}
-          style={styles.buttonContainer} >
-          <Text style={styles.buttonText}>LOGIN</Text>
-        </TouchableOpacity>   */}
-      
       </View>
     );
   }  
