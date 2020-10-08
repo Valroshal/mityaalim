@@ -120,7 +120,7 @@ class HomeComponent extends React.Component{
               style={styles.button}>
               <View style={{flexDirection: 'row'}}>
                 <TouchableHighlight
-                    onPress={() => navigate("LoginScreen")}>
+                    onPress={() => navigate("Login")}>
                     <Text style={styles.buttonText}>sign out</Text>
                 </TouchableHighlight>
                 <Icon name='sign-out' type='font-awesome' style={{paddingLeft:3}} />
@@ -166,8 +166,8 @@ const styles = StyleSheet.create({
   },
   topMenu:{
     backgroundColor: '#ececec',
-    height: 60,
-    width: 375,
+    height: '10%',
+    width: '100%',
     position: 'absolute',
     left: 0,
     top: 0,

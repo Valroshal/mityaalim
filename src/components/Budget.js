@@ -138,8 +138,8 @@ const styles = StyleSheet.create({
   },
   topMenu:{
     backgroundColor: '#ececec',
-    height: 60,
-    width: 375,
+    height: '10%',
+    width: '100%',
     position: 'absolute',
     left: 0,
     top: 0,

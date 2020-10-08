@@ -16,8 +16,14 @@ import  RootStack from './src/navigation/navigator';
 import Error from './src/components/Error';
 import BudgetComponent from './src/components/Budget';
 import VideoComponent from './src/components/Video';
+import VideoComponentForRedux from './src/components/Video';
 import EventsComponent from './src/components/Events';
 
+import {Provider} from 'react-redux';
+import {composeWithDevTools} from 'redux-devtools-extension';
+import ReduxThunk from 'redux-thunk';
+import reducers from './src/reducers';
+import { applyMiddleware, createStore } from 'redux';
 // class App extends React.Component{
 //       render(){
 //         return(
@@ -28,24 +34,28 @@ import EventsComponent from './src/components/Events';
 //         );
 //       }
 //   }
-  const Tab = createBottomTabNavigator();
+
+  const store = createStore(reducers, applyMiddleware(ReduxThunk))
   const Stack = createStackNavigator();
   class App extends React.Component{
     render(){
     return (
-
+      
+         <Provider store={store}>
+         
+        
         <NavigationContainer>
           <Stack.Navigator
               screenOptions={{  headerShown: false } }  
             >
-              <Stack.Screen
+              {/* <Stack.Screen
                 name="Login"
                 component={LoginScreen}
               />
               <Stack.Screen
                 name="RegistrationScreen"
                 component={RegistrationScreen}
-              />
+              /> 
               
               <Stack.Screen
                 name="HomeScreen"
@@ -58,7 +68,7 @@ import EventsComponent from './src/components/Events';
               <Stack.Screen
                 name="Error"
                 component={Error}
-              />
+              /> */}
               <Stack.Screen
                 name="VideoComponent"
                 component={VideoComponent}
@@ -73,8 +83,8 @@ import EventsComponent from './src/components/Events';
               />
             </Stack.Navigator>
         </NavigationContainer>
-
-    );
+         </Provider> 
+     );
   } }
       
 

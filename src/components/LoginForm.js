@@ -7,7 +7,7 @@ import {
   OutlinedTextField,
 } from 'react-native-material-textfield';
 
-
+// need to add error when the field is empty, as on registration screen
 
 export default class LoginForm extends Component {
   constructor(){
@@ -37,9 +37,22 @@ export default class LoginForm extends Component {
       }
 
       checkLogin = () =>{
+        const err = 'Field cannot be empy';
         if(this.state.emailError== null && this.state.passwordError== null )
         {
           global.flag = true;
+        }
+        if(this.state.email == '')
+        {
+          this.setState({
+            emailError: err,
+          
+        })}
+        if(this.state.password == '')
+        {
+          this.setState({
+            passwordError: err,
+          })
         }
         console.log('flag: ', global.flag);
       }

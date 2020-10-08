@@ -9,9 +9,8 @@ const id = "918095505346162";
 const mityalimLogo = require ('../images/mityalimLogo.png');
 const ScreenHeight = Dimensions.get("window").height;
 
-export default class Login extends React.Component {
+class Login extends React.Component {
 
-  //global.flag set only after the first clicking, need to change it. set flag before the clicking
   pressLogin = () =>{
     if(global.flag == true)
     {
@@ -118,3 +117,4 @@ const styles = StyleSheet.create({
   });
 
 
+  export default Login;

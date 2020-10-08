@@ -9,17 +9,16 @@ const ScreenHeight = Dimensions.get("window").height;
 
 class Registration extends React.Component {
 
-    // constructor(){
-    //     super();
-    // }
-
     state={
         checked : false,
+        userList: [],
+        //Have a loading state where when data retrieve returns data. 
+        loading: true
       }
 
-    post = () =>{
-        fetch('http://localhost:5000/adduser', {
-            mode: 'no-cors', 
+    post = async () =>{
+        await fetch('http://localhost:5000/adduser', {
+            
             method: 'POST',
             headers: {
             'Accept': 'application/x-www-form-urlencoded',
@@ -35,22 +34,28 @@ class Registration extends React.Component {
     }  
       
     // get works!!!!!!!!!!!!!!!!!!!!!!!!
-    get = () =>{
-        fetch('http://localhost:5000/getuser', {
-            mode: 'no-cors', 
+    get = async () =>{
+        await fetch('http://localhost:5000/getuser', {
+            
             method: 'GET',
             headers: {
             'Accept': 'application/x-www-form-urlencoded',
             'Content-Type': 'application/x-www-form-urlencoded',
             'Access-Control-Allow-Origin': '*'
-            },
-            // params: {
-            //     'search':'name'
-            //     }    
-            })        
+            },   
+            }).then((res) => res.json()
+            .catch(err =>{
+                console.log('happened!', err);
+                return {};
+            }))
+            .then((data) => {
+                console.log('parsed json: ', data);
+                this.setState({ userList: data,  })
+            
+              }).catch(error => {
+                console.log("Error fetching data-----------", error);
+              });     
     }    
-      
-
 
     // instance = axios.create({
     //     baseURL: 'http://localhost:5000',
@@ -106,8 +111,8 @@ class Registration extends React.Component {
         console.log('checked', this.state.checked)
         if(global.status == 'true' && this.state.checked == true)
         {
-            this.get()
-            //this.post();
+            //this.get();
+            this.post();
             this.props.navigation.navigate("HomeScreen");
 
         }

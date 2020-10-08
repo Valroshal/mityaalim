@@ -15,6 +15,7 @@ class RegistrationForm extends React.Component{
       global.regName = '';
       global.regEmail = '';
       global.regPass = '';
+      global.repregPass = '';
     }
     
       state = {
@@ -51,13 +52,13 @@ class RegistrationForm extends React.Component{
           await this.setState({name});
           global.regName = this.state.name;
           await console.log('name: ', this.state.name);
-          console.log('global name: ', global.regName);
+          //console.log('global name: ', global.regName);
           await this.setState({
             nameError: validate('name', this.state.name)
           })
           
           this.setGlobalStatus();
-          console.log(global.status)
+          //console.log(global.status)
         }
 
         handleEmail = async (email) =>{
@@ -69,7 +70,7 @@ class RegistrationForm extends React.Component{
           })
           
           this.setGlobalStatus();
-          console.log(global.status)
+          //console.log(global.status)
         }
 
         handlePass = async (password) =>{
@@ -79,24 +80,40 @@ class RegistrationForm extends React.Component{
           this.setState({
             passwordError: validate('password', this.state.password)
           })
-          console.log('errors: ', this.state.nameError, this.state.emailError, this.state.passwordError)
+          //console.log('errors: ', this.state.nameError, this.state.emailError, this.state.passwordError)
           
-          this.setGlobalStatus();
-          console.log(global.status)
+          this.handleConfirmPass();
+          //console.log(global.status)
         }
 
         handleConfirmPass = async (repeatPassword) =>{
           
           await this.setState({repeatPassword});
-
-          if(this.state.password.property != this.state.repeatPassword.property)
-            {
-              this.setState({
-                repeatPasswordError: 'not matched'
-              })
-            }
-          this.setGlobalStatus();
-          console.log(global.status)
+          global.repregPass = this.state.repeatPassword;
+          if(this.state.repeatPassword == null)
+          {
+            await this.setState({
+              repeatPasswordError: 'not matched'
+            })
+          }
+            
+          if(global.regPass != global.repregPass)
+          {
+            await this.setState({
+              repeatPasswordError: 'not matched'
+            })
+          }
+          else 
+          {
+            await this.setState({
+              repeatPasswordError: ''
+            })
+            await this.setGlobalStatus();
+          }
+          //console.log('rep pass: ' ,this.state.repeatPassword)
+          //console.log('pass: ' ,this.state.password)
+          await this.setGlobalStatus();
+          //console.log(global.status)
         }
 
         setGlobalStatus = () =>{
@@ -106,26 +123,26 @@ class RegistrationForm extends React.Component{
           {
               global.status = true;
           }
+          
           else if(this.state.name== ''){
-              this.setState({
-                nameError: err
-              })
-            }
+                this.setState({
+                  nameError: err
+                })
+              }
           else if(this.state.email== ''){
-              this.setState({
-                emailError: err
-              })
-            }
+                this.setState({
+                  emailError: err
+                })
+              }
           else if(this.state.password==''){
-              this.setState({
-                passwordError: err
-              })
-            }
-          else if(this.state.repeatPassword==''){
-              this.setState({
-                repeatPasswordError: err
-              })
-            }
+                this.setState({
+                  passwordError: err
+                })
+              }
+          else
+          {
+
+          }
         }
 
         render() {
@@ -170,7 +187,7 @@ class RegistrationForm extends React.Component{
                   secureTextEntry={true}/>
 
                 <TextField
-                  
+                  name='repeatPassword'
                   placeholder='repeat password'
                   placeholderTextColor="rgba(255,255,255,0.7)"
                   autoCapitalize='none'
@@ -178,7 +195,6 @@ class RegistrationForm extends React.Component{
                   style={styles.input}
                   returnKeyType='next'
                   onChangeText={this.handleConfirmPass}
-                  
                   error={this.state.repeatPasswordError}
                   secureTextEntry={true}/>
               </View>

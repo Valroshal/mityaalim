@@ -3,9 +3,17 @@ const app = express();
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const users = require('./routes/usersAPI')
+const cors = require('cors')
 
+app.use(cors({credentials: true, origin: 'http://localhost:19006'}));
 app.use(bodyParser.json({type:'application/json'}));
-app.use(bodyParser.urlencoded({extended:true}));
+//app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.urlencoded({extended:true}));
+
+app.use(function(req,res,next){
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:19006');
+    next();
+})
 
 const con = mysql.createPool({
     // host: '70.40.218.93',
@@ -30,10 +38,10 @@ con.getConnection(function(err){
 });
 
 
-app.get('/', function(req,res,next){
-    // res.render('index', {title: 'Express'});
-    //next(err);
-});
+// app.get('/', function(req,res,next){
+//     // res.render('index', {title: 'Express'});
+//     //next(err);
+// });
 
 app.get('/check',(req,res) =>{
     con.query('select * from users', function(err, result){
@@ -78,7 +86,7 @@ app.get('/adduser', (req,res) =>{
     con.query(sql, user, (err, result) =>{
         if(err) throw err;
         console.log(result);
-        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:19006');
         res.send('user added');
     });
 })
@@ -89,7 +97,8 @@ app.get('/getuser', (req,res) =>{
     con.query(sql, (err, result) =>{
         if(err) throw err;
         console.log(result);
-        res.send('users fetched');
+        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:19006');
+        res.send(result);
     });
 
     // User.findOne({ email: req.body.email }).then(user => {
