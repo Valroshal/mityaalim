@@ -1,1 +1,3 @@
-export const SEARCH_CHANGE = 'SEARCH_CHANGE'
+export const SEARCH_CHANGE = 'SEARCH_CHANGE';
+export const VIDEOS_FETCHED = 'VIDEOS_FETCHED';
+export const VIDEOS_FAILED = 'VIDEOS_FAILED';

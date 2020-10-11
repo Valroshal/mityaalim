@@ -3,66 +3,64 @@ import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react'; 
 import { StyleSheet, Text,TouchableOpacity, View, Image, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
+import { Icon } from 'react-native-elements';
 
-class HomeMenuBar extends React.Component{
+const HomeMenuBar =({
+  onPressHome,
+  onPressVideo,
+  onPressEvents,
+  onPressBudget,
+  HomeColorBorder,
+  VideoColorBorder,
+  EventsColorBorder,
+  BudgetColorBorder,
+}) => {
 
-//    function HomeMenuBar(){
-
-    navigateTo = () =>{
-        this.props.navigation.navigate("BudgetComponent");
-    }
-   
-    render(){
-    
-  //const { navigate } = this.props.navigation
         return (
-    //   <View
-    //      style={styles.container2}>
          <View 
          style={styles.menu}>
            <View
-              style={styles.button}>
+              style={[styles.button, {borderBottomColor: BudgetColorBorder, borderBottomWidth: 2,}]}>
+              <Icon name='credit-card' type='font-awesome' />
               <TouchableHighlight
-                //onPress={() => navigate("BudgetComponent")}
-                // style={styles.button}
-                onPress={this.navigateTo}
-                >
-                    <Text style={styles.buttonText}>budget</Text>
+                  onPress={onPressBudget}>
+                  <Text style={styles.buttonText}>budget</Text>
               </TouchableHighlight>
            </View>
            <View
-              style={styles.button}>
+              style={[styles.button, {borderBottomColor: EventsColorBorder, borderBottomWidth: 2,}]}>
+              <Icon name='calendar' type='font-awesome' />
               <TouchableHighlight
-                onPress={() => navigate("EventsComponent")}
-                // style={styles.button}
-                >
-                    <Text style={styles.buttonText}>events</Text>
+                  onPress={onPressEvents}>
+                  <Text style={styles.buttonText}>events</Text>
               </TouchableHighlight>
            </View>
            <View
-              style={styles.button}>
+              style={[styles.button, {borderBottomColor: VideoColorBorder, borderBottomWidth: 2,}]}>
+                
+              <Icon name='film' type='font-awesome' />
               <TouchableHighlight
-                onPress={() => navigate("VideoComponent")}
-                // style={styles.button}
-                >
-                    <Text style={styles.buttonText}>video</Text>
+                  onPress={onPressVideo}>
+                  <Text style={styles.buttonText}>video</Text>
               </TouchableHighlight>
            </View>
            <View
-              style={styles.button}>
+              style={[styles.button, {borderBottomColor: HomeColorBorder, borderBottomWidth: 2,}]}>
+              
+              <Icon name='home' type='font-awesome' style={{}} />
               <TouchableHighlight
-                onPress={() => navigate("HomeScreen")}
-                // style={styles.button}
-                >
-                    <Text style={styles.buttonText}>home</Text>
+                  onPress={onPressHome}>
+                     
+                  <Text style={styles.buttonText}>home</Text>
               </TouchableHighlight>
            </View>
          {/* </View> */}
         <StatusBar style="auto" />
       </View>
+      
     );
   }
-}
+
 
 //need camelCase in style sheet
 const styles = StyleSheet.create({
@@ -83,15 +81,15 @@ const styles = StyleSheet.create({
     fontSize: 46,
   },
   menu:{
-    backgroundColor: '#fff',
-    height: 50,
-    width: 375,
+    backgroundColor: '#ececec',
+    height: '10%',
+    width: '100%',
     position: 'absolute',
     left: 0,
     top: 0,
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
   },
   button:{
     alignItems: 'center',
@@ -101,8 +99,5 @@ const styles = StyleSheet.create({
     color: '#000000'
   }
 });
-
-
-
 
 export default HomeMenuBar;

@@ -35,7 +35,10 @@ import { applyMiddleware, createStore } from 'redux';
 //       }
 //   }
 
-  const store = createStore(reducers, applyMiddleware(ReduxThunk))
+  
+  const store = createStore(reducers, {}, window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
+    applyMiddleware(ReduxThunk)
+  ));
   const Stack = createStackNavigator();
   class App extends React.Component{
     render(){
@@ -55,7 +58,7 @@ import { applyMiddleware, createStore } from 'redux';
               <Stack.Screen
                 name="RegistrationScreen"
                 component={RegistrationScreen}
-              /> 
+              /> */}
               
               <Stack.Screen
                 name="HomeScreen"
@@ -68,7 +71,7 @@ import { applyMiddleware, createStore } from 'redux';
               <Stack.Screen
                 name="Error"
                 component={Error}
-              /> */}
+              /> 
               <Stack.Screen
                 name="VideoComponent"
                 component={VideoComponent}

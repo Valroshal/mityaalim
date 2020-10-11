@@ -116,6 +116,17 @@ app.get('/getuser', (req,res) =>{
     //         };
     //     }
 });
+
+//select videos
+app.get('/getvideo', (req,res) =>{
+    let sql = 'SELECT * FROM video';
+    con.query(sql, (err, result) =>{
+        if(err) throw err;
+        console.log(result);
+        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:19006');
+        res.send(result);
+    });
+});
 //Use Routes - Initilaze routes
 //app.use('/api/users', users);
 
