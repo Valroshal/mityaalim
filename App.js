@@ -58,7 +58,7 @@ import { applyMiddleware, createStore } from 'redux';
               <Stack.Screen
                 name="RegistrationScreen"
                 component={RegistrationScreen}
-              /> */}
+              /> 
               
               <Stack.Screen
                 name="HomeScreen"
@@ -71,7 +71,7 @@ import { applyMiddleware, createStore } from 'redux';
               <Stack.Screen
                 name="Error"
                 component={Error}
-              /> 
+              /> */}
               <Stack.Screen
                 name="VideoComponent"
                 component={VideoComponent}

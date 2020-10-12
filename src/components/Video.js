@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {searchChanged} from '../actions/index'
 import { StatusBar } from 'expo-status-bar';
 import React from 'react'; 
-import { StyleSheet, Text,TouchableOpacity, View, Image, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, ScrollView, Linking , View, Image, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
 import { Icon } from 'react-native-elements';
 import VideoSearchBar from './VideoSearchBar';
 import BottomMenuBar from '../components/BottomMenuBar';
@@ -20,12 +20,15 @@ class VideoComponent extends React.Component{
       state = {
             color: 'transparent',
             font: 'normal',
-            //search: ''
-            videoList: ''
+            videoList: [],
+            videoListLink: [],
+            videoListId: [],
+            videoListName: [],
+            videoListDate: [],
         }
     
-        get = async () =>{
-          await fetch('http://localhost:5000/getvideo', {
+        get = () =>{
+          fetch('http://localhost:5000/getvideo', {
               
               method: 'GET',
               headers: {
@@ -33,14 +36,27 @@ class VideoComponent extends React.Component{
               'Content-Type': 'application/x-www-form-urlencoded',
               'Access-Control-Allow-Origin': '*'
               },   
-              }).then((res) => res.json()
+              }).then((res) => res.json())
               .catch(err =>{
                   console.log('happened!', err);
                   return {};
-              }))
-              .then((data) => {
+              })
+              .then( (data) => {
                   console.log('parsed json: ', data);
-                  this.setState({ videoList: data,  })
+                  if (data != null){
+                    
+                    for(let i=0; i<data.length; i++)
+                    {
+                      this.setState({
+                        videoList: data, 
+                        videoListLink: [...this.state.videoListLink, data[i].link],
+                        videoListId:[...this.state.videoListId, data[i].id],
+                        videoListName:[...this.state.videoListName, data[i].name],
+                        videoListDate:[...this.state.videoListDate, data[i].date_added],
+                         })
+                    } 
+                  }
+                  
               
                 }).catch(error => {
                   console.log("Error fetching data-----------", error);
@@ -73,15 +89,33 @@ class VideoComponent extends React.Component{
       console.log('video', this.state.color);
       this.props.navigation.navigate("VideoComponent");
     }
-  
-  render(){
-  const { navigate } = this.props.navigation
-  const {videoList} = this.state.videoList
-  console.log('videoList',this.state.videoList)
-  console.log('props: ', this.props)
-  //const { search } = this.state;
+
+  render(){  
+  const { navigate } = this.props.navigation 
   const {search} = this.props
+  if(this.state.videoList[0] == null){
+    console.log('loading')
+    //return (<Loader/>)
+  }
+  let list = [];
+    for(let i=0; i<this.state.videoListId.length; i++)
+    {
+      list.push(
+        <View key={i} style={{flexDirection: 'column', justifyContent: 'space-around',margin:10, height: 80, width:'90%', borderColor: '#000', borderWidth: 2,}}>        
+                <Text 
+                  numberOfLines={1} 
+                  style={{ fontWeight: 'bold'}}>{this.state.videoListName[i]}</Text>
+                <Text 
+                  numberOfLines={1} 
+                  style={{ textDecorationLine: 'underline', color: 'blue'}}
+                  onPress={() => Linking.openURL(this.state.videoListLink[i])}
+                >{this.state.videoListLink[i]}</Text>
+                <Text style={{}}>{this.state.videoListDate[i]}</Text>
+        </View>
+      )
+    }
   return (
+    <KeyboardAvoidingView>
       <View
          style={styles.container2}>
           <HomeMenuBar
@@ -94,19 +128,15 @@ class VideoComponent extends React.Component{
           onPressVideo={this.setVideoButton}
           onPressHome={() => navigate("HomeScreen")}  
           />
-
-            
-            
             <View style={styles.searchContainer}>
                 <VideoSearchBar
                 onChangeText = {this._onChangeText} 
                 value={search}/>
             </View>
-          
-            <View style={{height: 50, width: '100%',}}>
-                  {videoList}
-            </View>
-        <Text style={styles.text}>Hello Video Component!</Text>
+            <ScrollView style={{margin:20}} >
+                {list}
+            </ScrollView>
+            {/* <Text style={styles.text}>Hello Video Component!</Text> */}
         <StatusBar style="auto" />
         
         <BottomMenuBar
@@ -114,6 +144,7 @@ class VideoComponent extends React.Component{
         onPressSettings={() => navigate("SettingsScreen")}
         />  
       </View>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -127,7 +158,8 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     flexDirection: 'row',
-    
+    height:'100%',
+    width:'100%'
   },
   text:{
     //color:'#fff',
@@ -141,6 +173,14 @@ const styles = StyleSheet.create({
     margin: 20
   },
   
+  list:{
+    flexDirection: 'column',
+    margin:10, 
+    height: '20%', 
+    width:'90%', 
+    borderColor: '#000', 
+    borderWidth: 2
+  }
 });
 
 
