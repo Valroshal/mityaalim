@@ -115,7 +115,7 @@ class VideoComponent extends React.Component{
       )
     }
   return (
-    <KeyboardAvoidingView>
+    
       <View
          style={styles.container2}>
           <HomeMenuBar
@@ -133,9 +133,11 @@ class VideoComponent extends React.Component{
                 onChangeText = {this._onChangeText} 
                 value={search}/>
             </View>
+            
             <ScrollView style={{margin:20}} >
                 {list}
             </ScrollView>
+            
             {/* <Text style={styles.text}>Hello Video Component!</Text> */}
         <StatusBar style="auto" />
         
@@ -144,7 +146,7 @@ class VideoComponent extends React.Component{
         onPressSettings={() => navigate("SettingsScreen")}
         />  
       </View>
-      </KeyboardAvoidingView>
+      
     );
   }
 }

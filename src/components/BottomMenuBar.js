@@ -21,7 +21,7 @@ const BottomMenuBar =({
                  <View style={{flexDirection: 'row'}}>
                    <TouchableHighlight
                        onPress={onPressSignOut}>
-                       <Text style={styles.buttonText}>sign out</Text>
+                       <Text style={styles.buttonText}>יציאה</Text>
                    </TouchableHighlight>
                    <Icon name='sign-out' type='font-awesome' style={{paddingLeft:3}} />
                  </View> 
@@ -32,7 +32,7 @@ const BottomMenuBar =({
                    <TouchableHighlight
                        
                        onPress={onPressSettings}>
-                       <Text style={styles.buttonText}>settings</Text>
+                       <Text style={styles.buttonText}>הגדרות</Text>
                    </TouchableHighlight>
                    <Icon name='settings' style={{paddingLeft:3}} />   
                  </View> 

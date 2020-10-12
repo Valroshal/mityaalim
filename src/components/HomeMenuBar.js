@@ -24,7 +24,7 @@ const HomeMenuBar =({
               <Icon name='credit-card' type='font-awesome' />
               <TouchableHighlight
                   onPress={onPressBudget}>
-                  <Text style={styles.buttonText}>budget</Text>
+                  <Text style={styles.buttonText}>תקציב</Text>
               </TouchableHighlight>
            </View>
            <View
@@ -32,7 +32,7 @@ const HomeMenuBar =({
               <Icon name='calendar' type='font-awesome' />
               <TouchableHighlight
                   onPress={onPressEvents}>
-                  <Text style={styles.buttonText}>events</Text>
+                  <Text style={styles.buttonText}>אירועים</Text>
               </TouchableHighlight>
            </View>
            <View
@@ -41,7 +41,7 @@ const HomeMenuBar =({
               <Icon name='film' type='font-awesome' />
               <TouchableHighlight
                   onPress={onPressVideo}>
-                  <Text style={styles.buttonText}>video</Text>
+                  <Text style={styles.buttonText}>וידאו</Text>
               </TouchableHighlight>
            </View>
            <View
@@ -51,7 +51,7 @@ const HomeMenuBar =({
               <TouchableHighlight
                   onPress={onPressHome}>
                      
-                  <Text style={styles.buttonText}>home</Text>
+                  <Text style={styles.buttonText}>בית</Text>
               </TouchableHighlight>
            </View>
          {/* </View> */}
