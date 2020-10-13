@@ -12,6 +12,7 @@ const ScreenHeight = Dimensions.get("window").height;
 
 class Login extends React.Component {
   
+  // need to add error when the field is empty, as on registration screen
   componentDidMount(){
     this.get()
   }
@@ -40,12 +41,6 @@ class Login extends React.Component {
 
     checkLogin = () =>{
       const err = 'Field cannot be empy';
-      // if(this.state.emailError== null && this.state.passwordError== null )
-      // {
-      //   global.flag = true;
-      //   global.email = this.state.email;
-      //   global.password = this.state.password;
-      // }
       if(this.state.email == '')
       {
         this.setState({
@@ -58,7 +53,6 @@ class Login extends React.Component {
           passwordError: err,
         })
       }
-      //console.log('flag: ', global.flag);
     }
 
   handleEmail = async (email) =>{

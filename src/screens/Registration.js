@@ -2,20 +2,129 @@ import React, { Component } from 'react';
 import {StyleSheet, View, TextInput, TouchableOpacity, Text, KeyboardAvoidingView, StatusBar, Dimensions } from 'react-native';
 import Register from '../components/RegistrationForm';
 import axios from 'axios';
-
+import validate from '../components/validation';
 import { CheckBox } from 'react-native-elements';
 
 const ScreenHeight = Dimensions.get("window").height;
 
 class Registration extends React.Component {
+    componentDidMount(){
+        this.get()
+      }
 
-    state={
+    state = {
+        status: false,
         checked : false,
         userList: [],
         //Have a loading state where when data retrieve returns data. 
-        loading: true
+        loading: true,
+        name:'',
+        nameError: '',
+        email: '',
+        emailError: '',
+        password: '',
+        passwordError: '',
+        repeatPassword: '',
+        repeatPasswordError: '',
+        getEmail:[],
+        getPassword:[]
       }
 
+      register() {
+        const nameError = validate('name', this.state.name)
+        const emailError = validate('email', this.state.email)
+        const passwordError = validate('password', this.state.password)
+        const repeatPasswordError = validate('repeatPassword', this.state.repeatPassword)
+
+        this.setState({
+            nameError: nameError,
+            emailError: emailError,
+            passwordError: passwordError,
+            repeatPasswordError: repeatPasswordError,
+          })
+          if (!emailError && !passwordError) {
+            alert('Details are valid!')
+          }
+        }
+
+        handleName = async (name) =>{
+          await this.setState({name});
+          await this.setState({
+            nameError: validate('name', this.state.name)
+          })
+          this.setStatus();
+        }
+
+        handleEmail = async (email) =>{
+          await this.setState({email});
+          global.regEmail = this.state.email;
+          await console.log('email: ', this.state.email);
+          this.setState({
+            emailError: validate('email', this.state.email)
+          })
+          this.setStatus();
+        }
+
+        handlePass = async (password) =>{
+          await this.setState({password});
+          this.setState({
+            passwordError: validate('password', this.state.password)
+          })
+          this.handleConfirmPass();
+        }
+
+        handleConfirmPass = async (repeatPassword) =>{
+          await this.setState({repeatPassword});
+          if(this.state.repeatPassword == null)
+          {
+            await this.setState({
+              repeatPasswordError: 'not matched'
+            })
+          } 
+          if(this.state.password != this.state.repeatPassword)
+          {
+            await this.setState({
+              repeatPasswordError: 'not matched'
+            })
+          }
+          else 
+          {
+            await this.setState({
+              repeatPasswordError: ''
+            })
+            await this.setStatus();
+          }
+          await this.setStatus();
+
+        }
+
+        setStatus = () =>{
+          const err = 'Field cannot be empy';
+          if(this.state.nameError == null && this.state.emailError == null && this.state.passwordError == null
+            && this.state.name!= null && this.state.email!= null && this.state.password!= null && this.state.repeatPassword!= null)
+          {
+            this.setState({
+                status: true
+              })
+          }
+          else if(this.state.name== ''){
+                this.setState({
+                  nameError: err
+                })
+              }
+          else if(this.state.email== ''){
+                this.setState({
+                  emailError: err
+                })
+              }
+          else if(this.state.password==''){
+                this.setState({
+                  passwordError: err
+                })
+              }
+        }
+
+    //there is a problem in api - post doesn't work
     post = async () =>{
         await fetch('http://localhost:5000/adduser', {
             
@@ -50,79 +159,53 @@ class Registration extends React.Component {
             }))
             .then((data) => {
                 console.log('parsed json: ', data);
-                this.setState({ userList: data,  })
-            
+                if (data != null){
+              
+              for(let i=0; i<data.length; i++)
+              {
+                this.setState({
+                  getEmail: [...this.state.getEmail, data[i].email],
+                  getPassword: [...this.state.getPassword, data[i].password]
+                   })
+              } 
+            }
               }).catch(error => {
                 console.log("Error fetching data-----------", error);
               });     
     }    
-
-    // instance = axios.create({
-    //     baseURL: 'http://localhost:5000',
-    //     timeout: 1000,
-    //     headers: {
-    //         'Content-Type':'application/json',
-    //         'Access-Control-Allow-Origin': 'http://localhost:19006',
-    //         'Access-Control-Expose-Headers':'Access-Control-*',
-    //         'Access-Control-Allow-Headers':'Access-Control-*',
-    //         'Access-Control-Allow-Methods':'GET, POST, PUT, DELETE, OPTIONS, HEAD',
-    //         'Allow':'GET, POST, PUT, DELETE, OPTIONS, HEAD'
-    //     }
-    //     });
-
-    //     getUser = () => this.instance({
-    //         'method':'GET',
-    //         'url':'/getuser',
-    //         // 'params': {
-    //         //     'search':'parameter',
-    //         // }
-    //     })
-
-    //     postUser = () => this.instance({
-    //         'method': 'POST',
-    //         'url':'/adduser',
-    //         'data': {
-    //             'name': global.regName,
-    //             'email': global.regEmail,
-    //             'password': global.regPass
-    //         }
-    //     })
-    //url = 'http://localhost:5000/adduser';
-    //baseURL = 'http://localhost:5000'
-    // postUser = () =>{
-    // axios.post('/adduser', {
-    //     name: global.regName,
-    //     email: global.regEmail,
-    //     password: global.regPass
-    // }, this.baseURL)
-    // .then(function (response) {
-    //     console.log(response);
-    // })
-    // .catch(function (error) {
-    //     console.log(error);
-    // });
-    // }
-
     
-
-     
     clickRegister=() =>{
-        console.log('entering the button')
-        console.log('checked', this.state.checked)
-        if(global.status == 'true' && this.state.checked == true)
+        const err = 'אי-מייל כבר קיים במערכת'
+        if(this.state.status == true && this.state.checked == true)
         {
-            //this.get();
-            this.post();
-            this.props.navigation.navigate("HomeScreen");
-
+            for(let i=0; i<this.state.getEmail.length; i++){
+                if(this.state.getEmail[i] != this.state.email){
+                    this.post();
+                    this.props.navigation.navigate("HomeScreen");
+                }
+                else{
+                    this.setState({
+                        emailError:err
+                    })
+                }  
+            }     
         }
     }
 
 render() {
+    const { navigate } = this.props.navigation
     return (
+        <KeyboardAvoidingView>  
         <View style={styles.container}>
             <Register
-            onChange={this.clickRegister} //need something that will change the button before click
+            onChangeName={this.handleName}
+            onChangeEmail={this.handleEmail}
+            onChangePassword={this.handlePass}
+            onChangeRepeatPassword={this.handleConfirmPass}
+            errorName={this.state.nameError}
+            errorEmail={this.state.emailError}
+            errorPassword={this.state.passwordError}
+            errorRepeatPassword={this.state.repeatPasswordError}
             />
             <View style={{flexDirection: 'row', justifyContent:'flex-start', marginRight:15}}>
                 <CheckBox 
@@ -138,13 +221,20 @@ render() {
                 style={styles.buttonContainer}
                 disabled={this.state.buttonStateHolder}
 ////////////////////////////////////////////////////need changes
-                //onMouseOver={this.clickRegister}
-                //onPress={()=>{navigate("HomeScreen")}}
                 onPress={this.clickRegister}
                 >
                 <Text style={styles.buttonText}>REGISTER</Text>
             </TouchableOpacity> 
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigate("Login")}>
+                  <View style={styles.registerContainer}>
+                    <Text >Already a Member? </Text>
+                    <Text style={{color:'#07beb8'}}> Login Here</Text>
+                  </View>
+              </TouchableOpacity>
         </View>
+        </KeyboardAvoidingView>  
     );
 }
 }
@@ -175,7 +265,14 @@ const styles = StyleSheet.create({
         
         marginRight:30,
         marginBottom: 20 
-      }
+      },
+      registerContainer:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingTop: 10,
+        flexDirection: 'row',
+      },
+
   });
 
 export default Registration;
