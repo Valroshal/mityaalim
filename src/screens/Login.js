@@ -4,6 +4,7 @@ import { StyleSheet, Text,TouchableOpacity, View, Image, KeyboardAvoidingView, D
 import Expo from 'expo';
 import LoginForm from '../components/LoginForm';
 import FacebookLogin from '../components/FacebookLogin';
+import validate from '../components/validation';
 
 const id = "918095505346162";
 const mityalimLogo = require ('../images/mityalimLogo.png');
@@ -16,8 +17,66 @@ class Login extends React.Component {
   }
 
   state = {
-    email: [],
-    password: []
+    email: '',
+    emailError: '',
+    password: '',
+    passwordError: '',
+    getEmail: [],
+    getPassword: []
+  }
+  register() {
+    const emailError = validate('email', this.state.email)
+    const passwordError = validate('password', this.state.password)
+
+    this.setState({
+        emailError: emailError,
+        passwordError: passwordError,
+      })
+  
+      if (!emailError && !passwordError) {
+        alert('Details are valid!')
+      }
+    }
+
+    checkLogin = () =>{
+      const err = 'Field cannot be empy';
+      // if(this.state.emailError== null && this.state.passwordError== null )
+      // {
+      //   global.flag = true;
+      //   global.email = this.state.email;
+      //   global.password = this.state.password;
+      // }
+      if(this.state.email == '')
+      {
+        this.setState({
+          emailError: err,
+        
+      })}
+      if(this.state.password == '')
+      {
+        this.setState({
+          passwordError: err,
+        })
+      }
+      //console.log('flag: ', global.flag);
+    }
+
+  handleEmail = async (email) =>{
+    await this.setState({email});
+    console.log('email: ', this.state.email);
+    this.setState({
+      emailError: validate('email', this.state.email)
+    });
+    this.checkLogin();
+  }
+
+  handlePass = async (password) =>{
+    await this.setState({password});
+    console.log('pass: ', this.state.password);
+    this.setState({
+      passwordError: validate('password', this.state.password)
+    }); 
+    this.checkLogin();
   }
 
   get = () =>{
@@ -40,8 +99,8 @@ class Login extends React.Component {
               for(let i=0; i<data.length; i++)
               {
                 this.setState({
-                  email: [...this.state.email, data[i].email],
-                  password: [...this.state.password, data[i].password]
+                  getEmail: [...this.state.getEmail, data[i].email],
+                  getPassword: [...this.state.getPassword, data[i].password]
                    })
               } 
             }
@@ -51,26 +110,33 @@ class Login extends React.Component {
 }    
 
   pressLogin = () =>{
+    const err = 'אחד או יותר מהנתונים לא תואמים'
     console.log('onpress login')
-    if(global.flag == true)
+    if(this.state.emailError== null && this.state.passwordError== null)
     {
       console.log('onpress login first if')
-      console.log('state.email', this.state.email)
-      for(let i=0; i<this.state.email.length; i++)
+      console.log('state.email', this.state.getEmail)
+      for(let i=0; i<this.state.getEmail.length; i++)
       {
         console.log('onpress login if for loop')
-        if(this.state.email[i] == global.email && this.state.password[i] == global.password)
+        if(this.state.getEmail[i] == this.state.email && this.state.getPassword[i] == this.state.password)
         {
+          console.log('onpress login second if')
           console.log('email == email from db')
           this.props.navigation.navigate("HomeScreen");
         }
         else
         {
-          console.log('emails not equal')
+          console.log('on error in pressLogin')
+          this.setState({
+            passwordError: err,
+            emailError:err
+          });
         }
       }
       
     }
+
     
   }
 
@@ -85,7 +151,12 @@ class Login extends React.Component {
               />
           </View>
           <View style={styles.formContainer}>
-              <LoginForm />
+              <LoginForm 
+                onChangeEmail={this.handleEmail}
+                onChangePassword={this.handlePass}
+                emailError={this.state.emailError}
+                passwordError={this.state.passwordError}
+              />
 
               <TouchableOpacity
                 onPress={this.pressLogin}
