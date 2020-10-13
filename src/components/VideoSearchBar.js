@@ -17,7 +17,6 @@ const VideoSearchBar = ({
                     containerStyle={{borderRadius: 20}}
                     lightTheme='true'
                     placeholderTextColor="rgba(255,255,255,0.7)"
-                    // ref="searchBar"
                     placeholder="חיפוש"
                     onChangeText={onChangeText}
                     value={value}

@@ -72,71 +72,76 @@ class Settings extends React.Component{
 
   render(){
   const { navigate } = this.props.navigation
-  const config = {
-    velocityThreshold: 0.3,
-    directionalOffsetThreshold: 80
-  };
+  // const config = {
+  //   velocityThreshold: 0.3,
+  //   directionalOffsetThreshold: 80
+  // };
   return (
     
       <View
          style={styles.container2}>
         <View
          style={styles.profileContainer}>
-            <Text style={styles.upperText}>Profile and Settings</Text>
-            <Text style={{fontSize:16, paddingTop:10}}>last entering at {global.lastEnter}</Text>
+            <Text style={styles.upperText}>פרופיל והגדרות</Text>
+            <Text style={{fontSize:16, paddingTop:10}}>הכניסה האחרונה הייתה ב {global.lastEnter}</Text>
         </View>     
         <View 
          style={styles.contentContainer}>
              <View 
                 style={styles.eachSetContainer}>
-                <Text style={styles.text}>Change Profile Settings</Text>
                 <View style={{flexDirection: 'row', marginTop:10}}>
                     {/* <Text style={{fontWeight:'bold'}}>change</Text> */}
-                    <Icon name='chevron-right' type='font-awesome' style={{paddingLeft:3, fontSize:'5px'}} />    
+                    <Icon name='chevron-left' type='font-awesome' style={{paddingLeft:3, fontSize:'5px'}} />    
                 </View>
+                <Text style={styles.text}>שנה את הגדרות הפרופיל</Text>
+                
             </View>
              <View 
                 style={styles.eachSetContainer}>
-                <Text style={styles.text}>Password Change</Text>
                 <View style={{flexDirection: 'row', marginTop:10}}>
                     {/* <Text style={{fontWeight:'bold'}}>change</Text> */}
-                    <Icon name='chevron-right' type='font-awesome' style={{paddingLeft:3, fontSize:'5px'}} />    
+                    <Icon name='chevron-left' type='font-awesome' style={{paddingLeft:3, fontSize:'5px'}} />    
                 </View>
+                <Text style={styles.text}>שנה את הסיסמה</Text>
+                
             </View>
             <View 
                 style={styles.eachSetContainer}>
+                <View style={{flexDirection: 'row', marginTop:10}}>
+                    {/* <Text style={{fontWeight:'bold'}}>change</Text> */}
+                    <Icon name='chevron-left' type='font-awesome' style={{paddingLeft:3,}} />  
+                </View>
                 <View style={{marginTop:15}}>
-                    <Text style={styles.text}>My Phone Number</Text>
+                    <Text style={styles.text}>מספר הטלפון שלי</Text>
                     <Text>{this.state.phone}</Text>
                 </View>
-                <View style={{flexDirection: 'row', marginTop:10}}>
-                    {/* <Text style={{fontWeight:'bold'}}>change</Text> */}
-                    <Icon name='chevron-right' type='font-awesome' style={{paddingLeft:3,}} />  
-                </View>
+                
             </View>
             <View 
                 style={styles.eachSetContainer}>
-                <View>
-                    <Text style={styles.text}>Emails sending</Text>
-                    <Text>we will send you our events</Text>
-                </View>
                 <View>
                     <Switch
                     onValueChange = {this.toggleSwitch1}
                     value = {this.state.switchEmailValue}/>
                 </View>
+                <View>
+                    <Text style={styles.text}>שליחת אי-מיילים</Text>
+                    <Text>נשלח את האירועים ועדכונים שלנו</Text>
+                </View>
+                
             </View>
             <View 
                 style={styles.eachSetContainer}>
-                <View>
-                    <Text style={styles.text}>Getting Notifications</Text>
-                    <Text>we will send you notifications to your phone</Text>
-                </View>
                 <View>
                     <Switch
                     onValueChange = {this.toggleSwitch2}
                     value = {this.state.switchNoteValue}/>
                 </View>
+                <View>
+                    <Text style={styles.text}>קבלת התראות</Text>
+                    <Text>נשלח התראות מאפליקציה לטלפון שלך</Text>
+                </View>
+                
             </View>
         </View> 
         <StatusBar style="auto" />
@@ -148,7 +153,7 @@ class Settings extends React.Component{
                 <View style={{flexDirection: 'row'}}>
                     <TouchableHighlight
                         onPress={() => navigate("LoginScreen")}>
-                        <Text style={styles.buttonText}>sign out</Text>
+                        <Text style={styles.buttonText}>יציאה</Text>
                     </TouchableHighlight>
                     <Icon name='sign-out' type='font-awesome' style={{paddingLeft:3}} />
                 </View>
@@ -159,7 +164,7 @@ class Settings extends React.Component{
                 <View style={{flexDirection: 'row'}}>
                     <TouchableHighlight
                         onPress={() => navigate("HomeScreen")}>
-                        <Text style={styles.buttonText}>back home</Text>
+                        <Text style={styles.buttonText}> לעמוד הבית</Text>
                     </TouchableHighlight>
                     <Icon name='home' type='font-awesome' style={{paddingLeft:3}} />
                 </View>

@@ -13,6 +13,8 @@ export default class LoginForm extends Component {
   constructor(){
     super();
     global.flag = false;
+    global.email = '';
+    global.password = '';
   }
   
     state = {
@@ -41,6 +43,8 @@ export default class LoginForm extends Component {
         if(this.state.emailError== null && this.state.passwordError== null )
         {
           global.flag = true;
+          global.email = this.state.email;
+          global.password = this.state.password;
         }
         if(this.state.email == '')
         {

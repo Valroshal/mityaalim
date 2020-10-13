@@ -101,7 +101,7 @@ class VideoComponent extends React.Component{
     for(let i=0; i<this.state.videoListId.length; i++)
     {
       list.push(
-        <View key={i} style={{flexDirection: 'column', justifyContent: 'space-around',margin:10, height: 80, width:'90%', borderColor: '#000', borderWidth: 2,}}>        
+        <View key={i} style={styles.list}>        
                 <Text 
                   numberOfLines={1} 
                   style={{ fontWeight: 'bold'}}>{this.state.videoListName[i]}</Text>

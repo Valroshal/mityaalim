@@ -51,7 +51,7 @@ import { applyMiddleware, createStore } from 'redux';
           <Stack.Navigator
               screenOptions={{  headerShown: false } }  
             >
-              {/* <Stack.Screen
+              <Stack.Screen
                 name="Login"
                 component={LoginScreen}
               />
@@ -63,7 +63,7 @@ import { applyMiddleware, createStore } from 'redux';
               <Stack.Screen
                 name="HomeScreen"
                 component={HomeScreen}
-              /> 
+              />
               <Stack.Screen
                 name="SettingsScreen"
                 component={SettingsScreen}
@@ -71,7 +71,7 @@ import { applyMiddleware, createStore } from 'redux';
               <Stack.Screen
                 name="Error"
                 component={Error}
-              /> */}
+              /> 
               <Stack.Screen
                 name="VideoComponent"
                 component={VideoComponent}

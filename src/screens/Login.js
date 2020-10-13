@@ -10,12 +10,68 @@ const mityalimLogo = require ('../images/mityalimLogo.png');
 const ScreenHeight = Dimensions.get("window").height;
 
 class Login extends React.Component {
+  
+  componentDidMount(){
+    this.get()
+  }
+
+  state = {
+    email: [],
+    password: []
+  }
+
+  get = () =>{
+    fetch('http://localhost:5000/getuser', {       
+        method: 'GET',
+        headers: {
+        'Accept': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Access-Control-Allow-Origin': '*'
+        },   
+        }).then((res) => res.json())
+        .catch(err =>{
+            console.log('happened!', err);
+            return {};
+        })
+        .then( (data) => {
+            console.log('parsed json: ', data);
+            if (data != null){
+              
+              for(let i=0; i<data.length; i++)
+              {
+                this.setState({
+                  email: [...this.state.email, data[i].email],
+                  password: [...this.state.password, data[i].password]
+                   })
+              } 
+            }
+          }).catch(error => {
+            console.log("Error fetching data-----------", error);
+          });     
+}    
 
   pressLogin = () =>{
+    console.log('onpress login')
     if(global.flag == true)
     {
-      this.props.navigation.navigate("HomeScreen");
+      console.log('onpress login first if')
+      console.log('state.email', this.state.email)
+      for(let i=0; i<this.state.email.length; i++)
+      {
+        console.log('onpress login if for loop')
+        if(this.state.email[i] == global.email && this.state.password[i] == global.password)
+        {
+          console.log('email == email from db')
+          this.props.navigation.navigate("HomeScreen");
+        }
+        else
+        {
+          console.log('emails not equal')
+        }
+      }
+      
     }
+    
   }
 
   render(){
