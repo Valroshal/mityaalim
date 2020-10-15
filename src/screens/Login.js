@@ -6,8 +6,11 @@ import LoginForm from '../components/LoginForm';
 import FacebookLogin from '../components/FacebookLogin';
 import validate from '../components/validation';
 
+// source only logo: 'https://mityaalim.org/wp-content/uploads/2020/06/cropped-%d7%9e%d7%aa%d7%99%d7%99%d7%a2%d7%9c%d7%99%d7%9d-%d7%a8%d7%a7-%d7%a1%d7%9e%d7%9c-%d7%a8%d7%a7%d7%a2-%d7%a9%d7%a7%d7%95%d7%a3.png'
+// #22aa22 - icon light green
+// #086008 - icon dark green
 const id = "918095505346162";
-const mityalimLogo = require ('../images/mityalimLogo.png');
+//const mityalimLogo = require ('../images/logoMale');
 const ScreenHeight = Dimensions.get("window").height;
 
 class Login extends React.Component {
@@ -127,11 +130,8 @@ class Login extends React.Component {
             emailError:err
           });
         }
-      }
-      
-    }
-
-    
+      }  
+    }  
   }
 
   render(){
@@ -141,7 +141,7 @@ class Login extends React.Component {
         <View style={styles.container}>
           <View style={styles.logoContainer}>
               <Image style={styles.logo}
-              source={mityalimLogo}
+              source={'https://mityaalim.org/wp-content/uploads/2020/06/cropped-%d7%9e%d7%aa%d7%99%d7%99%d7%a2%d7%9c%d7%99%d7%9d-%d7%9c%d7%95%d7%92%d7%95-%d7%9e%d7%9c%d7%90-%d7%a8%d7%a7%d7%a2-%d7%a9%d7%a7%d7%95%d7%a3.png'}
               />
           </View>
           <View style={styles.formContainer}>
@@ -187,6 +187,8 @@ class Login extends React.Component {
 const styles = StyleSheet.create({
     container:{
       padding: 20,
+      //backgroundColor: ,
+      
     },
     text:{
         
@@ -196,11 +198,12 @@ const styles = StyleSheet.create({
     
     logo:{
         
-        width: 70,
+        width: 250,
         height: 70,
         flexGrow: 1
     },
     logoContainer:{
+        
         justifyContent: 'center',
         alignItems: 'center',
         padding: 30,

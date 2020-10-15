@@ -48,23 +48,13 @@ const styles = StyleSheet.create({
   input:{
     height: 40,
     //width:260,
-    backgroundColor: '#07beb8',
+    backgroundColor: '#22aa22', //'#07beb8',
+    opacity: 0.8,
     color:'#FFF',
     marginBottom: 10,
     paddingHorizontal:10,
     borderRadius: 5,
   },
-  buttonContainer:{
-    backgroundColor:'#034643',
-    paddingVertical: 15,
-    borderRadius: 5,
-  },
-  buttonText:{
-    textAlign: 'center',
-    color:'#FFF',
-    fontWeight: '500',
-  }
-
 });
 
 export default LoginForm;

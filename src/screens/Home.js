@@ -66,7 +66,13 @@ class HomeComponent extends React.Component{
           onPressVideo={() => navigate("VideoComponent")}
           onPressHome={this.setHomeButton}  
           />
-        <Text style={styles.text}>Hello Home Component!</Text>
+          <View style={styles.logoContainer}>
+              <Image style={styles.logo}
+              source={'https://mityaalim.org/wp-content/uploads/2020/06/תמונת-רקע.jpg'}
+              />
+              <View style={styles.overlay}></View>
+          </View>
+          
         <StatusBar style="auto" />
         
         <BottomMenuBar
@@ -84,13 +90,39 @@ class HomeComponent extends React.Component{
 //need camelCase in style sheet
 const styles = StyleSheet.create({
   container2:{
-    backgroundColor:'#ceffee',
+    backgroundColor:'#ececec',
     flex: 1,
     alignItems: 'center',
     height: '100%',
     justifyContent: 'center',
     flexDirection: 'row',
     
+  },
+  logoContainer:{
+    //backgroundColor: '#fff',
+    height: '35%',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    left: 0,
+    top: '10.2%',
+  },
+  logo:{
+    width: '100%',
+    height: '100%',
+    // flexGrow: 1
+    opacity: 0.3
+  },
+  overlay:{
+    flex: 1,
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    opacity: 0.3,
+    backgroundColor: 'black',
+    width: '100%',
+    height: '100%',
   },
   text:{
     //color:'#fff',

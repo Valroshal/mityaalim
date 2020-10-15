@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, TextInput, TouchableOpacity, Text, KeyboardAvoidingView, StatusBar, Dimensions } from 'react-native';
+import {StyleSheet, Image, View, TextInput, TouchableOpacity, Text, KeyboardAvoidingView, StatusBar, Dimensions } from 'react-native';
 import Register from '../components/RegistrationForm';
 import axios from 'axios';
 import validate from '../components/validation';
@@ -197,6 +197,11 @@ render() {
     return (
         <KeyboardAvoidingView>  
         <View style={styles.container}>
+            <View style={styles.logoContainer}>
+              <Image style={styles.logo}
+              source={'https://mityaalim.org/wp-content/uploads/2020/06/cropped-%D7%9E%D7%AA%D7%99%D7%99%D7%A2%D7%9C%D7%99%D7%9D-%D7%9C%D7%95%D7%92%D7%95-%D7%9E%D7%9C%D7%90-%D7%A8%D7%A7%D7%A2-%D7%A9%D7%A7%D7%95%D7%A3-1024x282.png'}
+              />
+            </View>
             <Register
             onChangeName={this.handleName}
             onChangeEmail={this.handleEmail}
@@ -230,7 +235,7 @@ render() {
                 onPress={() => navigate("Login")}>
                   <View style={styles.registerContainer}>
                     <Text >Already a Member? </Text>
-                    <Text style={{color:'#07beb8'}}> Login Here</Text>
+                    <Text style={{color:'#22aa22'}}> Login Here</Text>
                   </View>
               </TouchableOpacity>
         </View>
@@ -241,10 +246,22 @@ render() {
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: '#ceffee',
+        //backgroundColor: '#ceffee',
+        //opacity: 0.5,
         height: ScreenHeight,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    logo:{
+        
+      width: 250,
+      height: 70,
+      flexGrow: 1
+    },
+    logoContainer:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 30,
     },
     buttonContainer:{
         backgroundColor:'#034643',

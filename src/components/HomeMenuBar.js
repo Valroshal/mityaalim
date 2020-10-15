@@ -64,15 +64,7 @@ const HomeMenuBar =({
 
 //need camelCase in style sheet
 const styles = StyleSheet.create({
-  container2:{
-    backgroundColor:'#ceffee',
-    flex: 1,
-    alignItems: 'center',
-    height: '100%',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    
-  },
+  
   text:{
     //color:'#fff',
     fontSize: 26,
@@ -90,6 +82,13 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
+    shadowColor: "#000000",
+    shadowOpacity: 0.6,
+    shadowRadius: 6,
+    shadowOffset: {
+      height: 2,
+      width: 2
+    }
   },
   button:{
     alignItems: 'center',

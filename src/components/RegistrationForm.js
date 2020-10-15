@@ -31,7 +31,7 @@ const RegistrationForm = ({
             keyboardType="email-address"
             autoCapitalize='none'
             autoCorrect={false}
-            style={styles.input}
+            style={styles.input2}
             returnKeyType='next'
             onChangeText={onChangeEmail}
             error={errorEmail}/>
@@ -52,7 +52,7 @@ const RegistrationForm = ({
             placeholderTextColor="rgba(255,255,255,0.7)"
             autoCapitalize='none'
             autoCorrect={false}
-            style={styles.input}
+            style={styles.input2}
             returnKeyType='next'
             onChangeText={onChangeRepeatPassword}
             error={errorRepeatPassword}
@@ -68,11 +68,23 @@ const RegistrationForm = ({
       input:{
         height: 40,
         width:260,
-        backgroundColor: '#07beb8',
+        backgroundColor: '#22aa22',
         color:'#FFF',
         marginBottom: 10,
         paddingHorizontal:10,
         borderRadius: 5,
+        opacity: 0.8
+      },
+      
+      input2:{
+        height: 40,
+        width:260,
+        backgroundColor: '#086008',
+        color:'#FFF',
+        marginBottom: 10,
+        paddingHorizontal:10,
+        borderRadius: 5,
+        opacity: 0.8
       },
     });
         

@@ -3,11 +3,13 @@ import {connect} from 'react-redux';
 import {searchChanged} from '../actions/index'
 import { StatusBar } from 'expo-status-bar';
 import React from 'react'; 
-import { StyleSheet, Text, ScrollView, Linking , View, Image, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
+import { StyleSheet, WebView, Text, ScrollView, Linking , View, Image, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
 import { Icon } from 'react-native-elements';
 import VideoSearchBar from './VideoSearchBar';
 import BottomMenuBar from '../components/BottomMenuBar';
 import HomeMenuBar from '../components/HomeMenuBar';
+//import { WebView } from 'react-native-webview';
+//import {YouTube} from 'react-native-youtube';
 
 class VideoComponent extends React.Component{
     
@@ -134,11 +136,26 @@ class VideoComponent extends React.Component{
                 value={search}/>
             </View>
             
-            <ScrollView style={{margin:20}} >
+            {/* <ScrollView style={{margin:20}} >
                 {list}
-            </ScrollView>
-            
-            {/* <Text style={styles.text}>Hello Video Component!</Text> */}
+            </ScrollView> */}
+
+            {/* <ScrollView style={{margin:20}} >  */}
+            <View style={{flex: 1, height:250, width:350, margin:20}}> 
+              <WebView
+                //style={{flex: 1, height:250, width:350,}}
+                //javaScriptEnabled={true}
+                //domStorageEnabled={true}
+                //source={{uri: 'https://www.youtube.com/embed/FkvEQjbhij4'}}
+                source={{ html: "<iframe src=\"https://www.youtube.com/embed/jiVDV8-MQes\" frameborder=\"0\" allowfullscreen></iframe>" }}
+                />  
+            </View>
+
+            {/* source={{ html: "<html><body>Look Ma' a video! <br /> <iframe width='560' height='315' src='https://www.youtube.com/embed/FkvEQjbhij4' frameborder='0' allowfullscreen></iframe></body></html>" }}
+
+                          //source={{uri: 'https://www.youtube.com/embed/'+this.state.pictureData.idVideo }} */}
+            {/* </ScrollView> */}
+
         <StatusBar style="auto" />
         
         <BottomMenuBar
@@ -195,3 +212,14 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {searchChanged})(VideoComponent);
 
 
+ {/* <YouTube
+                videoId="FkvEQjbhij4" // The YouTube video ID
+                play={true} // control playback of video with true/false
+                //fullscreen // control whether the video should play in fullscreen or inline
+                //loop // control whether the video should loop when ended
+                //onReady={e => this.setState({ isReady: true })}
+                //onChangeState={e => this.setState({ status: e.state })}
+                //onChangeQuality={e => this.setState({ quality: e.quality })}
+                //onError={e => this.setState({ error: e.error })}
+                style={{ alignSelf: 'stretch', height: 300 }}
+              /> */}

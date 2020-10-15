@@ -53,6 +53,13 @@ const styles = StyleSheet.create({
         bottom: 0,
         flexDirection: 'row',
         justifyContent: 'space-around',
+        shadowColor: "#000000",
+        shadowOpacity: 0.6,
+        shadowRadius: 6,
+        shadowOffset: {
+        height: 2,
+        width: 2
+        }
       },
       button:{
         alignItems: 'center',
