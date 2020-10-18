@@ -121,7 +121,7 @@ class VideoComponent extends React.Component{
                       javaScriptEnabled={true}
                       scrollEnabled={false}
                       allowsFullscreenVideo={true}
-                      source={{uri: 'https://www.youtube.com/embed/FkvEQjbhij4'}}
+                      source={{uri: 'https://www.youtube.com/embed/' + video_id_arr[i]}}
                       /> 
                   </View>
           </View>
@@ -141,7 +141,7 @@ class VideoComponent extends React.Component{
                           javaScriptEnabled={true}
                           scrollEnabled={false}
                           allowsFullscreenVideo={true}
-                          source={{uri: 'https://www.youtube.com/embed/FkvEQjbhij4'}}
+                          source={{uri: 'https://www.youtube.com/embed/' + video_id_arr[i]}}
                           /> 
                       </View>
               </View>
