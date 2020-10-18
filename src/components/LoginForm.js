@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   input:{
     height: 40,
     //width:260,
-    backgroundColor: '#22aa22', //'#07beb8',
+    backgroundColor: '#22aa22',
     opacity: 0.8,
     color:'#FFF',
     marginBottom: 10,

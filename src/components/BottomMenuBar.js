@@ -46,8 +46,8 @@ const BottomMenuBar =({
 const styles = StyleSheet.create({
     bottomMenu:{
         backgroundColor: '#ececec',
-        height: 50,
-        width: 375,
+        height: '8%',
+        width: '100%',
         position: 'absolute',
         right: 0,
         bottom: 0,

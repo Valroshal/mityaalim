@@ -1,22 +1,22 @@
 import 'react-native-gesture-handler';
 import {connect} from 'react-redux';
 import {searchChanged} from '../actions/index'
-import { StatusBar } from 'expo-status-bar';
+//import { StatusBar } from 'expo-status-bar';
 import React from 'react'; 
-import { StyleSheet, WebView, Text, ScrollView, Linking , View, Image, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
+import { Platform,StatusBar, StyleSheet, Text, ScrollView, Linking , View, Image, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
 import { Icon } from 'react-native-elements';
 import VideoSearchBar from './VideoSearchBar';
 import BottomMenuBar from '../components/BottomMenuBar';
 import HomeMenuBar from '../components/HomeMenuBar';
-//import { WebView } from 'react-native-webview';
+import { WebView } from 'react-native-webview';
 //import {YouTube} from 'react-native-youtube';
 
 class VideoComponent extends React.Component{
     
     componentDidMount(){
         this.checkColor()
-        this.props.navigation.addListener('willFocus', this.load)
-        this.get()
+        //this.props.navigation.addListener('willFocus', this.load)
+        this.get();
     }
     
       state = {
@@ -28,7 +28,7 @@ class VideoComponent extends React.Component{
             videoListName: [],
             videoListDate: [],
         }
-    
+
         get = () =>{
           fetch('http://localhost:5000/getvideo', {
               
@@ -93,42 +93,79 @@ class VideoComponent extends React.Component{
     }
 
   render(){  
-  const { navigate } = this.props.navigation 
+  //const { navigate } = this.props.navigation 
   const {search} = this.props
   if(this.state.videoList[0] == null){
     console.log('loading')
     //return (<Loader/>)
   }
   let list = [];
+  let video_id_arr = [];
     for(let i=0; i<this.state.videoListId.length; i++)
     {
-      list.push(
-        <View key={i} style={styles.list}>        
-                <Text 
-                  numberOfLines={1} 
-                  style={{ fontWeight: 'bold'}}>{this.state.videoListName[i]}</Text>
-                <Text 
-                  numberOfLines={1} 
-                  style={{ textDecorationLine: 'underline', color: 'blue'}}
-                  onPress={() => Linking.openURL(this.state.videoListLink[i])}
-                >{this.state.videoListLink[i]}</Text>
-                <Text style={{}}>{this.state.videoListDate[i]}</Text>
-        </View>
-      )
+      let url = this.state.videoListLink[i]
+      let video_id = url.split('v=')[1];
+      var ampersandPosition = video_id.indexOf('&');
+      if(ampersandPosition != -1) {
+        video_id_arr[i] = video_id.substring(0, ampersandPosition);
+      }
+      if(search == ''){
+        list.push(
+          <View key={i} style={styles.list}>        
+                  <Text 
+                    numberOfLines={1} 
+                    style={{ fontWeight: 'bold'}}>{this.state.videoListName[i]}</Text>
+                  <View style={{flex: 1, height:250, width:350, margin:20}}> 
+                    <WebView
+                      //domStorageEnabled={true}
+                      javaScriptEnabled={true}
+                      scrollEnabled={false}
+                      allowsFullscreenVideo={true}
+                      source={{uri: 'https://www.youtube.com/embed/FkvEQjbhij4'}}
+                      /> 
+                  </View>
+          </View>
+        )
+      }else 
+      {
+          if(this.state.videoListName[i].includes(search))
+          {
+            list.push(
+              <View key={i} style={styles.list}>        
+                      <Text 
+                        numberOfLines={1} 
+                        style={{ fontWeight: 'bold'}}>{this.state.videoListName[i]}</Text>
+                      <View style={{flex: 1, height:250, width:350, margin:20}}> 
+                        <WebView
+                          //domStorageEnabled={true}
+                          javaScriptEnabled={true}
+                          scrollEnabled={false}
+                          allowsFullscreenVideo={true}
+                          source={{uri: 'https://www.youtube.com/embed/FkvEQjbhij4'}}
+                          /> 
+                      </View>
+              </View>
+            )
+          
+        }
+      }
+
+      
     }
   return (
     
       <View
-         style={styles.container2}>
+         style={[styles.container2, {paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }]}>
+           <StatusBar style="auto" />
           <HomeMenuBar
           VideoColorBorder = {this.state.color}
           EventsColorBorder = {'transparent'}
           BudgetColorBorder = {'transparent'}
           HomeColorBorder = {'transparent'}
-          onPressBudget={() => navigate("BudgetComponent")}
-          onPressEvents={() => navigate("EventsComponent")}
-          onPressVideo={this.setVideoButton}
-          onPressHome={() => navigate("HomeScreen")}  
+          //onPressBudget={() => navigate("BudgetComponent")}
+          //onPressEvents={() => navigate("EventsComponent")}
+          //onPressVideo={this.setVideoButton}
+          //onPressHome={() => navigate("HomeScreen")}  
           />
             <View style={styles.searchContainer}>
                 <VideoSearchBar
@@ -136,31 +173,13 @@ class VideoComponent extends React.Component{
                 value={search}/>
             </View>
             
-            {/* <ScrollView style={{margin:20}} >
+            <ScrollView style={styles.scroll} >
                 {list}
-            </ScrollView> */}
-
-            {/* <ScrollView style={{margin:20}} >  */}
-            <View style={{flex: 1, height:250, width:350, margin:20}}> 
-              <WebView
-                //style={{flex: 1, height:250, width:350,}}
-                //javaScriptEnabled={true}
-                //domStorageEnabled={true}
-                //source={{uri: 'https://www.youtube.com/embed/FkvEQjbhij4'}}
-                source={{ html: "<iframe src=\"https://www.youtube.com/embed/jiVDV8-MQes\" frameborder=\"0\" allowfullscreen></iframe>" }}
-                />  
-            </View>
-
-            {/* source={{ html: "<html><body>Look Ma' a video! <br /> <iframe width='560' height='315' src='https://www.youtube.com/embed/FkvEQjbhij4' frameborder='0' allowfullscreen></iframe></body></html>" }}
-
-                          //source={{uri: 'https://www.youtube.com/embed/'+this.state.pictureData.idVideo }} */}
-            {/* </ScrollView> */}
-
-        <StatusBar style="auto" />
+            </ScrollView>
         
         <BottomMenuBar
-        onPressSignOut={() => navigate("Login")}
-        onPressSettings={() => navigate("SettingsScreen")}
+        //onPressSignOut={() => navigate("Login")}
+        //onPressSettings={() => navigate("SettingsScreen")}
         />  
       </View>
       
@@ -187,18 +206,22 @@ const styles = StyleSheet.create({
 
   searchContainer:{
     position:"absolute",
-    top: '12%',
+    top: '15%',
     textAlign: 'center',
-    margin: 20
+    
   },
   
   list:{
     flexDirection: 'column',
     margin:10, 
-    height: '20%', 
+    //height: '20%', 
     width:'90%', 
-    borderColor: '#000', 
-    borderWidth: 2
+    //borderColor: '#000', 
+    //borderWidth: 2
+  },
+  scroll:{
+    marginTop:'30%',
+    
   }
 });
 
@@ -212,14 +235,32 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {searchChanged})(VideoComponent);
 
 
- {/* <YouTube
-                videoId="FkvEQjbhij4" // The YouTube video ID
-                play={true} // control playback of video with true/false
-                //fullscreen // control whether the video should play in fullscreen or inline
-                //loop // control whether the video should loop when ended
-                //onReady={e => this.setState({ isReady: true })}
-                //onChangeState={e => this.setState({ status: e.state })}
-                //onChangeQuality={e => this.setState({ quality: e.quality })}
-                //onError={e => this.setState({ error: e.error })}
-                style={{ alignSelf: 'stretch', height: 300 }}
-              /> */}
+{/* <ScrollView style={styles.scroll} >
+              <View style={{flex: 1, height:250, width:350, margin:20}}> 
+                <WebView
+                  //style={{flex: 1, height:250, width:350,}}
+                  //javaScriptEnabled={true}
+                  //domStorageEnabled={true}
+                  source={{uri: 'https://www.youtube.com/embed/FkvEQjbhij4'}}
+                  //source={{ html: "<iframe src=\"https://www.youtube.com/embed/FkvEQjbhij4\" frameborder=\"0\" allowfullscreen></iframe>" }}
+                  />  
+              </View>
+              <View style={{flex: 1, height:250, width:350, margin:20}}> 
+                <WebView
+                  //style={{flex: 1, height:250, width:350,}}
+                  //javaScriptEnabled={true}
+                  //domStorageEnabled={true}
+                  source={{uri: 'https://www.youtube.com/embed/FkvEQjbhij4'}}
+                  //source={{ html: "<iframe src=\"https://www.youtube.com/embed/FkvEQjbhij4\" frameborder=\"0\" allowfullscreen></iframe>" }}
+                  />  
+              </View>
+              <View style={{flex: 1, height:250, width:350, margin:20}}> 
+                <WebView
+                  //style={{flex: 1, height:250, width:350,}}
+                  //javaScriptEnabled={true}
+                  //domStorageEnabled={true}
+                  source={{uri: 'https://www.youtube.com/embed/FkvEQjbhij4'}}
+                  //source={{ html: "<iframe src=\"https://www.youtube.com/embed/FkvEQjbhij4\" frameborder=\"0\" allowfullscreen></iframe>" }}
+                  />  
+              </View>
+            </ScrollView>  */}

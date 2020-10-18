@@ -1,10 +1,11 @@
 import 'react-native-gesture-handler';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text,TouchableOpacity, View } from 'react-native';
-
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import HomeScreen from './src/screens/Home';
 import LoginScreen from './src/screens/Login';
 import RegistrationScreen from './src/screens/Registration';
@@ -23,7 +24,7 @@ import {Provider} from 'react-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import ReduxThunk from 'redux-thunk';
 import reducers from './src/reducers';
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, compose,  } from 'redux';
 // class App extends React.Component{
 //       render(){
 //         return(
@@ -36,9 +37,11 @@ import { applyMiddleware, createStore } from 'redux';
 //   }
 
   
-  const store = createStore(reducers, {}, window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
-    applyMiddleware(ReduxThunk)
-  ));
+  // const store = createStore(reducers, {}, window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
+  //   applyMiddleware(ReduxThunk)
+  // ));
+  const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const store = createStore(reducers, {}, composeEnhancer(applyMiddleware(ReduxThunk)) );
   const Stack = createStackNavigator();
   class App extends React.Component{
     render(){
@@ -46,12 +49,12 @@ import { applyMiddleware, createStore } from 'redux';
       
          <Provider store={store}>
          
-        
-        <NavigationContainer>
+          <VideoComponent/>
+        {/* <NavigationContainer>
           <Stack.Navigator
               screenOptions={{  headerShown: false } }  
             >
-              {/* <Stack.Screen
+              <Stack.Screen
                 name="Login"
                 component={LoginScreen}
               />
@@ -71,7 +74,7 @@ import { applyMiddleware, createStore } from 'redux';
               <Stack.Screen
                 name="Error"
                 component={Error}
-              />   */}
+              />  
               <Stack.Screen
                 name="VideoComponent"
                 component={VideoComponent}
@@ -85,7 +88,7 @@ import { applyMiddleware, createStore } from 'redux';
                 component={BudgetComponent}
               />
             </Stack.Navigator>
-        </NavigationContainer>
+        </NavigationContainer> */}
          </Provider> 
      );
   } }
