@@ -49,19 +49,19 @@ import { applyMiddleware, createStore, compose,  } from 'redux';
       
          <Provider store={store}>
          
-          <VideoComponent/>
-        {/* <NavigationContainer>
+          
+        <NavigationContainer>
           <Stack.Navigator
               screenOptions={{  headerShown: false } }  
             >
-              <Stack.Screen
+              {/* <Stack.Screen
                 name="Login"
                 component={LoginScreen}
               />
               <Stack.Screen
                 name="RegistrationScreen"
                 component={RegistrationScreen}
-              />
+              /> */}
               
               <Stack.Screen
                 name="HomeScreen"
@@ -88,7 +88,7 @@ import { applyMiddleware, createStore, compose,  } from 'redux';
                 component={BudgetComponent}
               />
             </Stack.Navigator>
-        </NavigationContainer> */}
+        </NavigationContainer>
          </Provider> 
      );
   } }

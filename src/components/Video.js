@@ -15,7 +15,7 @@ class VideoComponent extends React.Component{
     
     componentDidMount(){
         this.checkColor()
-        //this.props.navigation.addListener('willFocus', this.load)
+        this.props.navigation.addListener('willFocus', this.load)
         this.get();
     }
     
@@ -93,7 +93,7 @@ class VideoComponent extends React.Component{
     }
 
   render(){  
-  //const { navigate } = this.props.navigation 
+  const { navigate } = this.props.navigation 
   const {search} = this.props
   if(this.state.videoList[0] == null){
     console.log('loading')
@@ -162,10 +162,10 @@ class VideoComponent extends React.Component{
           EventsColorBorder = {'transparent'}
           BudgetColorBorder = {'transparent'}
           HomeColorBorder = {'transparent'}
-          //onPressBudget={() => navigate("BudgetComponent")}
-          //onPressEvents={() => navigate("EventsComponent")}
-          //onPressVideo={this.setVideoButton}
-          //onPressHome={() => navigate("HomeScreen")}  
+          onPressBudget={() => navigate("BudgetComponent")}
+          onPressEvents={() => navigate("EventsComponent")}
+          onPressVideo={this.setVideoButton}
+          onPressHome={() => navigate("HomeScreen")}  
           />
             <View style={styles.searchContainer}>
                 <VideoSearchBar
@@ -178,8 +178,8 @@ class VideoComponent extends React.Component{
             </ScrollView>
         
         <BottomMenuBar
-        //onPressSignOut={() => navigate("Login")}
-        //onPressSettings={() => navigate("SettingsScreen")}
+        onPressSignOut={() => navigate("Login")}
+        onPressSettings={() => navigate("SettingsScreen")}
         />  
       </View>
       
@@ -233,34 +233,3 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {searchChanged})(VideoComponent);
-
-
-{/* <ScrollView style={styles.scroll} >
-              <View style={{flex: 1, height:250, width:350, margin:20}}> 
-                <WebView
-                  //style={{flex: 1, height:250, width:350,}}
-                  //javaScriptEnabled={true}
-                  //domStorageEnabled={true}
-                  source={{uri: 'https://www.youtube.com/embed/FkvEQjbhij4'}}
-                  //source={{ html: "<iframe src=\"https://www.youtube.com/embed/FkvEQjbhij4\" frameborder=\"0\" allowfullscreen></iframe>" }}
-                  />  
-              </View>
-              <View style={{flex: 1, height:250, width:350, margin:20}}> 
-                <WebView
-                  //style={{flex: 1, height:250, width:350,}}
-                  //javaScriptEnabled={true}
-                  //domStorageEnabled={true}
-                  source={{uri: 'https://www.youtube.com/embed/FkvEQjbhij4'}}
-                  //source={{ html: "<iframe src=\"https://www.youtube.com/embed/FkvEQjbhij4\" frameborder=\"0\" allowfullscreen></iframe>" }}
-                  />  
-              </View>
-              <View style={{flex: 1, height:250, width:350, margin:20}}> 
-                <WebView
-                  //style={{flex: 1, height:250, width:350,}}
-                  //javaScriptEnabled={true}
-                  //domStorageEnabled={true}
-                  source={{uri: 'https://www.youtube.com/embed/FkvEQjbhij4'}}
-                  //source={{ html: "<iframe src=\"https://www.youtube.com/embed/FkvEQjbhij4\" frameborder=\"0\" allowfullscreen></iframe>" }}
-                  />  
-              </View>
-            </ScrollView>  */}

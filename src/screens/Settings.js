@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#07beb8',
     //backgroundColor:'#808080',
     height: '30%',
-    width: 375,
+    width: '100%',
     position: 'absolute',
     left: 0,
     top: 0,
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',  
   },
   contentContainer:{
-    width: 375,
+    width: '100%',
     marginTop: 140  
   },
   eachSetContainer:{
@@ -230,13 +230,20 @@ const styles = StyleSheet.create({
 
   bottomMenu:{
     backgroundColor: '#ececec',
-    height: 50,
-    width: 375,
+    height: '8%',
+    width: '100%',
     position: 'absolute',
     right: 0,
     bottom: 0,
     flexDirection: 'row',
     justifyContent: 'space-around',
+    shadowColor: "#000000",
+        shadowOpacity: 0.6,
+        shadowRadius: 6,
+        shadowOffset: {
+        height: 2,
+        width: 2
+        }
   },
 
 

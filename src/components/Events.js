@@ -6,6 +6,7 @@ import { StyleSheet, Text,TouchableOpacity, View, Image, KeyboardAvoidingView, D
 import { Icon } from 'react-native-elements';
 import BottomMenuBar from '../components/BottomMenuBar';
 import HomeMenuBar from '../components/HomeMenuBar';
+import VideoSearchBar from './VideoSearchBar';
 
 class EventsComponent extends React.Component{
     
@@ -15,6 +16,7 @@ class EventsComponent extends React.Component{
     }
     
       state = {
+            search: '',
             color: 'transparent',
             font: 'normal'
         }
@@ -39,12 +41,23 @@ class EventsComponent extends React.Component{
       this.props.navigation.navigate("EventsComponent");
     }
 
+    _onChangeText = async (search) =>{
+      console.log('text changes on events screen', search)
+      await this.setState({
+        search:search
+      });
+      console.log('this.state.search: ', this.state.search)
+      
+  }
+
   render(){
   const { navigate } = this.props.navigation
   return (
       <View
          style={styles.container2}>
-           <HomeMenuBar
+          <StatusBar style="auto" />
+
+          <HomeMenuBar
           VideoColorBorder = {'transparent'}
           EventsColorBorder = {this.state.color}
           BudgetColorBorder = {'transparent'}
@@ -55,10 +68,14 @@ class EventsComponent extends React.Component{
           onPressHome={() => navigate("HomeScreen")}  
           />
 
-         
+        
 
-        <Text style={styles.text}>Hello Events Component!</Text>
-        <StatusBar style="auto" />
+        <View style={styles.searchContainer}>
+          <VideoSearchBar
+          onChangeText = {this._onChangeText} 
+          value={this.state.search}/>
+        </View>
+
 
         <BottomMenuBar
         onPressSignOut={() => navigate("Login")}
@@ -85,7 +102,12 @@ const styles = StyleSheet.create({
     //color:'#fff',
     fontSize: 26,
   },
-  
+  searchContainer:{
+    position:"absolute",
+    top: '15%',
+    textAlign: 'center',
+    
+  },
 });
 
 

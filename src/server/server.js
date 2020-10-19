@@ -75,7 +75,7 @@ app.get('/createuserstable', (req,res) =>{
 });
 
 //Insert user
-app.get('/adduser', (req,res) =>{
+app.post('/adduser', (req,res) =>{
     let user = {
         name: req.body.name,
         email: req.body.email,
