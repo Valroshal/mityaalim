@@ -127,6 +127,18 @@ app.get('/getvideo', (req,res) =>{
         res.send(result);
     });
 });
+
+//select events
+app.get('/getevent', (req,res) =>{
+    let sql = 'SELECT * FROM events';
+    con.query(sql, (err, result) =>{
+        if(err) throw err;
+        console.log(result);
+        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:19006');
+        res.send(result);
+    });
+});
+
 //Use Routes - Initilaze routes
 //app.use('/api/users', users);
 

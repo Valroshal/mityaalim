@@ -17,7 +17,7 @@ class EventsComponent extends React.Component{
     componentDidMount(){
         this.checkColor()
         this.props.navigation.addListener('willFocus', this.load)
-        this.get();
+        //this.get();
     }
     
       state = {
@@ -25,9 +25,19 @@ class EventsComponent extends React.Component{
             color: 'transparent',
             font: 'normal',
             date: new Date(),
-            eventsList: [], 
-            eventsListName: [],
-            eventsListDate: [],
+             
+            eventsListName: ['All Day Event', 'Long Event'],
+            eventsListDate: ['2020-10-22', '2020-10-21'],
+            events:[
+              {
+                  title: 'All Day Event',
+                  start: '2020-10-22'
+              },
+              {
+                  title: 'Long Event',
+                  start: '2020-10-21',
+                  
+              }]
       }
     
         onChange = date => this.setState({ date })
@@ -96,9 +106,9 @@ class EventsComponent extends React.Component{
 
   render(){
   const { navigate } = this.props.navigation
-  const events = ['ev1','ev2','ev3','ev4','ev5','ev6','ev7','ev8','ev9','ev10'];
-  const len = this.state.eventsList.length;
-  const dates = ['2020-10-20','2020-10-21','2020-10-22','2020-10-23','2020-10-24','2020-10-25','2020-10-26','2020-10-27','2020-10-28','2020-10-29']
+  //const events = ['ev1','ev2','ev3','ev4','ev5','ev6','ev7','ev8','ev9','ev10'];
+  const len = this.state.events.length;
+  //const dates = ['2020-10-20','2020-10-21','2020-10-22','2020-10-23','2020-10-24','2020-10-25','2020-10-26','2020-10-27','2020-10-28','2020-10-29']
   return (
       <View
          style={styles.container2}>
@@ -122,12 +132,12 @@ class EventsComponent extends React.Component{
           </View>
 
           <View style={{ flex: 1, marginTop: 70 }}>
-            
                 <View style={{height: 450}}>
                   <EventsList
                     EventItem={this.state.eventsListName}
                     Length={len}
                     Dates={this.state.eventsListDate }
+                    CalendarEvent={this.state.events}
                     />
                 </View>
           </View>

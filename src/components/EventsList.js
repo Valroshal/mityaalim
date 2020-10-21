@@ -9,22 +9,20 @@ import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClic
 const EventsList = ({
     EventItem,
     Length,
-    Dates,
+    CalendarEvent,
+    Dates
 }) => {
     let list = [];
     let events = [];
     for(let i=0; i<Length; i++)
     {
-        const dates = Dates[i];
         const text = EventItem[i];
-        console.log('dates and text', dates, text)
-        events.push({title: text,start: dates})
-        
+        const date = Dates[i];
         list.push(
             <View key={i}>
                 <Text 
                     numberOfLines={1}>
-                    {text}
+                    {text} {date}
                 </Text>
             </View>
         )
@@ -42,9 +40,7 @@ const EventsList = ({
                     refetchEvents={true}
                     plugins={[ dayGridPlugin, interactionPlugin  ]}
                     initialView="dayGridMonth"
-                    //events={[events]}
-                    //events={[{ title: 'event 1', start: '2020-10-19' } ]}
-                    // dateClick={this.handleDateClick}
+                    events={CalendarEvent}
                   />
                 </View>
                 <View>{list}</View>    
