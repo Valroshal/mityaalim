@@ -7,7 +7,7 @@ import { Icon } from 'react-native-elements';
 import BottomMenuBar from '../components/BottomMenuBar';
 import HomeMenuBar from '../components/HomeMenuBar';
 import VideoSearchBar from './VideoSearchBar';
-
+import EventsView from './EventsView';
 class EventsComponent extends React.Component{
     
     componentDidMount(){
@@ -76,6 +76,9 @@ class EventsComponent extends React.Component{
           value={this.state.search}/>
         </View>
 
+        <View style = {styles.calendarContainer}>
+          <EventsView/>
+        </View>
 
         <BottomMenuBar
         onPressSignOut={() => navigate("Login")}
@@ -91,11 +94,11 @@ class EventsComponent extends React.Component{
 const styles = StyleSheet.create({
   container2:{
     backgroundColor:'#ceffee',
-    flex: 1,
+    //flex: 1,
     alignItems: 'center',
     height: '100%',
     justifyContent: 'center',
-    flexDirection: 'row',
+    //flexDirection: 'row',
     
   },
   text:{
@@ -107,6 +110,16 @@ const styles = StyleSheet.create({
     top: '15%',
     textAlign: 'center',
     
+  },
+
+  calendarContainer:{
+    
+    position:"absolute",
+    top: '25%',
+    //textAlign: 'center',
+    alignSelf:'baseline',
+    height: 300,
+    width: '100%'
   },
 });
 
