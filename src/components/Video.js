@@ -3,13 +3,14 @@ import {connect} from 'react-redux';
 import {searchChanged} from '../actions/index'
 //import { StatusBar } from 'expo-status-bar';
 import React from 'react'; 
-import { Platform,StatusBar, StyleSheet, Text, ScrollView, Linking , View, Image, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
+import { Platform,StatusBar, StyleSheet, Text, ScrollView, Linking , View, ImageBackground, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
 import { Icon } from 'react-native-elements';
 import VideoSearchBar from './VideoSearchBar';
 import BottomMenuBar from '../components/BottomMenuBar';
 import HomeMenuBar from '../components/HomeMenuBar';
 import { WebView } from 'react-native-webview';
 //import {YouTube} from 'react-native-youtube';
+import image from '../images/43118.jpg';
 
 class VideoComponent extends React.Component{
     
@@ -127,8 +128,8 @@ class VideoComponent extends React.Component{
           </View>
         )
       }else 
-      {
-          if(this.state.videoListName[i].includes(search))
+      {if(this.state.videoListName[i].includes(search))
+          
           {
             list.push(
               <View key={i} style={styles.list}>        
@@ -153,7 +154,7 @@ class VideoComponent extends React.Component{
       
     }
   return (
-    
+    <ImageBackground source={image} style={styles.image} imageStyle= {{opacity:0.2}}>
       <View
          style={[styles.container2, {paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }]}>
            <StatusBar style="auto" />
@@ -178,11 +179,11 @@ class VideoComponent extends React.Component{
             </ScrollView>
         
         <BottomMenuBar
-        onPressSignOut={() => navigate("Login")}
-        onPressSettings={() => navigate("SettingsScreen")}
+          onPressSignOut={() => navigate("Login")}
+          onPressSettings={() => navigate("SettingsScreen")}
         />  
       </View>
-      
+      </ImageBackground>
     );
   }
 }
@@ -190,7 +191,7 @@ class VideoComponent extends React.Component{
 //need camelCase in style sheet
 const styles = StyleSheet.create({
   container2:{
-    backgroundColor:'#ceffee',
+    //backgroundColor:'#ceffee',
     flex: 1,
     alignItems: 'center',
     height: '100%',
@@ -222,7 +223,12 @@ const styles = StyleSheet.create({
   scroll:{
     marginTop:'30%',
     
-  }
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center"
+  },
 });
 
 

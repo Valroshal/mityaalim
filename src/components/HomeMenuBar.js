@@ -95,7 +95,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   buttonText:{
-    color: '#000000'
+    color: '#000000',
+    //fontFamily: 'notoserif'
   }
 });
 
