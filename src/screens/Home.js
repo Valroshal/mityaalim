@@ -8,7 +8,7 @@ import BottomMenuBar from '../components/BottomMenuBar';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import { Icon } from 'react-native-elements';
 
-
+global.firstEnter = true;
 
 class HomeComponent extends React.Component{
   componentDidMount(){
@@ -49,6 +49,15 @@ class HomeComponent extends React.Component{
     console.log('home', this.state.color);
     this.props.navigation.navigate("HomeScreen");
   }
+
+  pressBudget = () => {
+    if(global.firstEnter)
+    {
+      this.props.navigation.navigate("Questionaire")
+    }
+    else
+      this.props.navigation.navigate("BudgetComponent")
+  }
   
   render(){
   const { navigate } = this.props.navigation 
@@ -61,7 +70,7 @@ class HomeComponent extends React.Component{
           EventsColorBorder = {'transparent'}
           BudgetColorBorder = {'transparent'}
           HomeColorBorder = {this.state.color}
-          onPressBudget={() => navigate("BudgetComponent")}
+          onPressBudget={this.pressBudget}
           onPressEvents={() => navigate("EventsComponent")}
           onPressVideo={() => navigate("VideoComponent")}
           onPressHome={this.setHomeButton}  

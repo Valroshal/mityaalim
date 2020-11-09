@@ -1,0 +1,11 @@
+{
+    "menu":{
+        "homeTab": "בית",
+        "videoTab": "וידאו",
+        "eventTab": "אירועים",
+        "budgetTab": "תקציב",
+        "settingsTab": "הגדרות",
+        "exitTab": "יציאה"
+    }
+    
+}

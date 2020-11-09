@@ -1,0 +1,11 @@
+{
+    "menu":{
+        "homeTab": "home",
+        "videoTab": "video",
+        "eventTab": "events",
+        "budgetTab": "budget",
+        "settingsTab": "settings",
+        "exitTab": "sign out"
+    }
+    
+}

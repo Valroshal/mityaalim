@@ -11,9 +11,9 @@ import LoginScreen from './src/screens/Login';
 import RegistrationScreen from './src/screens/Registration';
 import SettingsScreen from './src/screens/Settings';
 import Expo from 'expo';
+import Questionaire from './src/screens/Questionaire';
 
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import  RootStack from './src/navigation/navigator';
+//import  RootStack from './src/navigation/navigator';
 import Error from './src/components/Error';
 import BudgetComponent from './src/components/Budget';
 import VideoComponent from './src/components/Video';
@@ -21,7 +21,7 @@ import VideoComponentForRedux from './src/components/Video';
 import EventsComponent from './src/components/Events';
 
 import {Provider} from 'react-redux';
-import {composeWithDevTools} from 'redux-devtools-extension';
+//import {composeWithDevTools} from 'redux-devtools-extension';
 import ReduxThunk from 'redux-thunk';
 import reducers from './src/reducers';
 import { applyMiddleware, createStore, compose,  } from 'redux';
@@ -83,7 +83,12 @@ import { applyMiddleware, createStore, compose,  } from 'redux';
                 name="BudgetComponent"
                 component={BudgetComponent}
               />
+              <Stack.Screen
+                name="Questionaire"
+                component={Questionaire}
+              />
             </Stack.Navigator>
+
         </NavigationContainer>
          </Provider> 
      );

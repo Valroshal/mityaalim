@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react'; 
-import { StyleSheet,ScrollView, FlatList, Text,TouchableOpacity, View, Image, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
+import { StyleSheet,ScrollView, Linking, Text,TouchableOpacity, View, Image, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
@@ -209,9 +209,14 @@ class EventsView extends React.Component{
                     <View key={i} style={styles.textList}>
                         <Text>{date}</Text>
                         <Text>{text}</Text>
-                        <Text 
+                        <Text style={{flex:1, flexDirection: 'column'}}
                             numberOfLines={this.state.textShown === i ? undefined : 1}>
-                            jfgkfdjgld jkljfls iuoiuoiuo oiuoiuijkajdalk iuouuouou skdhaduoerjdkzch987w98rjhsdvkj ur98797xuvxhv</Text>
+                            <Text>jfgkfdjgld jkljfls iuoiuoiuo oiuoiuijkajdalk iuouuouou skdhaduoerjdkzch987w98rjhsdvkj ur98797xuvxhv</Text>
+                        </Text>
+                        <TouchableHighlight
+                            onPress={()=>{Linking.openURL('https://google.com')}}>
+                            <Text style={{color: 'blue', textDecorationLine: 'underline'}}>להרשמה לאירוע</Text>
+                        </TouchableHighlight>
                         <Text style={{color: '#23a500'}}
                             onPress={() => this.toggleNumberOfLines(i)}>
                             {this.state.textShown === i ? 'show less...' : 'show more...'}
@@ -263,7 +268,7 @@ const styles = StyleSheet.create({
             height: 1,
             width: 1
         }
-        }
+    }
     })
 
 export default EventsView;

@@ -4,6 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react'; 
 import { StyleSheet, Text,TouchableOpacity, View, Image, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
 import { Icon } from 'react-native-elements';
+import i18n from '../multilang/i18n';
 
 const BottomMenuBar =({
   onChangeText,
@@ -21,7 +22,7 @@ const BottomMenuBar =({
                  <View style={{flexDirection: 'row'}}>
                    <TouchableHighlight
                        onPress={onPressSignOut}>
-                       <Text style={styles.buttonText}>יציאה</Text>
+                       <Text style={styles.buttonText}>{i18n.t('menu.exitTab')}</Text>
                    </TouchableHighlight>
                    <Icon name='sign-out' type='font-awesome' style={{paddingLeft:3}} />
                  </View> 
@@ -32,7 +33,7 @@ const BottomMenuBar =({
                    <TouchableHighlight
                        
                        onPress={onPressSettings}>
-                       <Text style={styles.buttonText}>הגדרות</Text>
+                       <Text style={styles.buttonText}>{i18n.t('menu.settingsTab')}</Text>
                    </TouchableHighlight>
                    <Icon name='settings' style={{paddingLeft:3}} />   
                  </View> 

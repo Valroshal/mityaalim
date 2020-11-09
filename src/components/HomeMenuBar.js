@@ -1,9 +1,9 @@
 import 'react-native-gesture-handler';
-
 import { StatusBar } from 'expo-status-bar';
 import React from 'react'; 
 import { StyleSheet, Text,TouchableOpacity, View, Image, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
 import { Icon } from 'react-native-elements';
+import i18n from '../multilang/i18n';
 
 const HomeMenuBar =({
   onPressHome,
@@ -24,7 +24,7 @@ const HomeMenuBar =({
               <Icon name='credit-card' type='font-awesome' />
               <TouchableHighlight
                   onPress={onPressBudget}>
-                  <Text style={styles.buttonText}>תקציב</Text>
+                  <Text style={styles.buttonText}>{i18n.t('menu.budgetTab')}</Text>
               </TouchableHighlight>
            </View>
            <View
@@ -32,7 +32,7 @@ const HomeMenuBar =({
               <Icon name='calendar' type='font-awesome' />
               <TouchableHighlight
                   onPress={onPressEvents}>
-                  <Text style={styles.buttonText}>אירועים</Text>
+                  <Text style={styles.buttonText}>{i18n.t('menu.eventTab')}</Text>
               </TouchableHighlight>
            </View>
            <View
@@ -41,7 +41,7 @@ const HomeMenuBar =({
               <Icon name='film' type='font-awesome' />
               <TouchableHighlight
                   onPress={onPressVideo}>
-                  <Text style={styles.buttonText}>וידאו</Text>
+                  <Text style={styles.buttonText}>{i18n.t('menu.videoTab')}</Text>
               </TouchableHighlight>
            </View>
            <View
@@ -51,7 +51,7 @@ const HomeMenuBar =({
               <TouchableHighlight
                   onPress={onPressHome}>
                      
-                  <Text style={styles.buttonText}>בית</Text>
+                  <Text style={styles.buttonText}>{i18n.t('menu.homeTab')}</Text>
               </TouchableHighlight>
            </View>
          {/* </View> */}

@@ -2,26 +2,14 @@ import 'react-native-gesture-handler';
 
 import { StatusBar } from 'expo-status-bar';
 import React from 'react'; 
-<<<<<<< HEAD
 import { ImageBackground, StyleSheet, Text,TouchableOpacity, View, Image, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
-=======
-import { StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, TouchableHighlight } from 'react-native';
->>>>>>> eedb2653c8d3c10fe4a3b08bf2d3b7d888c0f3af
 import { Icon } from 'react-native-elements';
 import BottomMenuBar from '../components/BottomMenuBar';
 import HomeMenuBar from '../components/HomeMenuBar';
 import VideoSearchBar from './VideoSearchBar';
-<<<<<<< HEAD
 import EventsView from './EventsView';
 import image from '../images/43118.jpg';
 //import image from '../images/3704.jpg';
-=======
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
-//import Calendar from 'react-calendar';
-import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
-import EventsList from './EventsList';
->>>>>>> eedb2653c8d3c10fe4a3b08bf2d3b7d888c0f3af
 class EventsComponent extends React.Component{
     constructor(props){
       super(props);
@@ -141,7 +129,6 @@ class EventsComponent extends React.Component{
           onPressHome={() => navigate("HomeScreen")}  
           />
 
-<<<<<<< HEAD
         
         {/* <View style={styles.searchContainer}> */}
           {/* <TouchableHighlight
@@ -151,14 +138,11 @@ class EventsComponent extends React.Component{
               </View>
           </TouchableHighlight> */}
           
-=======
->>>>>>> eedb2653c8d3c10fe4a3b08bf2d3b7d888c0f3af
           <View style={styles.searchContainer}>
             <VideoSearchBar
             onChangeText = {this._onChangeText} 
             value={this.state.search}/>
           </View>
-<<<<<<< HEAD
         {/* </View> */}
 
         <View style = {styles.calendarContainer}>
@@ -171,25 +155,6 @@ class EventsComponent extends React.Component{
         onPressSettings={() => navigate("SettingsScreen")}
         />  
 
-=======
-
-          <View style={{ flex: 1, marginTop: 70 }}>
-                <View style={{height: 450}}>
-                  <EventsList
-                    EventItem={this.state.eventsListName}
-                    Length={len}
-                    Dates={this.state.eventsListDate }
-                    CalendarEvent={this.state.events}
-                    />
-                </View>
-          </View>
-
-          <BottomMenuBar
-          onPressSignOut={() => navigate("Login")}
-          onPressSettings={() => navigate("SettingsScreen")}
-          />  
-        
->>>>>>> eedb2653c8d3c10fe4a3b08bf2d3b7d888c0f3af
       </View>
     </ImageBackground>
     );
@@ -216,7 +181,6 @@ const styles = StyleSheet.create({
     top: '15%',
     textAlign: 'center',  
   },
-<<<<<<< HEAD
 
   calendarContainer:{
     position:"absolute",
@@ -238,19 +202,6 @@ const styles = StyleSheet.create({
   button:{
 
   }
-=======
-  textList: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    //alignItems: 'center',
-    //padding: 30,
-    margin: 20,
-    width: '90%'
-    //borderColor: '#2a4944',
-    //borderWidth: 1,
-    //backgroundColor: '#d2f7f1'
- }
->>>>>>> eedb2653c8d3c10fe4a3b08bf2d3b7d888c0f3af
 });
 
 

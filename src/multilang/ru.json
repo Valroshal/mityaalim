@@ -1,0 +1,11 @@
+{
+    "menu":{
+        "homeTab": "дом",
+        "videoTab": "видео",
+        "eventTab": "события",
+        "budgetTab": "бюджет",
+        "settingsTab": "настройки",
+        "exitTab": "выход"
+    }
+    
+}
