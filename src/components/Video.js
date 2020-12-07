@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import {connect} from 'react-redux';
-import {searchChanged} from '../actions/index'
+import {searchChanged} from '../actions/index';
 //import { StatusBar } from 'expo-status-bar';
 import React from 'react'; 
 import { Platform,StatusBar, StyleSheet, Text, ScrollView, Linking , View, ImageBackground, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
@@ -11,13 +11,30 @@ import HomeMenuBar from '../components/HomeMenuBar';
 import { WebView } from 'react-native-webview';
 //import {YouTube} from 'react-native-youtube';
 import image from '../images/43118.jpg';
+import getVideo from '../functions/getVideo';
 
 class VideoComponent extends React.Component{
     
     componentDidMount(){
         this.checkColor()
         this.props.navigation.addListener('willFocus', this.load)
-        this.get();
+        getVideo().then( (data) => {
+            console.log('parsed json: ', data);
+            if (data != null){
+              for(let i=0; i<data.length; i++)
+              {
+                this.setState({
+                  videoList: data, 
+                  videoListLink: [...this.state.videoListLink, data[i].link],
+                  videoListId:[...this.state.videoListId, data[i].id],
+                  videoListName:[...this.state.videoListName, data[i].name],
+                  videoListDate:[...this.state.videoListDate, data[i].date_added],
+                   })
+              } 
+            }
+          }).catch(error => {
+            console.log("Error fetching data-----------", error);
+          });
     }
     
       state = {
@@ -29,42 +46,6 @@ class VideoComponent extends React.Component{
             videoListName: [],
             videoListDate: [],
         }
-
-        get = () =>{
-          fetch('http://localhost:5000/getvideo', {
-              
-              method: 'GET',
-              headers: {
-              'Accept': 'application/x-www-form-urlencoded',
-              'Content-Type': 'application/x-www-form-urlencoded',
-              'Access-Control-Allow-Origin': '*'
-              },   
-              }).then((res) => res.json())
-              .catch(err =>{
-                  console.log('happened!', err);
-                  return {};
-              })
-              .then( (data) => {
-                  console.log('parsed json: ', data);
-                  if (data != null){
-                    
-                    for(let i=0; i<data.length; i++)
-                    {
-                      this.setState({
-                        videoList: data, 
-                        videoListLink: [...this.state.videoListLink, data[i].link],
-                        videoListId:[...this.state.videoListId, data[i].id],
-                        videoListName:[...this.state.videoListName, data[i].name],
-                        videoListDate:[...this.state.videoListDate, data[i].date_added],
-                         })
-                    } 
-                  }
-                  
-              
-                }).catch(error => {
-                  console.log("Error fetching data-----------", error);
-                });     
-      }    
 
         checkColor = () =>{
           console.log('on load home', this.state.color);

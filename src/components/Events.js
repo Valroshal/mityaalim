@@ -1,5 +1,4 @@
 import 'react-native-gesture-handler';
-
 import { StatusBar } from 'expo-status-bar';
 import React from 'react'; 
 import { ImageBackground, StyleSheet, Text,TouchableOpacity, View, Image, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
@@ -10,6 +9,8 @@ import VideoSearchBar from './VideoSearchBar';
 import EventsView from './EventsView';
 import image from '../images/43118.jpg';
 //import image from '../images/3704.jpg';
+import getEvents from '../functions/getEvents';
+
 class EventsComponent extends React.Component{
     constructor(props){
       super(props);
@@ -18,29 +19,50 @@ class EventsComponent extends React.Component{
     componentDidMount(){
         this.checkColor()
         this.props.navigation.addListener('willFocus', this.load)
-        //this.get();
+        getEvents().then(async (data) => {
+              console.log('parsed json: ', data);
+              if (data != null){
+                for(let i=0; i<data.length; i++)
+                {
+                  this.setState({
+                    eventsList:  [...this.state.eventsList, data[i]], 
+                    eventsListName: [...this.state.eventsListName, data[i].name],
+                    eventsListDate:[...this.state.eventsListDate, data[i].date],
+                    eventsListContent: [...this.state.eventsListDate, data[i].content]
+                  })
+                }
+                //await console.log('eventsList in Events.js: ', this.state.eventsList)
+                await this.setEvents();
+                //await console.log('events in Events.js', this.state.events)
+              }
+            }).catch(error => {
+              console.log("Error fetching data-----------", error);
+            });       
     }
-    
-      state = {
-            search: 'All Day Event1',
-            button: '',
-            color: 'transparent',
-            font: 'normal',
-            date: new Date(),
-             
-            eventsListName: ['All Day Event', 'Long Event'],
-            eventsListDate: ['2020-10-22', '2020-10-21'],
-            events:[
-              {
-                  title: 'All Day Event',
-                  start: '2020-10-22'
-              },
-              {
-                  title: 'Long Event',
-                  start: '2020-10-21',
-                  
-              }]
-      }
+
+    setEvents = () =>{
+        let events=[];
+        for(let i=0; i< this.state.eventsList.length; i++){
+          let obj = {title: this.state.eventsList[i].name, start: this.state.eventsList[i].date.substring(0,10)}
+          events.push(obj)
+        }
+      this.setState ({
+        events: events
+      })
+    }
+
+    state = {
+          search: 'All Day Event1',
+          button: '',
+          color: 'transparent',
+          font: 'normal',
+          date: new Date(),
+          eventsList:[],
+          eventsListContent: [],
+          eventsListName: ['All Day Event1', 'Long Event2', 'All Day Event3', 'Long Event4', 'All Day Event5', 'Long Event6', 'Long Event7', 'All Day Event11', 'Long Event11'],
+          eventsListDate: ['2020-10-21', '2020-10-22', '2020-10-23', '2020-10-24', '2020-10-25', '2020-10-26', '2020-10-27', '2020-10-28', '2020-10-29'],
+          events:[]
+    }
     
         onChange = date => this.setState({ date })
 
@@ -73,45 +95,12 @@ class EventsComponent extends React.Component{
       console.log('this.state.search: ', this.state.search)
     }
 
-    get = () =>{
-      fetch('http://localhost:5000/getevent', {
-          
-          method: 'GET',
-          headers: {
-          'Accept': 'application/x-www-form-urlencoded',
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Access-Control-Allow-Origin': '*'
-          },   
-          }).then((res) => res.json())
-          .catch(err =>{
-              console.log('happened!', err);
-              return {};
-          })
-          .then( (data) => {
-              console.log('parsed json: ', data);
-              if (data != null){
-                
-                for(let i=0; i<data.length; i++)
-                {
-                  this.setState({
-                    eventsList: data, 
-                    eventsListName: [...this.state.eventsListName, data[i].name],
-                    eventsListDate:[...this.state.eventsListDate, data[i].date_added],
-                     })
-                } 
-              }
-              
-          
-            }).catch(error => {
-              console.log("Error fetching data-----------", error);
-            });     
-    }    
+    
+    // 
 
   render(){
   const { navigate } = this.props.navigation
-  //const events = ['ev1','ev2','ev3','ev4','ev5','ev6','ev7','ev8','ev9','ev10'];
   const len = this.state.events.length;
-  //const dates = ['2020-10-20','2020-10-21','2020-10-22','2020-10-23','2020-10-24','2020-10-25','2020-10-26','2020-10-27','2020-10-28','2020-10-29']
   return (
     <ImageBackground source={image} style={styles.image} imageStyle= {{opacity:0.2}}>
       <View
@@ -128,22 +117,12 @@ class EventsComponent extends React.Component{
           onPressVideo={() => navigate("VideoComponent")}
           onPressHome={() => navigate("HomeScreen")}  
           />
-
-        
-        {/* <View style={styles.searchContainer}> */}
-          {/* <TouchableHighlight
-            style={styles.button}>
-              <View style={styles.buttonTextContainer}>
-                <Text style={styles.buttonText}>חפש</Text>
-              </View>
-          </TouchableHighlight> */}
           
           <View style={styles.searchContainer}>
             <VideoSearchBar
             onChangeText = {this._onChangeText} 
             value={this.state.search}/>
           </View>
-        {/* </View> */}
 
         <View style = {styles.calendarContainer}>
           <EventsView
@@ -206,3 +185,39 @@ const styles = StyleSheet.create({
 
 
 export default EventsComponent;
+
+
+
+//get = () =>{
+  //   fetch('http://localhost:5000/getevent', {
+        
+  //       method: 'GET',
+  //       headers: {
+  //       'Accept': 'application/x-www-form-urlencoded',
+  //       'Content-Type': 'application/x-www-form-urlencoded',
+  //       'Access-Control-Allow-Origin': '*'
+  //       },   
+  //       }).then((res) => res.json())
+  //       .catch(err =>{
+  //           console.log('happened!', err);
+  //           return {};
+  //       })
+  //       .then( (data) => {
+  //           console.log('parsed json: ', data);
+  //           if (data != null){
+              
+  //             for(let i=0; i<data.length; i++)
+  //             {
+  //               this.setState({
+  //                 eventsList: data, 
+  //                 eventsListName: [...this.state.eventsListName, data[i].name],
+  //                 eventsListDate:[...this.state.eventsListDate, data[i].date_added],
+  //                  })
+  //             } 
+  //           }
+            
+        
+  //         }).catch(error => {
+  //           console.log("Error fetching data-----------", error);
+  //         });     
+  // }    

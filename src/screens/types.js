@@ -1,3 +1,6 @@
 export const SEARCH_CHANGE = 'SEARCH_CHANGE';
 export const VIDEOS_FETCHED = 'VIDEOS_FETCHED';
 export const VIDEOS_FAILED = 'VIDEOS_FAILED';
+export const USER_LOGGEDIN = 'USER_LOGGEDIN';
+export const USER_FETCHED = 'USER_FETCHED';
+export const USER_FAILED = 'USER_FAILED';

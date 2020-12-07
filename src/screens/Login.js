@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text,TouchableOpacity, View, Image, KeyboardAvoidingView, Dimensions, TouchableHighlight } from 'react-native';
@@ -5,7 +6,9 @@ import Expo from 'expo';
 import LoginForm from '../components/LoginForm';
 import FacebookLogin from '../components/FacebookLogin';
 import validate from '../components/validation';
-
+import getUser from '../functions/getUser';
+import {connect} from 'react-redux';
+import {userLoggedIn} from '../actions/index';
 // source only logo: 'https://mityaalim.org/wp-content/uploads/2020/06/cropped-%d7%9e%d7%aa%d7%99%d7%99%d7%a2%d7%9c%d7%99%d7%9d-%d7%a8%d7%a7-%d7%a1%d7%9e%d7%9c-%d7%a8%d7%a7%d7%a2-%d7%a9%d7%a7%d7%95%d7%a3.png'
 // #22aa22 - icon light green
 // #086008 - icon dark green
@@ -17,10 +20,28 @@ class Login extends React.Component {
   
   // need to add error when the field is empty, as on registration screen
   componentDidMount(){
-    this.get()
+    getUser().then( (data) => {
+      console.log('parsed json: ', data);
+      if (data != null){
+        
+        for(let i=0; i<data.length; i++)
+        {
+          this.setState({
+            userInfo:  [...this.state.userInfo, data[i]],
+            getEmail: [...this.state.getEmail, data[i].email],
+            getPassword: [...this.state.getPassword, data[i].password]
+             })
+        } 
+      }
+    }).catch(error => {
+      console.log("Error fetching data-----------", error);
+    });
+
+    this.props.navigation.addListener('willFocus', this.load);
   }
 
   state = {
+    userInfo: [],
     email: '',
     emailError: '',
     password: '',
@@ -76,35 +97,20 @@ class Login extends React.Component {
     this.checkLogin();
   }
 
-  get = () =>{
-    fetch('http://localhost:5000/getuser', {       
-        method: 'GET',
-        headers: {
-        'Accept': 'application/x-www-form-urlencoded',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Access-Control-Allow-Origin': '*'
-        },   
-        }).then((res) => res.json())
-        .catch(err =>{
-            console.log('happened!', err);
-            return {};
-        })
-        .then( (data) => {
-            console.log('parsed json: ', data);
-            if (data != null){
-              
-              for(let i=0; i<data.length; i++)
-              {
-                this.setState({
-                  getEmail: [...this.state.getEmail, data[i].email],
-                  getPassword: [...this.state.getPassword, data[i].password]
-                   })
-              } 
-            }
-          }).catch(error => {
-            console.log("Error fetching data-----------", error);
-          });     
-}    
+  saveUserInfo = async (i) =>{
+    // getUser().then(async (data) => {
+    //   console.log('parsed json: ', data);
+    //   if (data != null){
+    //     await this.props.userLoggedIn(data);
+    //     await console.log('userInfo: ', this.props.user)
+    //   }
+    // }).catch(error => {
+    //   console.log("Error fetching data-----------", error);
+    // });
+    await console.log("user info from state",this.state.userInfo[i])
+    await this.props.userLoggedIn(this.state.userInfo[i])
+    await console.log("user info from props",this.props.user)
+  }
 
   pressLogin = () =>{
     const err = 'אחד או יותר מהנתונים לא תואמים'
@@ -120,6 +126,7 @@ class Login extends React.Component {
         {
           console.log('onpress login second if')
           console.log('email == email from db')
+          this.saveUserInfo(i);
           this.props.navigation.navigate("HomeScreen");
         }
         else
@@ -240,5 +247,10 @@ const styles = StyleSheet.create({
     },
   });
 
-
-  export default Login;
+  const mapStateToProps = state => {
+    return{
+      user: state.user.user
+    }
+  }
+  //export default Login;
+  export default connect(mapStateToProps, {userLoggedIn})(Login);

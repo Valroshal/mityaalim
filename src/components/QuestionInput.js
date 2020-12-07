@@ -10,16 +10,19 @@ const QuestionInput =({
 }) => {
     return (
         <View>
-          <TextField
+          <TextField inputContainerStyle={{ borderColor: "#000", borderWidth: 1, padding: 0 }}
             name='name'
             placeholder=''
             placeholderTextColor="rgba(255,255,255,0.7)"
             autoCapitalize='none'
             autoCorrect={false}
             style={styles.input}
-            //returnKeyType='next'
             onChangeText={onChange}
-            error={errorValue}
+            //error={errorValue}
+            lineWidth={true}
+            activeLineWidth = {true}
+            lineWidth = '1'
+            //errorColor = "red"
             />
             
         </View>

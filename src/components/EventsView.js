@@ -22,15 +22,8 @@ class EventsView extends React.Component{
         this.scrollRef = React.createRef();
     }
 
-    componentDidMount(){
-        //this.get();
-        
-    }
-
-    
     componentDidUpdate(){
         
-        //while (res != ''){
             if(res == 'res')
             {
                 const res = this.props.button
@@ -42,99 +35,18 @@ class EventsView extends React.Component{
             else if(this.props.button != res)
             {
                 this.executeScroll();
-            }
-        //}
-        
-        
+            }    
     }
 
     state = {
         eventName: '',
         textShown: -1,
-        eventsListName: ['All Day Event1', 'Long Event2', 'All Day Event3', 'Long Event4', 'All Day Event5', 'Long Event6', 'Long Event7', 'All Day Event11', 'Long Event11'],
-        eventsListDate: ['2020-10-21', '2020-10-22', '2020-10-23', '2020-10-24', '2020-10-25', '2020-10-26', '2020-10-27', '2020-10-28', '2020-10-29'],
-        events:[
-            {
-                title: 'All Day Event1',
-                start: '2020-10-21'
-            },
-            {
-                title: 'Long Event2',
-                start: '2020-10-22',
-                
-            },
-            {
-              title: 'All Day Event3',
-              start: '2020-10-23'
-            },
-            {
-                title: 'Long Event4',
-                start: '2020-10-24',
-                
-            },
-            {
-              title: 'All Day Event5',
-              start: '2020-10-25'
-            },
-            {
-                title: 'Long Event6',
-                start: '2020-10-26',
-                
-            },
-            {
-                title: 'Long Event7',
-                start: '2020-10-27',
-                
-            },
-            {
-              title: 'All Day Event11',
-              start: '2020-10-28'
-            },
-            {
-                title: 'Long Event11',
-                start: '2020-10-29',
-                
-            }
-          ]
-    }
-
-
-    get = () =>{
-        fetch('http://localhost:5000/getevent', {
-            
-            method: 'GET',
-            headers: {
-            'Accept': 'application/x-www-form-urlencoded',
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Access-Control-Allow-Origin': '*'
-            },   
-            }).then((res) => res.json())
-            .catch(err =>{
-                console.log('happened!', err);
-                return {};
-            })
-            .then( (data) => {
-                console.log('parsed json: ', data);
-                if (data != null){
-                  
-                  for(let i=0; i<data.length; i++)
-                  {
-                    this.setState({
-                      eventsList: data, 
-                      eventsListName: [...this.state.eventsListName, data[i].name],
-                      eventsListDate:[...this.state.eventsListDate, data[i].date_added],
-                       })
-                  } 
-                }
-              }).catch(error => {
-                console.log("Error fetching data-----------", error);
-              });     
-    }    
+    }   
 
     executeScroll = (i) =>{ 
         
-        for(let j=0; j<this.state.eventsListName.length; j++){
-            if(this.props.search.toLowerCase() == this.state.eventsListName[j].toLowerCase())
+        for(let j=0; j<this.props.eventsList.length; j++){
+            if(this.props.search.toLowerCase() == this.props.eventsList[j].name.toLowerCase())
             {
                 console.log('search in child if')
                 i=j
@@ -160,8 +72,8 @@ class EventsView extends React.Component{
     scrollFromCalendar = (arg) =>{
         name= arg.event.title
         let i =0;
-        for(let j=0; j<this.state.eventsListName.length; j++){
-            if(name.toLowerCase() == this.state.eventsListName[j].toLowerCase())
+        for(let j=0; j<this.props.eventsList.length; j++){
+            if(name.toLowerCase() == this.props.eventsList[j].name.toLowerCase())
             {
                 console.log('search in child if')
                 i=j
@@ -200,18 +112,21 @@ class EventsView extends React.Component{
     render(){
         
         let list = [];
-            for(let i=0; i<this.state.eventsListName.length; i++)
+        //let events = {title: '', start: ''}
+            for(let i=0; i<this.props.eventsList.length; i++)
             //for(let i=this.state.events.length-1; i>=0; i--) //from the most recent to old, need to check on db
                 {
-                const text = this.state.eventsListName[i];
-                const date = this.state.eventsListDate[i];
+                const text = this.props.eventsList[i].name;
+                const date = this.props.eventsList[i].date.substring(0,10);
+                const content = this.props.eventsList[i].content;
+                //events += {title: this.props.eventsListName[i], start: this.props.eventsListDate[i]}
                 list.push(
                     <View key={i} style={styles.textList}>
                         <Text>{date}</Text>
                         <Text>{text}</Text>
                         <Text style={{flex:1, flexDirection: 'column'}}
                             numberOfLines={this.state.textShown === i ? undefined : 1}>
-                            <Text>jfgkfdjgld jkljfls iuoiuoiuo oiuoiuijkajdalk iuouuouou skdhaduoerjdkzch987w98rjhsdvkj ur98797xuvxhv</Text>
+                            <Text>{content}</Text>
                         </Text>
                         <TouchableHighlight
                             onPress={()=>{Linking.openURL('https://google.com')}}>
@@ -223,7 +138,8 @@ class EventsView extends React.Component{
                         </Text>
                     </View>
                 )  
-            } 
+            }
+            //console.log('events array: ', events) 
         return(
             //change height to something dinamic 
             <View style={{height:500}}>
@@ -234,7 +150,7 @@ class EventsView extends React.Component{
                             contentHeight={150}
                             plugins={[ dayGridPlugin, interactionPlugin  ]}
                             initialView="dayGridMonth"
-                            events={this.state.events}
+                            events={this.props.events}
                             locale='he'
                             buttonText={{today:'היום'}}
                             direction='rtl'

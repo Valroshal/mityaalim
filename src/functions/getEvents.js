@@ -7,7 +7,7 @@ import React from 'react';
 
 // need to think where to store fetched data and how can I access to it from another screen 
 const getEvents = () =>{
-    fetch('http://localhost:5000/getevent', {
+    return fetch('http://localhost:5000/getevent', {
         
         method: 'GET',
         headers: {
@@ -20,22 +20,22 @@ const getEvents = () =>{
             console.log('happened!', err);
             return {};
         })
-        .then( (data) => {
-            console.log('parsed json: ', data);
-            if (data != null){
+        // .then( (data) => {
+        //     console.log('parsed json: ', data);
+        //     if (data != null){
               
-              for(let i=0; i<data.length; i++)
-              {
-                this.setState({
-                  eventsList: data, 
-                  eventsListName: [...this.state.eventsListName, data[i].name],
-                  eventsListDate:[...this.state.eventsListDate, data[i].date_added],
-                   })
-              } 
-            }
-          }).catch(error => {
-            console.log("Error fetching data-----------", error);
-          });     
+        //       for(let i=0; i<data.length; i++)
+        //       {
+        //         this.setState({
+        //           eventsList: data, 
+        //           eventsListName: [...this.state.eventsListName, data[i].name],
+        //           eventsListDate:[...this.state.eventsListDate, data[i].date_added],
+        //            })
+        //       } 
+        //     }
+        //   }).catch(error => {
+        //     console.log("Error fetching data-----------", error);
+        //   });     
   }    
 
 
