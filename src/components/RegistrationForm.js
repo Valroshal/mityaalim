@@ -69,13 +69,12 @@ const RegistrationForm = ({
       input:{
         textAlign: 'right',
         alignSelf: 'stretch',
-        height: 45,
+        height: 48,
         width:280,
         backgroundColor: '#fff',
         color:'#FFF',
         borderRadius: 3,
         paddingRight: 10,
-        textDecorationStyle:'bold'
       },
       
       // input2:{
