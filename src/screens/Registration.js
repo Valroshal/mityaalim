@@ -48,7 +48,9 @@ class Registration extends React.Component {
         }
 
         handleName = async (name) =>{
+
           await this.setState({name});
+          console.log('click name: ', this.state.name)
           await this.setState({
             nameError: validate('name', this.state.name)
           })
@@ -202,7 +204,7 @@ render() {
               source={'https://mityaalim.org/wp-content/uploads/2020/06/cropped-%D7%9E%D7%AA%D7%99%D7%99%D7%A2%D7%9C%D7%99%D7%9D-%D7%9C%D7%95%D7%92%D7%95-%D7%9E%D7%9C%D7%90-%D7%A8%D7%A7%D7%A2-%D7%A9%D7%A7%D7%95%D7%A3-1024x282.png'}
               />
             </View>
-            <Register
+            <Register 
             onChangeName={this.handleName}
             onChangeEmail={this.handleEmail}
             onChangePassword={this.handlePass}
@@ -213,13 +215,15 @@ render() {
             errorRepeatPassword={this.state.repeatPasswordError}
             />
             <View style={{flexDirection: 'row', justifyContent:'flex-start', marginRight:15}}>
+                <Text style={{marginTop:15, color: '#23a500', fontSize:12, marginRight: 4}}>לתנאי השימוש</Text>
+                <Text style={{marginTop:15, color: '#034643', fontSize:12 }}>בלחיצה על כפתור ההרשמה, אני מסכים</Text>
+                
                 <CheckBox 
                     style={styles.checkBox}
                     title=''
                     checked={this.state.checked}
                     onClick={() => this.setState({ checked: !this.state.checked })}
                     />
-                <Text style={{marginTop:15}}>Privacy Policy, Terms and Conditions</Text>
             </View>
 
             <TouchableOpacity 
@@ -228,7 +232,7 @@ render() {
 ////////////////////////////////////////////////////need changes
                 onPress={this.clickRegister}
                 >
-                <Text style={styles.buttonText}>REGISTER</Text>
+                <Text style={styles.buttonText}>הרשמה</Text>
             </TouchableOpacity> 
             <TouchableOpacity
                 style={styles.button}
@@ -264,9 +268,9 @@ const styles = StyleSheet.create({
         padding: 30,
     },
     buttonContainer:{
-        backgroundColor:'#034643',
+        backgroundColor:'#23a500',
         paddingVertical: 15,
-        borderRadius: 5,
+        borderRadius: 2,
         width:260, 
       },
       buttonText:{

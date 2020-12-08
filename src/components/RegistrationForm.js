@@ -13,51 +13,65 @@ const RegistrationForm = ({
   errorRepeatPassword
 }) =>{
     return (
-        <View>
-          <TextField
-            name='name'
-            placeholder=':שם'
-            placeholderTextColor="#23a500"
-            autoCapitalize='none'
-            autoCorrect={false}
-            style={styles.input}
-            returnKeyType='next'
-            onChangeText={onChangeName}
-            error={errorName}/> 
-          <TextField
-            name='email'
-            placeholder=":דוא''ל"
-            placeholderTextColor="#23a500"
-            keyboardType="email-address"
-            autoCapitalize='none'
-            autoCorrect={false}
-            style={styles.input}
-            returnKeyType='next'
-            onChangeText={onChangeEmail}
-            error={errorEmail}/>
-          <TextField
-            name='password'
-            placeholder=':סיסמה'
-            placeholderTextColor="#23a500"
-            placeholderText
-            autoCapitalize='none'
-            autoCorrect={false}
-            style={styles.input}
-            returnKeyType='next'
-            onChangeText={onChangePassword}
-            error={errorPassword}
-            secureTextEntry={true}/>
-          <TextField
-            name='repeatPassword'
-            placeholder=':אישור סיסמה'
-            placeholderTextColor="#23a500"
-            autoCapitalize='none'
-            autoCorrect={false}
-            style={styles.input}
-            returnKeyType='next'
-            onChangeText={onChangeRepeatPassword}
-            error={errorRepeatPassword}
-            secureTextEntry={true}/>
+        <View style={{maxWidth: '375px', width: '100%', padding: '15px'}}>
+            <View style={{margin: 5}}>
+              <TextField
+                //textColor = '#000'
+                lineWidth = '0'
+                name='name'
+                placeholder=':שם'
+                placeholderTextColor="#23a500"
+                autoCapitalize='none'
+                autoCorrect={false}
+                style={styles.input}
+                returnKeyType='next'
+                onChangeText={onChangeName}
+                error={errorName}/> 
+            </View>
+            <View style={{margin: 5}}>
+              <TextField
+                lineWidth = '0'
+                name='email'
+                placeholder=":דוא''ל"
+                placeholderTextColor="#23a500"
+                keyboardType="email-address"
+                autoCapitalize='none'
+                autoCorrect={false}
+                style={styles.input}
+                returnKeyType='next'
+                onChangeText={onChangeEmail}
+                error={errorEmail}/>
+            </View>
+            <View style={{margin: 5}}>
+              <TextField
+                lineWidth = '0'
+                name='password'
+                placeholder=':סיסמה'
+                placeholderTextColor="#23a500"
+                placeholderText
+                autoCapitalize='none'
+                autoCorrect={false}
+                style={styles.input}
+                returnKeyType='next'
+                onChangeText={onChangePassword}
+                error={errorPassword}
+                secureTextEntry={true}/>
+            </View>
+            <View style={{margin: 5}}>
+              <TextField
+                placeholderText='32'
+                lineWidth = '0'
+                name='repeatPassword'
+                placeholder=':אישור סיסמה'
+                placeholderTextColor="#23a500"
+                autoCapitalize='none'
+                autoCorrect={false}
+                style={styles.input}
+                returnKeyType='next'
+                onChangeText={onChangeRepeatPassword}
+                error={errorRepeatPassword}
+                secureTextEntry={true}/>
+            </View>
         </View>
       )
     }
@@ -67,33 +81,18 @@ const RegistrationForm = ({
         padding: "5%",
       },
       input:{
+        flex: 1,
+        borderColor: 'white',
         textAlign: 'right',
         alignSelf: 'stretch',
-        height: 48,
-        width:280,
+        height: 45,
+        width: "100%",
         backgroundColor: '#fff',
         color:'#FFF',
         borderRadius: 3,
         paddingRight: 10,
       },
-      
-      // input2:{
-      //   height: 40,
-      //   width:260,
-      //   backgroundColor: '#086008',
-      //   color:'#FFF',
-      //   marginBottom: 10,
-      //   paddingHorizontal:10,
-      //   borderRadius: 5,
-      //   opacity: 0.8
-      // },
-
-      placeholder: {
-          fontStyle: 'italic',
-          marginLeft: 10
-      },
-
-      '&::-webkit-input-placeholder': { color: 'blue' }
+    
     });
         
 export default RegistrationForm;
