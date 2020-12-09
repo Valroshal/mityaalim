@@ -6,6 +6,10 @@
         "budgetTab": "budget",
         "settingsTab": "settings",
         "exitTab": "sign out"
-    }
+    },
     
+    "registration":{
+        "member": "Aready a Member",
+        "login": "Login Here"
+    }
 }

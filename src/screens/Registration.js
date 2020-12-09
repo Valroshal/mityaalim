@@ -214,18 +214,20 @@ render() {
             errorPassword={this.state.passwordError}
             errorRepeatPassword={this.state.repeatPasswordError}
             />
-            <View style={{flexDirection: 'row', justifyContent:'flex-start', marginRight:15}}>
-                <Text style={{marginTop:15, color: '#23a500', fontSize:12, marginRight: 4}}>לתנאי השימוש</Text>
-                <Text style={{marginTop:15, color: '#034643', fontSize:12 }}>בלחיצה על כפתור ההרשמה, אני מסכים</Text>
-                
-                <CheckBox 
-                    style={styles.checkBox}
-                    title=''
-                    checked={this.state.checked}
-                    onClick={() => this.setState({ checked: !this.state.checked })}
-                    />
+            <View style={{justifyContent: 'center', alignItems: 'center',}}>
+              <View style={{flexDirection: 'row', justifyContent:'flex-start', width:'100%'}}>
+                  <Text style={{paddingTop:15, color: '#23a500', fontSize:12, paddingLeft: 45}}>לתנאי השימוש</Text>
+                  <Text style={{paddingTop:15, color: '#034643', fontSize:12, paddingLeft: 4 }}>בלחיצה על כפתור ההרשמה, אני מסכים</Text>
+                  
+                  <CheckBox 
+                      containerStyle = {{margin: 0, marginLeft:0}}
+                      uncheckedColor = '#034643'
+                      checkedColor = '#23a500'
+                      checked={this.state.checked}
+                      onClick={() => this.setState({ checked: !this.state.checked })}
+                      />
+              </View>
             </View>
-
             <TouchableOpacity 
                 style={styles.buttonContainer}
                 disabled={this.state.buttonStateHolder}
@@ -238,8 +240,9 @@ render() {
                 style={styles.button}
                 onPress={() => navigate("Login")}>
                   <View style={styles.registerContainer}>
-                    <Text >Already a Member? </Text>
-                    <Text style={{color:'#22aa22'}}> Login Here</Text>
+                    <Text style={{color:'#22aa22'}}> התחברות</Text>
+                    <Text style={{color: '#034643'}}>יש לכם שם משתמש?</Text>
+                    
                   </View>
               </TouchableOpacity>
         </View>
@@ -250,14 +253,12 @@ render() {
 
 const styles = StyleSheet.create({
     container:{
-        //backgroundColor: '#ceffee',
-        //opacity: 0.5,
+        width:'100%',
         height: ScreenHeight,
-        justifyContent: 'center',
         alignItems: 'center',
+        padding: '15px'
     },
-    logo:{
-        
+    logo:{   
       width: 250,
       height: 70,
       flexGrow: 1
@@ -265,27 +266,20 @@ const styles = StyleSheet.create({
     logoContainer:{
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 30,
+        paddingTop:120
     },
     buttonContainer:{
         backgroundColor:'#23a500',
-        paddingVertical: 15,
+        padding: 20,
         borderRadius: 2,
-        width:260, 
+        width:'75%',
+        maxWidth:300,
+        marginTop: 15
       },
       buttonText:{
         textAlign: 'center',
         color:'#FFF',
         fontWeight: '500',
-      },
-      checkBox:{
-        height: 20,
-        width:20,
-        borderColor: '#034643',
-        backgroundColor: '#00ffaa', 
-        
-        marginRight:30,
-        marginBottom: 20 
       },
       registerContainer:{
         justifyContent: 'center',
