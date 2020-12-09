@@ -10,13 +10,12 @@ const RegistrationForm = ({
   errorName,
   errorEmail,
   errorPassword,
-  errorRepeatPassword
+  errorRepeatPassword,
 }) =>{
     return (
         <View style={{maxWidth: '375px', width: '100%', padding: '15px'}}>
             <View style={{margin: 5}}>
               <TextField
-                //textColor = '#000'
                 lineWidth = '0'
                 name='name'
                 placeholder=':שם'
@@ -88,7 +87,7 @@ const RegistrationForm = ({
         height: 45,
         width: "100%",
         backgroundColor: '#fff',
-        color:'#FFF',
+        //color:'#FFF',
         borderRadius: 3,
         paddingRight: 10,
       },

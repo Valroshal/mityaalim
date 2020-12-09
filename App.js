@@ -46,10 +46,10 @@ import { applyMiddleware, createStore, compose,  } from 'redux';
           <Stack.Navigator
               screenOptions={{  headerShown: false } }  
             >
-              {/* <Stack.Screen
+              <Stack.Screen
                 name="Login"
                 component={LoginScreen}
-              /> */}
+              />
               <Stack.Screen
                 name="RegistrationScreen"
                 component={RegistrationScreen}

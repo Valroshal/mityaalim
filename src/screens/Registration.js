@@ -1,13 +1,17 @@
-import React, { Component } from 'react';
-import {StyleSheet, Image, View, TextInput, TouchableOpacity, Text, KeyboardAvoidingView, StatusBar, Dimensions } from 'react-native';
+import React from 'react';
+import { StatusBar } from 'expo-status-bar';
+import Expo from 'expo';
+import {StyleSheet, Image, View, TextInput, TouchableOpacity, Text, KeyboardAvoidingView, Dimensions } from 'react-native';
 import Register from '../components/RegistrationForm';
 import axios from 'axios';
 import validate from '../components/validation';
 import { CheckBox } from 'react-native-elements';
-
+import {TextField} from 'react-native-material-textfield';
 const ScreenHeight = Dimensions.get("window").height;
 
 class Registration extends React.Component {
+    
+
     componentDidMount(){
         this.get()
       }
@@ -47,25 +51,44 @@ class Registration extends React.Component {
           }
         }
 
-        handleName = async (name) =>{
-
-          await this.setState({name});
-          console.log('click name: ', this.state.name)
-          await this.setState({
-            nameError: validate('name', this.state.name)
-          })
-          this.setStatus();
+        componentDidUpdate(props, state){
+          if (this.state.name !== state.name || this.state.email !== state.email 
+            || this.state.password !== state.password || this.state.repeatPassword !== state.repeatPassword){
+            //if(this.state.name !== state.name){
+              console.log('in did update')
+              this.setStatus();
+            
+          }
+          console.log('status', this.state.status)
         }
 
-        handleEmail = async (email) =>{
-          await this.setState({email});
-          global.regEmail = this.state.email;
-          await console.log('email: ', this.state.email);
-          this.setState({
-            emailError: validate('email', this.state.email)
-          })
-          this.setStatus();
+        handleName = (name) =>{
+          console.log("name value: ",name)
+          this.setState({name}, () =>         
+            this.setState({
+              nameError: validate('name', this.state.name)
+            })
+          );
         }
+
+        handleEmail = (email) =>{
+          //console.log("email value: ",email)
+          this.setState({email}, () =>         
+            this.setState({
+              emailError: validate('email', this.state.email)
+            })
+          );
+        }
+
+        // handleEmail = async (email) =>{
+        //   await this.setState({email});
+        //   global.regEmail = this.state.email;
+        //   await console.log('email: ', this.state.email);
+        //   this.setState({
+        //     emailError: validate('email', this.state.email)
+        //   })
+        //   this.setStatus();
+        // }
 
         handlePass = async (password) =>{
           await this.setState({password});
@@ -196,6 +219,7 @@ class Registration extends React.Component {
 
 render() {
     const { navigate } = this.props.navigation
+    let name = this.state.name
     return (
         <KeyboardAvoidingView>  
         <View style={styles.container}>
@@ -204,6 +228,7 @@ render() {
               source={'https://mityaalim.org/wp-content/uploads/2020/06/cropped-%D7%9E%D7%AA%D7%99%D7%99%D7%A2%D7%9C%D7%99%D7%9D-%D7%9C%D7%95%D7%92%D7%95-%D7%9E%D7%9C%D7%90-%D7%A8%D7%A7%D7%A2-%D7%A9%D7%A7%D7%95%D7%A3-1024x282.png'}
               />
             </View>
+            
             <Register 
             onChangeName={this.handleName}
             onChangeEmail={this.handleEmail}
@@ -213,6 +238,7 @@ render() {
             errorEmail={this.state.emailError}
             errorPassword={this.state.passwordError}
             errorRepeatPassword={this.state.repeatPasswordError}
+            
             />
             <View style={{justifyContent: 'center', alignItems: 'center',}}>
               <View style={{flexDirection: 'row', justifyContent:'flex-start', width:'100%'}}>
@@ -253,8 +279,8 @@ render() {
 
 const styles = StyleSheet.create({
     container:{
-        width:'100%',
-        height: ScreenHeight,
+        //width:'100%',
+        //height: ScreenHeight,
         alignItems: 'center',
         padding: '15px'
     },
@@ -287,7 +313,7 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         flexDirection: 'row',
       },
-
+      
   });
 
 export default Registration;
