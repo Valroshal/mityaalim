@@ -28,7 +28,7 @@ export default class FacebookLogin extends Component {
         return(
             <TouchableOpacity onPress={() => this.login()}>
             <View style={styles.buttonface}>
-            <Text style={{color: 'white'}}>Login with Facebook</Text>   
+            <Text style={styles.text}>הרשמה עם פייסבוק</Text>   
             </View>  
             </TouchableOpacity>
         )
@@ -47,21 +47,22 @@ export default class FacebookLogin extends Component {
 
     const styles = StyleSheet.create({
         
-          text:{
-              
-              fontSize: 26,
-              textAlign: 'center',
-            },
-          buttonface:{
-              width: '88%',
-              height: '30%',
+        text:{
+            fontFamily: 'OpenSansHebrew-Regular',
+            fontSize:20,
+            textAlign: 'center',
+            color: 'white'
+        },
+        buttonface:{
+              width: '100%',
+              height: 50,
               justifyContent: 'center',
               alignItems: 'center',
-              borderRadius: 4,
-              padding: 24,
+              borderRadius: 3,
+              //padding: 24,
               backgroundColor: '#3b5998',
-              marginTop:10,
-              marginLeft:20
-          },
+              //marginTop:10,
+              //marginLeft:20
+        },
 
     });

@@ -1,17 +1,13 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import Expo from 'expo';
-import {StyleSheet, Image, View, TextInput, TouchableOpacity, Text, KeyboardAvoidingView, Dimensions } from 'react-native';
+import {StyleSheet, Image, View, TextInput, TouchableOpacity, Text, KeyboardAvoidingView, StatusBar, Dimensions } from 'react-native';
 import Register from '../components/RegistrationForm';
 import axios from 'axios';
 import validate from '../components/validation';
 import { CheckBox } from 'react-native-elements';
-import {TextField} from 'react-native-material-textfield';
+
 const ScreenHeight = Dimensions.get("window").height;
 
 class Registration extends React.Component {
-    
-
     componentDidMount(){
         this.get()
       }
@@ -51,76 +47,68 @@ class Registration extends React.Component {
           }
         }
 
-        componentDidUpdate(props, state){
-          if (this.state.name !== state.name || this.state.email !== state.email 
-            || this.state.password !== state.password || this.state.repeatPassword !== state.repeatPassword){
-            //if(this.state.name !== state.name){
-              console.log('in did update')
-              this.setStatus();
-            
+        componentDidUpdate(props, state)
+        {
+          if(this.state.name != state.name || this.state.email != state.email || this.state.password != state.password
+            || this.state.repeatPassword != state.repeatPassword)
+          {
+            this.setStatus();
+            console.log('status', this.state.status)
           }
-          console.log('status', this.state.status)
+          if(this.state.password != state.password)
+          {
+            this.handleConfirmPass();
+          }
         }
 
         handleName = (name) =>{
-          console.log("name value: ",name)
-          this.setState({name}, () =>         
+          this.setState({name}, () => {
             this.setState({
               nameError: validate('name', this.state.name)
             })
+            console.log('in name', this.state.name)
+          }
+            
           );
-        }
+         }
 
         handleEmail = (email) =>{
-          //console.log("email value: ",email)
-          this.setState({email}, () =>         
+          this.setState({email}, ()=> 
             this.setState({
               emailError: validate('email', this.state.email)
             })
-          );
+            );
+          //global.regEmail = this.state.email;
         }
 
-        // handleEmail = async (email) =>{
-        //   await this.setState({email});
-        //   global.regEmail = this.state.email;
-        //   await console.log('email: ', this.state.email);
-        //   this.setState({
-        //     emailError: validate('email', this.state.email)
-        //   })
-        //   this.setStatus();
-        // }
-
-        handlePass = async (password) =>{
-          await this.setState({password});
+        handlePass = (password) =>{
+          this.setState({password}, () =>
           this.setState({
             passwordError: validate('password', this.state.password)
           })
-          this.handleConfirmPass();
+          );
+          
         }
 
-        handleConfirmPass = async (repeatPassword) =>{
-          await this.setState({repeatPassword});
+        handleConfirmPass = (repeatPassword) =>{
+          this.setState({repeatPassword}, () => {
           if(this.state.repeatPassword == null)
           {
-            await this.setState({
+            this.setState({
               repeatPasswordError: 'not matched'
             })
-          } 
-          if(this.state.password != this.state.repeatPassword)
+          }if(this.state.password != this.state.repeatPassword)
           {
-            await this.setState({
+            this.setState({
               repeatPasswordError: 'not matched'
             })
-          }
-          else 
+          } else 
           {
-            await this.setState({
+            this.setState({
               repeatPasswordError: ''
             })
-            await this.setStatus();
           }
-          await this.setStatus();
-
+        });
         }
 
         setStatus = () =>{
@@ -219,7 +207,6 @@ class Registration extends React.Component {
 
 render() {
     const { navigate } = this.props.navigation
-    let name = this.state.name
     return (
         <KeyboardAvoidingView>  
         <View style={styles.container}>
@@ -228,8 +215,8 @@ render() {
               source={'https://mityaalim.org/wp-content/uploads/2020/06/cropped-%D7%9E%D7%AA%D7%99%D7%99%D7%A2%D7%9C%D7%99%D7%9D-%D7%9C%D7%95%D7%92%D7%95-%D7%9E%D7%9C%D7%90-%D7%A8%D7%A7%D7%A2-%D7%A9%D7%A7%D7%95%D7%A3-1024x282.png'}
               />
             </View>
-            
             <Register 
+
             onChangeName={this.handleName}
             onChangeEmail={this.handleEmail}
             onChangePassword={this.handlePass}
@@ -238,22 +225,19 @@ render() {
             errorEmail={this.state.emailError}
             errorPassword={this.state.passwordError}
             errorRepeatPassword={this.state.repeatPasswordError}
-            
             />
-            <View style={{justifyContent: 'center', alignItems: 'center',}}>
-              <View style={{flexDirection: 'row', justifyContent:'flex-start', width:'100%'}}>
-                  <Text style={{paddingTop:15, color: '#23a500', fontSize:12, paddingLeft: 45}}>לתנאי השימוש</Text>
-                  <Text style={{paddingTop:15, color: '#034643', fontSize:12, paddingLeft: 4 }}>בלחיצה על כפתור ההרשמה, אני מסכים</Text>
-                  
-                  <CheckBox 
-                      containerStyle = {{margin: 0, marginLeft:0}}
-                      uncheckedColor = '#034643'
-                      checkedColor = '#23a500'
-                      checked={this.state.checked}
-                      onClick={() => this.setState({ checked: !this.state.checked })}
-                      />
-              </View>
+            <View style={{flexDirection: 'row', justifyContent:'flex-start'}}>
+                <Text style={{marginTop:17, color: '#23a500', fontSize:14, marginRight: 4, fontFamily: 'OpenSansHebrew-Regular'}}>לתנאי השימוש</Text>
+                <Text style={{marginTop:17, color: '#034643', fontSize:14, fontFamily: 'OpenSansHebrew-Regular' }}>בלחיצה על כפתור ההרשמה, אני מסכים</Text>
+                
+                <CheckBox 
+                    //style={styles.checkBox}
+                    title=''
+                    checked={this.state.checked}
+                    onClick={() => this.setState({ checked: !this.state.checked })}
+                    />
             </View>
+
             <TouchableOpacity 
                 style={styles.buttonContainer}
                 disabled={this.state.buttonStateHolder}
@@ -266,9 +250,9 @@ render() {
                 style={styles.button}
                 onPress={() => navigate("Login")}>
                   <View style={styles.registerContainer}>
-                    <Text style={{color:'#22aa22'}}> התחברות</Text>
-                    <Text style={{color: '#034643'}}>יש לכם שם משתמש?</Text>
                     
+                    <Text style={{color:'#22aa22', fontFamily: 'OpenSansHebrew-Regular', fontSize: 16}}> התחברות</Text>
+                    <Text style={{color: '#034643', fontFamily: 'OpenSansHebrew-Regular', fontSize: 16}}>יש לכם משתמש? </Text>
                   </View>
               </TouchableOpacity>
         </View>
@@ -279,33 +263,43 @@ render() {
 
 const styles = StyleSheet.create({
     container:{
-        //width:'100%',
-        //height: ScreenHeight,
+        //backgroundColor: '#ceffee',
+        //opacity: 0.5,
+        height: ScreenHeight,
+        justifyContent: 'center',
         alignItems: 'center',
-        padding: '15px'
     },
-    logo:{   
+    logo:{
       width: 250,
       height: 70,
       flexGrow: 1
     },
     logoContainer:{
+        marginTop:37,
         justifyContent: 'center',
         alignItems: 'center',
-        paddingTop:120
+        //paddingBottom: 15,
     },
     buttonContainer:{
         backgroundColor:'#23a500',
-        padding: 20,
+        paddingVertical: 15,
         borderRadius: 2,
-        width:'75%',
-        maxWidth:300,
-        marginTop: 15
+        width:280, 
       },
       buttonText:{
         textAlign: 'center',
         color:'#FFF',
         fontWeight: '500',
+        fontFamily: 'OpenSansHebrew-Regular',
+        fontSize: 20
+      },
+      checkBox:{
+        height: 20,
+        width:20,
+        borderColor: '#034643',
+        backgroundColor: '#00ffaa', 
+        //marginRight:20,
+        //marginBottom: 20 
       },
       registerContainer:{
         justifyContent: 'center',
@@ -313,7 +307,7 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         flexDirection: 'row',
       },
-      
+
   });
 
 export default Registration;

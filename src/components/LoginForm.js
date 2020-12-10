@@ -12,12 +12,12 @@ const LoginForm = ({
 }) => {
   
     return (
-      <View style={styles.container}>
+      <View style={{maxWidth: '375px', width: '100%', padding: '15px'}}>
         <StatusBar barStyle='Light-content'/>
-        
+        <View style={{margin: 5}}>
         <TextField
-                  placeholder='email'
-                  placeholderTextColor="rgba(255,255,255,0.7)"
+                  placeholder=":דוא''ל"
+                  placeholderTextColor="#23a500"
                   keyboardType="email-address"
                   autoCapitalize='none'
                   autoCorrect={false}
@@ -27,8 +27,8 @@ const LoginForm = ({
                   error={emailError}/>
         
         <TextField
-                  placeholder='password'
-                  placeholderTextColor="rgba(255,255,255,0.7)"
+                  placeholder=':סיסמה'
+                  placeholderTextColor="#23a500"
                   autoCapitalize='none'
                   autoCorrect={false}
                   style={styles.input}
@@ -37,23 +37,26 @@ const LoginForm = ({
                   error={passwordError}
                   secureTextEntry={true}/>
       </View>
+      </View>
     );
   }  
 
 
 const styles = StyleSheet.create({
-  container:{
-    padding: 20,
-  },
+  
   input:{
-    height: 40,
-    //width:260,
-    backgroundColor: '#22aa22',
-    opacity: 0.8,
-    color:'#FFF',
-    marginBottom: 10,
-    paddingHorizontal:10,
-    borderRadius: 5,
+    flex: 1,
+    borderColor: 'white',
+    textAlign: 'right',
+    alignSelf: 'stretch',
+    height: 50,
+    width: "100%",
+    backgroundColor: '#fff',
+    color:"#23a500",
+    borderRadius: 3,
+    paddingRight: 10,
+    fontFamily: 'OpenSansHebrew-Regular'
+
   },
 });
 

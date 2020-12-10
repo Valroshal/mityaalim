@@ -151,38 +151,41 @@ class Login extends React.Component {
               source={'https://mityaalim.org/wp-content/uploads/2020/06/cropped-%d7%9e%d7%aa%d7%99%d7%99%d7%a2%d7%9c%d7%99%d7%9d-%d7%9c%d7%95%d7%92%d7%95-%d7%9e%d7%9c%d7%90-%d7%a8%d7%a7%d7%a2-%d7%a9%d7%a7%d7%95%d7%a3.png'}
               />
           </View>
-          <View style={styles.formContainer}>
+          <View style={{maxWidth: '375px', width: '100%', padding: '15px'}}>
               <LoginForm 
                 onChangeEmail={this.handleEmail}
                 onChangePassword={this.handlePass}
                 emailError={this.state.emailError}
                 passwordError={this.state.passwordError}
               />
+              <View style={{margin: 20}}>
+                <TouchableOpacity
+                  onPress={this.pressLogin}
+                  style={styles.loginButtonContainer} >
+                  <Text style={styles.loginButtonText}>התחבר</Text>
+                </TouchableOpacity> 
 
-              <TouchableOpacity
-                onPress={this.pressLogin}
-                style={styles.loginButtonContainer} >
-                <Text style={styles.loginButtonText}>LOGIN</Text>
-              </TouchableOpacity> 
+                <TouchableHighlight
+                  style={styles.button}>
+                    <View style={styles.registerContainer}>
+                      <Text style={styles.buttonText}>לא רשום עדיין?</Text>
+                    </View>
+                </TouchableHighlight>
 
-              <TouchableHighlight
-                style={styles.button}>
-                  <View style={styles.registerContainer}>
-                    <Text style={styles.buttonText}>Not a Registered User?</Text>
-                  </View>
-              </TouchableHighlight>
+                <TouchableOpacity
+                  onPress={() => navigate("RegistrationScreen")}
+                  style={styles.CreateAccountButtonContainer} >
+                  <Text style={styles.loginButtonText}>יצירת חשבון</Text>
+                </TouchableOpacity> 
 
-              <TouchableOpacity
-                onPress={() => navigate("RegistrationScreen")}
-                style={styles.CreateAccountButtonContainer} >
-                <Text style={styles.loginButtonText}>Create an Account</Text>
-              </TouchableOpacity> 
-
-              <View style={styles.registerContainer}>
-                    <Text style={styles.buttonText}>or</Text>
+                <View style={styles.registerContainer}>
+                      <Text style={styles.buttonText}>או</Text>
+                </View>
+                {/* facebook login doesn't work need to do */}
+                <FacebookLogin />
               </View>
-              {/* facebook login doesn't work need to do */}
-              <FacebookLogin />
+              
+              
           </View>
         </View>
       </KeyboardAvoidingView>  
@@ -192,11 +195,11 @@ class Login extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    container:{
-      padding: 20,
-      //backgroundColor: ,
-      
-    },
+  container:{
+    height: ScreenHeight,
+    justifyContent: 'center',
+    alignItems: 'center',
+},
     text:{
         
         fontSize: 26,
@@ -213,31 +216,32 @@ const styles = StyleSheet.create({
         
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 30,
+        //padding: 30,
     },
     loginButtonText:{
       textAlign: 'center',
       color:'#FFF',
       fontWeight: '500',
-      
+      fontFamily: 'OpenSansHebrew-Regular',
+      fontSize:20
     },
     loginButtonContainer:{
-      backgroundColor:'#034643',
+      backgroundColor:'#23a500',
       paddingVertical: 15,
-      borderRadius: 5,
+      borderRadius: 3,
       justifyContent: 'center',
       alignItems: 'center',
-      width: '88%',
-      marginLeft: 20
+      width: '100%',
+      marginTop: 15
     },
     CreateAccountButtonContainer:{
-      backgroundColor:'#034643',
+      backgroundColor:'#245C03',
       paddingVertical: 15,
-      borderRadius: 5,
+      borderRadius: 3,
       justifyContent: 'center',
       alignItems: 'center',
-      width: '88%',
-      marginLeft: 20,
+      width: '100%',
+      //marginLeft: 20,
       marginTop: 5
     },
     registerContainer:{
@@ -245,6 +249,11 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       paddingTop: 10,
     },
+    buttonText:{
+      color:'#034643',
+      marginBottom: 5,
+      fontFamily: 'OpenSansHebrew-Regular'
+    }
   });
 
   const mapStateToProps = state => {

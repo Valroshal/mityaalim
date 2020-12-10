@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, View } from 'react-native';
+import {StyleSheet, View, StatusBar } from 'react-native';
 import {TextField} from 'react-native-material-textfield';
 
 const RegistrationForm = ({
@@ -14,6 +14,7 @@ const RegistrationForm = ({
 }) =>{
     return (
         <View style={{maxWidth: '375px', width: '100%', padding: '15px'}}>
+          <StatusBar barStyle='Light-content'/>
             <View style={{margin: 5}}>
               <TextField
                 lineWidth = '0'
@@ -76,20 +77,20 @@ const RegistrationForm = ({
     }
   
     const styles = StyleSheet.create({
-      container:{
-        padding: "5%",
-      },
+      
       input:{
         flex: 1,
         borderColor: 'white',
         textAlign: 'right',
         alignSelf: 'stretch',
-        height: 45,
+        height: 50,
         width: "100%",
         backgroundColor: '#fff',
-        //color:'#FFF',
+        color:"#23a500",
         borderRadius: 3,
         paddingRight: 10,
+        fontFamily: 'OpenSansHebrew-Regular'
+
       },
     
     });
