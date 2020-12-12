@@ -227,12 +227,13 @@ render() {
             errorRepeatPassword={this.state.repeatPasswordError}
             />
             <View style={{flexDirection: 'row', justifyContent:'flex-start'}}>
-                <Text style={{marginTop:17, color: '#23a500', fontSize:14, marginRight: 4, fontFamily: 'OpenSansHebrew-Regular'}}>לתנאי השימוש</Text>
-                <Text style={{marginTop:17, color: '#034643', fontSize:14, fontFamily: 'OpenSansHebrew-Regular' }}>בלחיצה על כפתור ההרשמה, אני מסכים</Text>
+                <Text style={{marginTop:15, color: '#23a500', fontSize:14, marginRight: 4, fontFamily: 'OpenSansHebrew-Regular'}}>לתנאי השימוש</Text>
+                <Text style={{marginTop:15, color: '#034643', fontSize:14, fontFamily: 'OpenSansHebrew-Regular' }}>בלחיצה על כפתור ההרשמה, אני מסכים</Text>
                 
                 <CheckBox 
-                    //style={styles.checkBox}
-                    title=''
+                    containerStyle = {{margin: 0, marginLeft:0}}
+                    uncheckedColor = '#034643'
+                    checkedColor = '#23a500'
                     checked={this.state.checked}
                     onClick={() => this.setState({ checked: !this.state.checked })}
                     />
