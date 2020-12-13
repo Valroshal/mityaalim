@@ -17,6 +17,7 @@ import BudgetComponent from './src/components/Budget';
 import VideoComponent from './src/components/Video';
 import VideoComponentForRedux from './src/components/Video';
 import EventsComponent from './src/components/Events';
+import RecoverPassword from './src/screens/RecoverPasswordScreen';
 import {Provider} from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './src/reducers';
@@ -82,6 +83,10 @@ import { applyMiddleware, createStore, compose,  } from 'redux';
               <Stack.Screen
                 name="Questionaire"
                 component={Questionaire}
+              />
+              <Stack.Screen
+                name="RecoverPassword"
+                component={RecoverPassword}
               />
             </Stack.Navigator>
 

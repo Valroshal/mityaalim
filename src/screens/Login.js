@@ -79,34 +79,25 @@ class Login extends React.Component {
       }
     }
 
-  handleEmail = async (email) =>{
-    await this.setState({email});
-    console.log('email: ', this.state.email);
+  handleEmail = (email) =>{
+    this.setState({email}, () =>
+    //console.log('email: ', this.state.email);
     this.setState({
       emailError: validate('email', this.state.email)
-    });
+    }));
     this.checkLogin();
   }
 
-  handlePass = async (password) =>{
-    await this.setState({password});
-    console.log('pass: ', this.state.password);
+  handlePass = (password) =>{
+    this.setState({password}, () =>
+    //console.log('pass: ', this.state.password);
     this.setState({
       passwordError: validate('password', this.state.password)
-    }); 
+    })); 
     this.checkLogin();
   }
 
   saveUserInfo = async (i) =>{
-    // getUser().then(async (data) => {
-    //   console.log('parsed json: ', data);
-    //   if (data != null){
-    //     await this.props.userLoggedIn(data);
-    //     await console.log('userInfo: ', this.props.user)
-    //   }
-    // }).catch(error => {
-    //   console.log("Error fetching data-----------", error);
-    // });
     await console.log("user info from state",this.state.userInfo[i])
     await this.props.userLoggedIn(this.state.userInfo[i])
     await console.log("user info from props",this.props.user)
@@ -151,13 +142,24 @@ class Login extends React.Component {
               source={'https://mityaalim.org/wp-content/uploads/2020/06/cropped-%d7%9e%d7%aa%d7%99%d7%99%d7%a2%d7%9c%d7%99%d7%9d-%d7%9c%d7%95%d7%92%d7%95-%d7%9e%d7%9c%d7%90-%d7%a8%d7%a7%d7%a2-%d7%a9%d7%a7%d7%95%d7%a3.png'}
               />
           </View>
-          <View style={{maxWidth: '375px', width: '100%', padding: '15px'}}>
+          <View style={{maxWidth: '375px', width: '100%', padding: 15}}>
               <LoginForm 
                 onChangeEmail={this.handleEmail}
                 onChangePassword={this.handlePass}
                 emailError={this.state.emailError}
                 passwordError={this.state.passwordError}
               />
+
+                <TouchableHighlight
+                  onPress={() => navigate("RecoverPassword")}
+                  //style={styles.button}
+                  >
+                    <View style={{paddingRight: 22}}
+                    >
+                      <Text style={styles.buttonText}>שכחת סיסמה?</Text>
+                    </View>
+                </TouchableHighlight>
+
               <View style={{margin: 20}}>
                 <TouchableOpacity
                   onPress={this.pressLogin}
@@ -242,7 +244,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       width: '100%',
       //marginLeft: 20,
-      marginTop: 5
+      marginTop: 10
     },
     registerContainer:{
       justifyContent: 'center',
@@ -251,7 +253,7 @@ const styles = StyleSheet.create({
     },
     buttonText:{
       color:'#034643',
-      marginBottom: 5,
+      //marginBottom: 5,
       fontFamily: 'OpenSansHebrew-Regular'
     }
   });
@@ -261,5 +263,21 @@ const styles = StyleSheet.create({
       user: state.user.user
     }
   }
-  //export default Login;
+  
   export default connect(mapStateToProps, {userLoggedIn})(Login);
+
+
+  // saveUserInfo = async (i) =>{
+  //   // getUser().then(async (data) => {
+  //   //   console.log('parsed json: ', data);
+  //   //   if (data != null){
+  //   //     await this.props.userLoggedIn(data);
+  //   //     await console.log('userInfo: ', this.props.user)
+  //   //   }
+  //   // }).catch(error => {
+  //   //   console.log("Error fetching data-----------", error);
+  //   // });
+  //   await console.log("user info from state",this.state.userInfo[i])
+  //   await this.props.userLoggedIn(this.state.userInfo[i])
+  //   await console.log("user info from props",this.props.user)
+  // }

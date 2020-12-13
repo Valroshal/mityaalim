@@ -12,7 +12,7 @@ const LoginForm = ({
 }) => {
   
     return (
-      <View style={{maxWidth: '375px', width: '100%', padding: '15px'}}>
+      <View style={{maxWidth: '375px', width: '100%', paddingRight: 15, paddingLeft: 15, paddingTop: 15}}>
         <StatusBar barStyle='Light-content'/>
         <View style={{margin: 5}}>
         <TextField
@@ -36,7 +36,7 @@ const LoginForm = ({
                   onChangeText={onChangePassword}
                   error={passwordError}
                   secureTextEntry={true}/>
-      </View>
+        </View>
       </View>
     );
   }  
