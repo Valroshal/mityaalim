@@ -157,6 +157,7 @@ class Registration extends React.Component {
       
     // get works!!!!!!!!!!!!!!!!!!!!!!!!
     get = async () =>{
+      console.log('in get user')
         await fetch('http://localhost:5000/getuser', {
             
             method: 'GET',
@@ -188,6 +189,7 @@ class Registration extends React.Component {
     }    
     
     clickRegister=() =>{
+      console.log('click register')
         const err = 'אי-מייל כבר קיים במערכת'
         if(this.state.status == true && this.state.checked == true)
         {

@@ -3,6 +3,7 @@ import {StyleSheet, Image, View, TextInput, TouchableOpacity, Text, KeyboardAvoi
 //import axios from 'axios';
 import {TextField} from 'react-native-material-textfield';
 import validate from '../components/validation';
+import email from 'react-native-email';
 
 const ScreenHeight = Dimensions.get("window").height;
 
@@ -32,7 +33,16 @@ class RecoverPassword extends React.Component {
 
     sendMail = () => {
         // need to write function to send mail (or with password or update password)
+        const to = this.state.email // string or array of email addresses
+        email(to, {
+            // Optional additional arguments
+            //cc: ['bazzy@moo.com', 'doooo@daaa.com'], // string or array of email addresses
+            //bcc: 'mee@mee.com', // string or array of email addresses
+            subject: 'restore your password',
+            body: 'Here will be a password'
+        }).catch(console.error)
     }
+    
 
     register() {
         const emailError = validate('email', this.state.email)

@@ -3,6 +3,7 @@ const app = express();
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const users = require('./routes/usersAPI')
+
 const cors = require('cors')
 
 app.use(cors({credentials: true, origin: 'http://localhost:19006'}));
@@ -17,7 +18,7 @@ app.use(function(req,res,next){
 })
 
 require('./routes/addUser')(app);
-
+require('./routes/getUser')(app);
 
 
 // const con = mysql.createPool({

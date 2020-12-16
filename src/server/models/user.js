@@ -17,5 +17,18 @@ module.exports = (sequelize, type) => {
             type: type.STRING,
             allowNull: false
         }
-    })
+        // ,
+        // CreateDate: {
+        //     type: type.DATE
+        // },
+        // UpdateDate: {
+        //     type: type.DATE
+        // }
+    },{
+        tableName: 'users',
+        timestamps: false,
+        freezeTableName: true
+        })
 }
+
+
